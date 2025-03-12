@@ -14,7 +14,7 @@ const shoppingCartSchema = new mongoose.Schema({
 			price : {type: Number},
 			thumbnailImage : {type: String}
 		}
-	]
+	],
 	createdAt: {type: Date, default: Date.now}
 });
 
