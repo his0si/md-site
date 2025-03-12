@@ -11,7 +11,7 @@ const shoppingCartSchema = new mongoose.Schema({
 			productID : {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
 			productName: {type : String, required: true},
 			quantity : {type: Number, required: true},
-			price : {type: Number}
+			price : {type: Number},
 			thumbnailImage : {type: String}
 		}
 	]
