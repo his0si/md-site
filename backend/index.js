@@ -43,6 +43,21 @@ const options = {
       version: '1.0.0',
       description: '이 문서는 이화이언 5월 행사 사이트 re:market api 문서입니다.😎 굿즈 판매 폼을 개발 목적으로 하고 있습니다.',
     },
+    components: {
+      securitySchemes: {
+        cookieAuth: {
+          type: 'apiKey',
+          in: 'cookie',
+          name: 'connect.sid', // 세션 쿠키 이름 (기본값이 connect.sid)
+          description: '세션 기반 인증'
+        },
+      },
+    },
+    security: [
+      {
+        cookieAuth: [],
+      },
+    ],
     servers: [
       {
         url: "http://localhost:5000"
