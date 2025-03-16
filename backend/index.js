@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import testRoutes from "./routes/test.route.js"
+import loginRoutes from "./routes/login.route.js"
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./lib/db.js";
+import session from "express-session";
 
 dotenv.config();
 
@@ -17,6 +19,19 @@ app.use(
   cors({
     origin: FRONTEND_URL,
     credentials: true,
+  })
+);
+
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 *24, // 24시간 동안 유지지
+    }
   })
 );
 
@@ -38,8 +53,9 @@ const options = {
 };
 
 const specs = swaggerJSDoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); // 여기 수정됨!
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); 
 app.use("/api/test", testRoutes);
+app.use("/api/login", loginRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
