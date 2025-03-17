@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import testRoutes from "./routes/test.route.js"
+import loginRoutes from "./routes/login.route.js"
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./lib/db.js";
+import session from "express-session";
 
 dotenv.config();
 
@@ -20,6 +22,19 @@ app.use(
   })
 );
 
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: false,
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 *24, // 24시간 동안 유지지
+    }
+  })
+);
+
 const options = {
   swaggerDefinition: {
     openapi: '3.0.3',
@@ -28,6 +43,21 @@ const options = {
       version: '1.0.0',
       description: '이 문서는 이화이언 5월 행사 사이트 re:market api 문서입니다.😎 굿즈 판매 폼을 개발 목적으로 하고 있습니다.',
     },
+    components: {
+      securitySchemes: {
+        cookieAuth: {
+          type: 'apiKey',
+          in: 'cookie',
+          name: 'connect.sid', // 세션 쿠키 이름 (기본값이 connect.sid)
+          description: '세션 기반 인증'
+        },
+      },
+    },
+    security: [
+      {
+        cookieAuth: [],
+      },
+    ],
     servers: [
       {
         url: "http://localhost:5000"
@@ -38,8 +68,9 @@ const options = {
 };
 
 const specs = swaggerJSDoc(options);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); // 여기 수정됨!
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); 
 app.use("/api/test", testRoutes);
+app.use("/api/login", loginRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
