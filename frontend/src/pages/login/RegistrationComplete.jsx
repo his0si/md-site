@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import checkImage from 'D:/_Code/md-site/frontend/src/assets/check.png';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -18,32 +19,26 @@ const Container = styled.div`
   justify-content: center;
   margin: auto;
 `;
-const InstructionText = styled.div`
-  font-size: 15px;
-  color: #167D4E;
-  margin-bottom: 30px;
-  text-align: left;
-  font-weight: bold;
-  width: 80%;
-`;
 
-const Input = styled.input`
-  width: 80%;
-  border: none;
-  border-bottom: 1px solid #167D4E;
+const Icon = styled.img`
+  width: 30px;
+  height: 30px;
   margin-bottom: 20px;
-  padding: 5px;
-  font-size: 16px;
-  outline: none;
-  background: rgb(255, 255, 255);
 `;
 
-const InfoText = styled.div`
-  font-size: 12px;
+const MainText = styled.div`
+  font-size: 18px;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+`;
+
+const SubText = styled.div`
+  font-size: 14px;
   color: #666;
-  text-align: left;
-  margin-bottom: 30px;
-  width: 80%;
+  text-align: center;
+  margin-bottom: 40px;
 `;
 
 const Button = styled.button`
@@ -58,18 +53,18 @@ const Button = styled.button`
   width: 300px;
 `;
 
-const StudentNumber = () => {
+const RegistrationComplete = () => {
   return (
     <>
       <GlobalStyle />
       <Container>
-        <InstructionText>학번을 입력해주세요.</InstructionText>
-        <Input type="text" />
-        <InfoText>행사 이후 모든 학번 및 회원 정보는 파기될 예정입니다.</InfoText>
-        <Button>다음</Button>
+        <Icon src={checkImage} alt="Check" />
+        <MainText>회원가입이 완료되었습니다.</MainText>
+        <SubText>rE: market의 새로운 회원님을 환영합니다!</SubText>
+        <Button>회원가입 마치기</Button>
       </Container>
     </>
   );
 }
 
-export default StudentNumber; 
+export default RegistrationComplete; 
