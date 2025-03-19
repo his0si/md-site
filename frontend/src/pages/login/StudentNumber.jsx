@@ -56,6 +56,10 @@ const Button = styled.button`
   font-size: 16px;
   position: fixed; bottom: 60px;
   width: 300px;
+
+  &:hover {
+    background-color: #0d5a3a;
+  }
 `;
 
 const StudentNumber = () => {

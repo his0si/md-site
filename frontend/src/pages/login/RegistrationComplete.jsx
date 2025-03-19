@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import checkImage from 'D:/_Code/md-site/frontend/src/assets/check.png';
+import checkImage from '../../assets/check.png';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -51,6 +51,10 @@ const Button = styled.button`
   font-size: 16px;
   position: fixed; bottom: 60px;
   width: 300px;
+
+  &:hover {
+    background-color: #0d5a3a;
+  }
 `;
 
 const RegistrationComplete = () => {
