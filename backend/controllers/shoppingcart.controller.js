@@ -78,13 +78,9 @@ import Product from './../models/product.model.js';
  *                   example: "Internal Server Error"
  */
 export const addProductInCart = async (req, res)=>{
-    console.log(req.session);
-    const userId = req.session.user?.id;
     const productID = req.body.productID;
     const quantity = req.body.quantity;
-    if(!userId){
-        return res.status(401).json({message : "로그인 후 이용해주세요. 😊"});
-    }
+    const userId = req.userId;
     if(!productID || !quantity){
         return res.status(400).json({message: "상품과 수량을 정확히 입력해야 합니다."});
     }
@@ -227,10 +223,7 @@ export const addProductInCart = async (req, res)=>{
  */
 export const getUserCart = async (req, res)=>{
     try {
-        const userId = req.session.user?.id;
-        if(!userId){
-            return res.status(401).json({message : "로그인 후 이용해주세요😅"});
-        }
+        const userId = req.userId;
         const cart = await ShoppingCart.findOne({"user.userId": userId});
         if(!cart || cart.products.length === 0){
             return res.status(404).json({message : "장바구니에 아직 상품이 없습니다😎"});
@@ -319,10 +312,7 @@ export const getUserCart = async (req, res)=>{
  */
 export const increaseProductQuantity = async (req, res)=>{
     try {
-        const userId = req.session.user?.id;
-        if(!userId){
-            return res.status(401).json({message : "로그인 후 이용해주세요.😅"});
-        }
+        const userId = req.userId;
         const productId = req.body.productId;
         if(!productId){
             return res.status(400).json({message : "상품 아이디를 보내주세요. 잘못된 요청입니다."});
