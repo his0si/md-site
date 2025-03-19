@@ -12,7 +12,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100%;
   max-width: 500px;
-  background: rgb(255, 255, 255);
+  background: radial-gradient(circle at 70% 40%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
   display: flex;
   flex-direction: column;
   align-items: center;
