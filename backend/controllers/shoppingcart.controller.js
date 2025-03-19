@@ -330,7 +330,7 @@ export const increaseProductQuantity = async (req, res)=>{
         
         const cart = await ShoppingCart.findOne({"user.userId": userId});
         if(!cart){
-            return res.status(404).json({meessage : "해당 회원의 쇼핑카트를 찾지 못했어요..."});
+            return res.status(404).json({message : "해당 회원의 쇼핑카트를 찾지 못했어요..."});
         }
         const existingProductIndex = cart.products.findIndex(p => p.productID.toString() === productId);
         if(existingProductIndex === -1){
