@@ -244,3 +244,104 @@ export const getUserCart = async (req, res)=>{
         return res.status(500).json({message : "Internal server error"});
     }
 }
+
+// 상품의 수량 1 증가
+
+/**
+ * @swagger
+ * /api/cart/increase:
+ *   patch:
+ *     summary: 장바구니 상품 수량 증가
+ *     description: 장바구니에 있는 특정 상품의 수량을 1 증가시킵니다.
+ *     tags:
+ *       - Cart
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "64f7e0b3e8c1c11b6c9b85a1"
+ *     responses:
+ *       200:
+ *         description: 상품 수량 증가 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 상품 수량이 증가했습니다.
+ *       400:
+ *         description: 잘못된 요청 (상품 ID 누락)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 상품 아이디를 보내주세요. 잘못된 요청입니다.
+ *       401:
+ *         description: 인증되지 않은 사용자
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 로그인 후 이용해주세요.😅
+ *       404:
+ *         description: 장바구니 또는 상품을 찾지 못함
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 해당되는 상품을 찾지 못했어요...
+ *       500:
+ *         description: 서버 내부 오류
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+export const increaseProductQuantity = async (req, res)=>{
+    try {
+        const userId = req.session.user?.id;
+        if(!userId){
+            return res.status(401).json({message : "로그인 후 이용해주세요.😅"});
+        }
+        const productId = req.body.productId;
+        if(!productId){
+            return res.status(400).json({message : "상품 아이디를 보내주세요. 잘못된 요청입니다."});
+        }
+        
+        const cart = await ShoppingCart.findOne({"user.userId": userId});
+        if(!cart){
+            return res.status(404).json({meessage : "해당 회원의 쇼핑카트를 찾지 못했어요..."});
+        }
+        const existingProductIndex = cart.products.findIndex(p => p.productID.toString() === productId);
+        if(existingProductIndex === -1){
+            return res.status(404).json({message : "해당되는 상품을 찾지 못했어요..."});
+        }
+        cart.products[existingProductIndex].quantity += 1;
+        
+        await cart.save();
+        return res.status(200).json({message : "상품 수량이 증가했습니다."});
+    } catch (error) {
+        //console.log(error);
+        return res.status(500).json({message : "Internal server error"});
+    }
+}
