@@ -33,13 +33,13 @@ const Home = () => {
       { id: 3, name: "굿즈이름", price: "10000", status: "sold-out" },
       { id: 4, name: "굿즈이름", price: "10000", status: "sold-out" },
       { id: 5, name: "굿즈이름", price: "10000", status: "sold-out" },
-      { id: 6, name: "굿즈이름", price: "10000", status: "sold-out" },
+      { id: 6, name: "굿즈이름", price: "10000", status: "available" },
       { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
+      { id: 1, name: "굿즈이름", price: "10000", status: "available" },
       { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
-      { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
-      { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
-      { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
-      { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
+      { id: 1, name: "굿즈이름", price: "10000", status: "available" },
+      { id: 1, name: "굿즈이름", price: "10000", status: "available" },
+      { id: 1, name: "굿즈이름", price: "10000", status: "available" },
       { id: 1, name: "굿즈이름", price: "10000", status: "sold-out" },
     ];
     setProducts(mockData);
