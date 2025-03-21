@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import testRoutes from "./routes/test.route.js"
 import loginRoutes from "./routes/login.route.js"
+import ordercheckRoutes from "./routes/ordercheck.route.js"
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./lib/db.js";
@@ -71,6 +72,7 @@ const specs = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); 
 app.use("/api/test", testRoutes);
 app.use("/api/login", loginRoutes);
+app.use("/api", ordercheckRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
