@@ -1,11 +1,10 @@
 
 import Home from './pages/home/Home';
 import { Routes, Route} from "react-router-dom";
-import MyPage from './pages/MyPage';
-import MyPage_info from './pages/MyPage_info';
-import MyPage_list from './pages/MyPage_list';
-import { Routes, Route, useLocation } from "react-router-dom";
-import Home from './pages/home/Home';
+import MyPage from './pages/MyPage/MyPage';
+import MyPage_info from './pages/MyPage/MyPage_info';
+import MyPage_list from './pages/MyPage/MyPage_list';
+import { useLocation } from "react-router-dom";
 import Login from './pages/login/Login';
 import StudentNumber from './pages/login/StudentNumber';
 import RegistrationComplete from './pages/login/RegistrationComplete';
