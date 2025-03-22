@@ -17,8 +17,8 @@ const NaviBar = styled.div`
 `;
 
 const Icon = styled.img`
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 
   cursor: pointer;
 `;
