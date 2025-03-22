@@ -238,6 +238,24 @@ export const getUserCart = async (req, res)=>{
     }
 }
 
+const changeProductQuantity = async (userId, productId, count) =>{
+    const cart = await ShoppingCart.findOne({"user.userId": userId});
+        if(!cart){
+            throw new Error("E01: 해당 회원의 쇼핑카트를 찾지 못함");
+        }
+        const existingProductIndex = cart.products.findIndex(p => p.productID.toString() === productId);
+        if(existingProductIndex === -1){
+            throw new Error("E02: 해당되는 상품 찾지 못함");
+        }
+        if(cart.products[existingProductIndex].quantity + count <= 0){
+            cart.products.splice(existingProductIndex, 1);
+        } else{
+            cart.products[existingProductIndex].quantity += count;
+        }
+        
+        await cart.save();
+}
+
 // 상품의 수량 1 증가
 
 /**
@@ -317,21 +335,107 @@ export const increaseProductQuantity = async (req, res)=>{
         if(!productId){
             return res.status(400).json({message : "상품 아이디를 보내주세요. 잘못된 요청입니다."});
         }
-        
-        const cart = await ShoppingCart.findOne({"user.userId": userId});
-        if(!cart){
-            return res.status(404).json({message : "해당 회원의 쇼핑카트를 찾지 못했어요..."});
-        }
-        const existingProductIndex = cart.products.findIndex(p => p.productID.toString() === productId);
-        if(existingProductIndex === -1){
-            return res.status(404).json({message : "해당되는 상품을 찾지 못했어요..."});
-        }
-        cart.products[existingProductIndex].quantity += 1;
-        
-        await cart.save();
+        await changeProductQuantity(userId, productId, 1);
         return res.status(200).json({message : "상품 수량이 증가했습니다."});
     } catch (error) {
         //console.log(error);
+        if(error.message.includes("E01")){
+            return res.status(404).json({message : error.message});
+        } else if (error.message.includes("E02")){
+            return res.status(404).json({message : error.message});
+        }
+        return res.status(500).json({message : "Internal server error"});
+    }
+}
+
+// 상품의 수량 1 감소
+
+/**
+ * @swagger
+ * /api/cart/decrease:
+ *   patch:
+ *     summary: 장바구니 상품 수량 감소
+ *     description: 장바구니에 있는 특정 상품의 수량을 1 감소시킵니다.
+ *     tags:
+ *       - Cart
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productId:
+ *                 type: string
+ *                 example: "64f7e0b3e8c1c11b6c9b85a1"
+ *     responses:
+ *       200:
+ *         description: 상품 수량 감소 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 상품 수량이 증가했습니다.
+ *       400:
+ *         description: 잘못된 요청 (상품 ID 누락)
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 상품 아이디를 보내주세요. 잘못된 요청입니다.
+ *       401:
+ *         description: 인증되지 않은 사용자
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 로그인 후 이용해주세요.😅
+ *       404:
+ *         description: 장바구니 또는 상품을 찾지 못함
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 해당되는 상품을 찾지 못했어요...
+ *       500:
+ *         description: 서버 내부 오류
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+export const decreaseProductQuantity = async (req, res)=>{
+    try {
+        const userId = req.userId;
+        const productId = req.body.productId;
+        if(!productId){
+            return res.status(400).json({message : "상품 아이디를 보내주세요. 잘못된 요청입니다."});
+        }
+        await changeProductQuantity(userId, productId, -1);
+        return res.status(200).json({message : "상품 수량이 감소했습니다."});
+    } catch (error) {
+        //console.log(error);
+        if(error.message.includes("E01")){
+            return res.status(404).json({message : error.message});
+        } else if (error.message.includes("E02")){
+            return res.status(404).json({message : error.message});
+        }
         return res.status(500).json({message : "Internal server error"});
     }
 }
