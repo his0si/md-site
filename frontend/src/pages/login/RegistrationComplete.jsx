@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import checkImage from '../../assets/check.png';
+import Button from "../../components/button";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -41,21 +42,7 @@ const SubText = styled.div`
   margin-bottom: 40px;
 `;
 
-const Button = styled.button`
-  background-color: #167D4E;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  position: fixed; bottom: 60px;
-  width: 300px;
 
-  &:hover {
-    background-color: #0d5a3a;
-  }
-`;
 
 const RegistrationComplete = () => {
   return (
@@ -65,7 +52,7 @@ const RegistrationComplete = () => {
         <Icon src={checkImage} alt="Check" />
         <MainText>회원가입이 완료되었습니다.</MainText>
         <SubText>rE: market의 새로운 회원님을 환영합니다!</SubText>
-        <Button>회원가입 마치기</Button>
+        <Button text={"회원가입 마치기"}/>
       </Container>
     </>
   );

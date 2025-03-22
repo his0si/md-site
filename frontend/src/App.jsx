@@ -1,4 +1,8 @@
 import Home from "./pages/home/Home";
+import { Routes, Route } from "react-router-dom";
+import MyPage from "./pages/MyPage/MyPage";
+import MyPage_info from "./pages/MyPage/MyPage_info";
+import MyPage_list from "./pages/MyPage/MyPage_list";
 
 import { Routes, Route } from "react-router-dom";
 import MyPage from "./pages/MyPage/MyPage";
@@ -11,6 +15,8 @@ import RegistrationComplete from "./pages/login/RegistrationComplete";
 import AdminPage from "./pages/admin/AdminPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import NavBar from "./components/NavBar";
+import Cart from "./pages/cart/cart";
+import CartEmpty from "./pages/cart/cart_empty";
 
 const App = () => {
   const location = useLocation();
@@ -50,6 +56,8 @@ const App = () => {
           path="/registration-complete"
           element={<RegistrationComplete />}
         />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/cartEmpty" element={<CartEmpty />} />
       </Routes>
     </div>
   );
