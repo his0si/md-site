@@ -13,8 +13,8 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   height: 100vh;
   width: 100%;
-  max-width: 500px;
-  background: radial-gradient(circle at 70% 40%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
+  max-width: 1200px;
+  background: radial-gradient(circle at 60% 40%, rgba(165, 223, 155, 0.2) 3%, rgba(245,245,245,0) 25%);
   display: flex;
   flex-direction: column;
   align-items: center;
