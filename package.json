@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "styled-components": "^6.1.15"
-  },
-  "devDependencies": {
-    "vite": "^6.2.2"
-  }
-}
