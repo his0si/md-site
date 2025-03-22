@@ -1,15 +1,15 @@
 import Home from "./pages/home/Home";
-import { Routes, Route} from "react-router-dom";
-import MyPage from './pages/MyPage/MyPage';
-import MyPage_info from './pages/MyPage/MyPage_info';
-import MyPage_list from './pages/MyPage/MyPage_list';
+import { Routes, Route } from "react-router-dom";
+import MyPage from "./pages/MyPage/MyPage";
+import MyPage_info from "./pages/MyPage/MyPage_info";
+import MyPage_list from "./pages/MyPage/MyPage_list";
 import { useLocation } from "react-router-dom";
-import Login from './pages/login/Login';
-import StudentNumber from './pages/login/StudentNumber';
-import RegistrationComplete from './pages/login/RegistrationComplete';
-import AdminPage from './pages/admin/AdminPage';
-import AdminLogin from './pages/admin/AdminLogin';
-import NavBar from './components/NavBar'; 
+import Login from "./pages/login/Login";
+import StudentNumber from "./pages/login/StudentNumber";
+import RegistrationComplete from "./pages/login/RegistrationComplete";
+import AdminPage from "./pages/admin/AdminPage";
+import AdminLogin from "./pages/admin/AdminLogin";
+import NavBar from "./components/NavBar";
 import Cart from "./pages/cart/cart";
 import CartEmpty from "./pages/cart/cart_empty";
 
@@ -36,6 +36,9 @@ const App = () => {
     <div>
       {/* 로그인 페이지가 아닐 때만 NavBar 표시 */}
       {location.pathname !== "/" &&
+        location.pathname !== "/MyPage" &&
+        location.pathname !== "/MyPage/list" &&
+        location.pathname !== "/MyPage/info" &&
         location.pathname !== "/login" &&
         location.pathname !== "/student-number" &&
         location.pathname !== "/registration-complete" && <NavBar />}
@@ -51,8 +54,8 @@ const App = () => {
           path="/registration-complete"
           element={<RegistrationComplete />}
         />
-        <Route path="/cart" element={<Cart/>}/>
-        <Route path="/cartEmpty" element={<CartEmpty/>}/>
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/cartEmpty" element={<CartEmpty />} />
       </Routes>
     </div>
   );
