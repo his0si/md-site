@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Header from "./Header";
+import NavBar from "../../components/NavBar";
 import ProductList from "./ProductList";
 import styled from "styled-components";
 
@@ -55,7 +55,7 @@ const Home = () => {
 
   return (
     <Container>
-      <Header />
+      <NavBar />
 
       <ScrollableContent>
         <ProductList products={products} />
