@@ -37,10 +37,10 @@ const App = () => {
       {/* 로그인 페이지가 아닐 때만 NavBar 표시 */}
       {location.pathname !== "/" &&
         location.pathname !== "/MyPage" &&
-        location.pathname !== "/cart" &&
-        location.pathname !== "/cartEmpty" &&
         location.pathname !== "/MyPage/list" &&
         location.pathname !== "/MyPage/info" &&
+        location.pathname !== "/cart" &&
+        location.pathname !== "/cartEmpty" &&
         location.pathname !== "/login" &&
         location.pathname !== "/student-number" &&
         location.pathname !== "/registration-complete" && <NavBar />}
