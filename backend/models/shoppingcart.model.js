@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const shoppingCartSchema = new mongoose.Schema({
 	user : {
 		userId : {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-		nickname : {type : String},
 		studentId : {type : Number}
 	},
 	products: [
