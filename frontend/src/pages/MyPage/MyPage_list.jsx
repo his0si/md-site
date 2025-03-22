@@ -1,4 +1,4 @@
-import NavBar2 from "../components/NavBar2"
+import NavBar2 from "../../components/NavBar2"
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -13,13 +13,13 @@ const Container = styled.div`
   margin: auto;
 `;
 
-const MyPage_info= () => {
+const MyPage_list = () => {
     return (
       <Container>
         <NavBar2/>
-        MyPage_info
+        MyPage_list
       </Container>
     )
   }
   
-  export default MyPage_info
+  export default MyPage_list
