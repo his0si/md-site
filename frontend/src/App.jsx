@@ -11,7 +11,7 @@ import AdminPage from './pages/admin/AdminPage';
 import AdminLogin from './pages/admin/AdminLogin';
 import NavBar from './components/NavBar'; 
 import Cart from "./pages/cart/cart";
-import CartEmty from "./pages/cart/cart_emty";
+import CartEmpty from "./pages/cart/cart_empty";
 
 const App = () => {
   const location = useLocation();
@@ -52,7 +52,7 @@ const App = () => {
           element={<RegistrationComplete />}
         />
         <Route path="/cart" element={<Cart/>}/>
-        <Route path="/cartEmty" element={<CartEmty/>}/>
+        <Route path="/cartEmpty" element={<CartEmpty/>}/>
       </Routes>
     </div>
   );
