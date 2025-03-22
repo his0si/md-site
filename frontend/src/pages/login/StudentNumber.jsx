@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import Button from "../../components/button";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -55,6 +56,7 @@ const StudentNumber = () => {
         <InstructionText>학번을 입력해주세요.</InstructionText>
         <Input type="text" />
         <InfoText>행사 이후 모든 학번 및 회원 정보는 파기될 예정입니다.</InfoText>
+        <Button text={"다음"}/>
       </Container>
     </>
   );
