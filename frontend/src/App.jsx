@@ -1,5 +1,4 @@
 import Home from "./pages/home/Home";
-
 import { Routes, Route } from "react-router-dom";
 import MyPage from "./pages/MyPage/MyPage";
 import MyPage_info from "./pages/MyPage/MyPage_info";
