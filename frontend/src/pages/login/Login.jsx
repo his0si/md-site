@@ -54,6 +54,12 @@ const ImageButton = styled.img`
   margin-top: 20px;
   cursor: pointer;
   width: 250px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(0.9);
+    transform: scale(1.05);
+  }
 `;
 
 const ImageGallery = styled.div`
