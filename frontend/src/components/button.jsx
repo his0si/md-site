@@ -10,9 +10,11 @@ const ButtonsStyle = styled.button`
   font-size: 16px;
   position: fixed; bottom: 60px;
   width: 300px;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: #0d5a3a;
+    transform: scale(1.05);
   }
 `;
 
