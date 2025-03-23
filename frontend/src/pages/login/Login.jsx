@@ -1,5 +1,5 @@
-import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components';
+import React, { useEffect, useRef } from 'react'
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import kakaoLoginImage from '../../assets/kakaoLogin.png';
 import image1 from '../../assets/image1.png';
 import image2 from '../../assets/image2.png';
@@ -58,15 +58,25 @@ const ImageButton = styled.img`
 
 const ImageGallery = styled.div`
   display: flex;
-  overflow-x: auto;
+  overflow: hidden;
   margin: 20px 0;
   width: 100%;
   padding: 0;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
-  &::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+`;
+
+const slide = keyframes`
+  from {
+    transform: translateX(0);
   }
+  to {
+    transform: translateX(-640px); /* 4장의 이미지 너비 (160px * 4) */
+  }
+`;
+
+const ImageContainer = styled.div`
+  display: flex;
+  animation: ${slide} 15s linear infinite;
+  width: fit-content;
 `;
 
 const ImageItem = styled.img`
@@ -77,6 +87,8 @@ const ImageItem = styled.img`
 `;
 
 const Login = () => {
+  const images = [image1, image2, image3, image4];
+
   return (
     <>
       <GlobalStyle />
@@ -95,10 +107,12 @@ const Login = () => {
           </Text>
         </TextBackground>
         <ImageGallery>
-          <ImageItem src={image1} alt="Image 1" />
-          <ImageItem src={image2} alt="Image 2" />
-          <ImageItem src={image3} alt="Image 3" />
-          <ImageItem src={image4} alt="Image 4" />
+          <ImageContainer>
+            {/* 무한 슬라이드를 위해 이미지를 두 번 반복 */}
+            {[...images, ...images].map((image, index) => (
+              <ImageItem key={index} src={image} alt={`Image ${(index % 4) + 1}`} />
+            ))}
+          </ImageContainer>
         </ImageGallery>
         <ImageButton src={kakaoLoginImage} alt="카카오로 3초만에 시작하기" />
       </Container>
