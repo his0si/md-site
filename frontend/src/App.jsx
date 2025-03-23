@@ -39,6 +39,8 @@ const App = () => {
         location.pathname !== "/MyPage" &&
         location.pathname !== "/MyPage/list" &&
         location.pathname !== "/MyPage/info" &&
+        location.pathname !== "/cart" &&
+        location.pathname !== "/cartEmpty" &&
         location.pathname !== "/login" &&
         location.pathname !== "/student-number" &&
         location.pathname !== "/registration-complete" && <NavBar />}
