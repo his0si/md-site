@@ -21,12 +21,6 @@ const Header = styled.div`
   margin-bottom: 30px;
 `;
 
-const Title = styled.h1`
-  color: #333;
-  font-size: 24px;
-  margin: 0;
-`;
-
 const Table = styled.table`
   width: 100%;
   border-collapse: collapse;
@@ -97,7 +91,6 @@ const AdminPage = () => {
       <GlobalStyle />
       <Container>
         <Header>
-          <Title>주문 관리</Title>
         </Header>
         <Table>
           <thead>
