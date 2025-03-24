@@ -12,9 +12,11 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import NavBar from "./components/NavBar";
 import Cart from "./pages/cart/cart";
 import CartEmpty from "./pages/cart/cart_empty";
+import useViewportHeight from './components/useViewportHeight'; 
 
 const App = () => {
   const location = useLocation();
+  useViewportHeight();
 
   // 관리자 페이지 해시 라우팅 처리
   if (location.hash === "#/admin") {
