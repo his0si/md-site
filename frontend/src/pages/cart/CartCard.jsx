@@ -109,7 +109,7 @@ const DeleteIcon = styled.img`
   }
 `;
 
-const CartCard = ({ item }) => {
+const CartCard = ({ item, onDelete, onCheck, onIncrease, onDecrease }) => {
   return (
     <Card>
       <ItemImage></ItemImage>
@@ -117,14 +117,18 @@ const CartCard = ({ item }) => {
         <ItemName>{item.name}</ItemName>
         <ItemPrice>{item.price}</ItemPrice>
         <Counter>
-          <button>-</button>
+          <button onClick={() => onDecrease(item.id)}>-</button>
           <span>{item.quantity}</span>
-          <button>+</button>
+          <button onClick={() => onIncrease(item.id)}>+</button>
         </Counter>
       </ItemInfo>
       <SideArea>
-        <input type="checkbox" />
-        <DeleteIcon src={bin} alt="삭제" />
+        <input
+          type="checkbox"
+          checked={item.checked}
+          onChange={() => onCheck(item.id)}
+        />
+        <DeleteIcon src={bin} alt="삭제" onClick={() => onDelete(item.id)} />
       </SideArea>
     </Card>
   );
