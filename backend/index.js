@@ -32,7 +32,7 @@ app.use(
     cookie: {
       secure: false,
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 *24, // 24시간 동안 유지지
+      maxAge: 1000 * 60 * 60 *24, // 24시간 동안 유지
     }
   })
 );
@@ -73,7 +73,7 @@ const specs = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); 
 app.use("/api", shoppingCartRoutes);
 app.use("/api/test", testRoutes);
-app.use("/api/products", productRoutes); // Product API
+app.use("/api/products", productRoutes);
 app.use("/api/login", loginRoutes);
 
 app.listen(PORT, () => {
