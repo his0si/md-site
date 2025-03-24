@@ -4,6 +4,7 @@ import bin from "../../assets/bin.png";
 
 const Card = styled.div`
   border: none;
+  display;flex;
   padding: 15px;
   margin: 5px auto;
   width: 90%;
@@ -17,30 +18,34 @@ const Card = styled.div`
 
 const ItemImage = styled.div`
   width: 170px;
-  height: 170px;
+  aspect-ratio: 1/1;
   background: rgb(245, 245, 245);
   //border-radius: 5px;
+
+  flex-shrink: 0;
+  flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정정
 `;
 
 const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 60px;
+  margin-left: 20px;
   //justify-content: center;
   margin-top: 10px;
   gap: 10px;
+  flex: 1;
 `;
 
 const ItemName = styled.div`
   color: #167d4e;
-  font-size: 17px;
+  font-size: 14px;
 
   font-weight: bold;
-  text-shadow: 0.3px 0 currentColor, -0.3px 0 currentColor;
+  //text-shadow: 0.3px 0 currentColor, -0.3px 0 currentColor;
 `;
 
 const ItemPrice = styled.div`
-  font-size: 20px;
+  font-size: 16px;
   color: black;
 
   font-weight: bold;
@@ -52,13 +57,20 @@ const Counter = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-top: 10px;
 
   button {
-    background-color: #167d4e;
-    color: white;
+    width: 25px;
+    height: 25px;
+    object-fit: contain; //  비율 유지 + 정렬
+
+    border: 1.5px solid #167d4e;
+    background-color: white;
+    color: #167d4e;
     border: none;
     padding: 5px 10px;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
     border-radius: 4px;
     cursor: pointer;
   }
@@ -74,7 +86,7 @@ const SideArea = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin-left: auto;
+  //margin-left: auto;
   padding: 5px 0;
 
   input[type="checkbox"] {
@@ -88,6 +100,7 @@ const SideArea = styled.div`
 const DeleteIcon = styled.img`
   width: 35px;
   height: 35px;
+  object-fit: contain; //  비율 유지 + 정렬
   cursor: pointer;
   transition: opacity 0.2s;
 

@@ -6,14 +6,14 @@ const CartList = () => {
 
   useEffect(() => {
     const tempCart = [
-      { id: 1, name: "키링", price: "12,000", image: "", quantity: 1 },
-      { id: 2, name: "머그컵", price: "12,000", image: "", quantity: 1 },
-      { id: 3, name: "그립톡톡", price: "15,000", image: "", quantity: 1 },
-      { id: 4, name: "키링", price: "12,000", image: "", quantity: 1 },
-      { id: 5, name: "키링", price: "12,000", image: "", quantity: 1 },
-      { id: 6, name: "키링", price: "12,000", image: "", quantity: 1 },
-      { id: 7, name: "키링", price: "12,000", image: "", quantity: 1 },
-      { id: 8, name: "키링", price: "12,000", image: "", quantity: 1 },
+      { id: 1, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
+      { id: 2, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
+      { id: 3, name: "굿즈 이름", price: "15,000", image: "", quantity: 1 },
+      { id: 4, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
+      { id: 5, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
+      { id: 6, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
+      { id: 7, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
+      { id: 8, name: "굿즈 이름", price: "12,000", image: "", quantity: 1 },
     ];
 
     setCartList(tempCart);
