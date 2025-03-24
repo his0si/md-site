@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import testRoutes from "./routes/test.route.js"
 import loginRoutes from "./routes/login.route.js"
+import orderadminRoutes from "./routes/orderadmin.route.js"
 import shoppingCartRoutes from "./routes/shoppingcart.route.js"
 import productRoutes from "./routes/product.route.js"
 import swaggerJSDoc from "swagger-jsdoc";
@@ -75,6 +76,7 @@ app.use("/api", shoppingCartRoutes);
 app.use("/api/test", testRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/login", loginRoutes);
+app.use('/api/orderadmin', orderadminRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);
