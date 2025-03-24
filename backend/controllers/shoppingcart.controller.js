@@ -439,3 +439,117 @@ export const decreaseProductQuantity = async (req, res)=>{
         return res.status(500).json({message : "Internal server error"});
     }
 }
+
+
+/**
+ * @swagger
+ * /api/cart/all-products:
+ *   delete:
+ *     summary: 특정회원 장바구니 비우기
+ *     description: 장바구니에 있는 상품을 모두 없앱니다.
+ *     tags:
+ *       - Cart
+ *     responses:
+ *       200:
+ *         description: 장바구니 비우기 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 장바구니를 비웠습니다.
+ *       401:
+ *         description: 인증되지 않은 사용자
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 로그인 후 이용해주세요.😅
+ *       500:
+ *         description: 서버 내부 오류
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Internal server error
+ */
+export const deleteAllProducts = async (req, res)=>{
+    try{
+        const userId = req.userId;
+        await ShoppingCart.updateOne(
+            { "user.userId": userId},
+            { $set : { products: [] }}
+        );
+        return res.status(200).json({message: "장바구니를 비웠습니다."});
+    }catch(error){
+        //console.error(error);
+        return res.status(500).json({ message: "Internal server error"});
+    }
+}
+
+/**
+ * @swagger
+ * /api/cart/products:
+ *   patch:
+ *     summary: 장바구니에서 여러 상품 삭제
+ *     description: 장바구니에서 여러 상품을 삭제합니다.
+ *     tags:
+ *       - Cart
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               productIds:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 example: ["60f7f7f7f7f7f7f7f7f7f7f7", "60f7f7f7f7f7f7f7f7f7f7f8"]
+ *     responses:
+ *       200:
+ *         description: 상품 삭제 성공
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: 2개의 상품이 장바구니에서 삭제되었습니다.
+ *       400:
+ *         description: 잘못된 요청 (상품 ID 누락 등)
+ *       404:
+ *         description: 장바구니에 해당 상품이 없음
+ *       500:
+ *         description: 서버 오류
+ */
+export const deleteProductFromCart = async (req, res)=>{
+    try{
+        const userId = req.userId;
+        const { productIds } = req.body; // 배열 형태
+        console.log(productIds);
+        if(!productIds || productIds.length == 0){
+            return res.status(400).json({message : "삭제할 상품 id가 필요합니다."});
+        }
+        const result = await ShoppingCart.updateOne(
+            {"user.userId": userId},
+            {$pull : {products: {productID: {$in: productIds}}}}
+        );
+        if (result.modifiedCount === 0) {
+            return res.status(404).json({ message: "장바구니에 해당 상품이 없습니다." });
+        }
+        return res.status(200).json({ message: `${productIds.length}개의 상품이 장바구니에서 삭제되었습니다.` });
+    }catch(error){
+        return res.status(500).json({ message: "Internal server error", error });
+    }
+}
