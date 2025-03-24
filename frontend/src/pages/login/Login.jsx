@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   max-width: 500px;
   background: rgb(248, 250, 243);
@@ -21,7 +21,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
+  overflow: hidden;  // 혹시 내부 콘텐츠로 인해 스크롤이 생기는 것을 방지
 `;
+
 
 const Header = styled.h1`
   font-size: 30px;
