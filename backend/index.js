@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import testRoutes from "./routes/test.route.js"
 import loginRoutes from "./routes/login.route.js"
 import shoppingCartRoutes from "./routes/shoppingcart.route.js"
+import productRoutes from "./routes/product.route.js"
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./lib/db.js";
@@ -72,6 +73,7 @@ const specs = swaggerJSDoc(options);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs)); 
 app.use("/api", shoppingCartRoutes);
 app.use("/api/test", testRoutes);
+app.use("/api/products", productRoutes); // Product API
 app.use("/api/login", loginRoutes);
 
 app.listen(PORT, () => {
