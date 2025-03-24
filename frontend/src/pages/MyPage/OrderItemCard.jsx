@@ -16,30 +16,33 @@ const Card = styled.div`
 
 const ItemImage = styled.div`
   width: 170px;
-  height: 170px;
+  aspect-ratio: 1/1;
   background: rgb(245, 245, 245);
+  flex-shrink: 0;
+  flex-basis: 50%; //이미지가 카드 45%너비만 차지하도록 수정정
   //border-radius: 5px;
 `;
 
 const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 60px;
+  margin-left: 40px;
   //justify-content: center;
   margin-top: 10px;
   gap: 10px;
+  flex: 1;
 `;
 
 const ItemName = styled.div`
   color: #167d4e;
-  font-size: 17px;
+  font-size: 14px;
 
   font-weight: bold;
-  text-shadow: 0.3px 0 currentColor, -0.3px 0 currentColor;
+  //text-shadow: 0.3px 0 currentColor, -0.3px 0 currentColor;
 `;
 
 const ItemPrice = styled.div`
-  font-size: 20px;
+  font-size: 16px;
   color: black;
 
   font-weight: bold;
