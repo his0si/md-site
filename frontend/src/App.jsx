@@ -13,6 +13,8 @@ import NavBar from "./components/NavBar";
 import Cart from "./pages/cart/cart";
 import CartEmpty from "./pages/cart/cart_empty";
 import useViewportHeight from './components/useViewportHeight'; 
+import OrderComplete from "./pages/order/OrderComplete";
+import NavBar2 from "./components/NavBar2";
 
 const App = () => {
   const location = useLocation();
@@ -34,18 +36,24 @@ const App = () => {
     return <AdminLogin />;
   }
 
+  // 네비바가 없는 페이지들
+  const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
+  
+  // NavBar1이 있는 페이지들 (아이콘 3개)
+  const navBar1Pages = ["/", "/cart", "/cartEmpty", "/order-complete"];
+  
+  // NavBar2가 있는 페이지들 (뒤로가기, 홈)
+  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info"];
+
   return (
     <div>
-      {/* 로그인 페이지가 아닐 때만 NavBar 표시 */}
-      {location.pathname !== "/" &&
-        location.pathname !== "/MyPage" &&
-        location.pathname !== "/MyPage/list" &&
-        location.pathname !== "/MyPage/info" &&
-        location.pathname !== "/cart" &&
-        location.pathname !== "/cartEmpty" &&
-        location.pathname !== "/login" &&
-        location.pathname !== "/student-number" &&
-        location.pathname !== "/registration-complete" && <NavBar />}
+      {/* 네비바 조건부 렌더링 */}
+      {!noNavBarPages.includes(location.pathname) && (
+        <>
+          {navBar1Pages.includes(location.pathname) && <NavBar />}
+          {navBar2Pages.includes(location.pathname) && <NavBar2 />}
+        </>
+      )}
 
       <Routes>
         <Route path="/MyPage" element={<MyPage />} />
@@ -59,6 +67,7 @@ const App = () => {
           path="/registration-complete"
           element={<RegistrationComplete />}
         />
+        <Route path="/order-complete" element={<OrderComplete />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/cartEmpty" element={<CartEmpty />} />
       </Routes>
