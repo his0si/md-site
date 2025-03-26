@@ -40,10 +40,10 @@ const App = () => {
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
   
   // NavBar1이 있는 페이지들 (아이콘 3개)
-  const navBar1Pages = ["/", "/cart", "/cartEmpty", "/order-complete"];
+  const navBar1Pages = ["/", "/order-complete"];
   
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
-  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info"];
+  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info","/cart"];
 
   return (
     <div>

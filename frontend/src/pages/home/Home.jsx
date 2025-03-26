@@ -55,7 +55,6 @@ const Home = () => {
 
   return (
     <Container>
-      <NavBar />
 
       <ScrollableContent>
         <ProductList products={products} />
