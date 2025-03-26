@@ -15,7 +15,7 @@ const Container = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   max-width: 500px;
-  background: rgb(248, 250, 243);
+  background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +26,7 @@ const Container = styled.div`
 
 
 const Header = styled.h1`
-  font-size: 30px;
+  font-size: 35px;
   background: linear-gradient(to right,rgb(154, 205, 205), #b0c77e,rgb(214, 214, 143));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -45,8 +45,8 @@ const Text = styled.div`
   text-align: center;
   margin-top: 15px;
   margin-bottom: 10px;
-  font-size: 10px;
-  line-height: 1.5;
+  font-size: 11px;
+  line-height: 1.7;
   color: #333;
   padding: 0 20px;
   max-width: 300px; 
@@ -104,14 +104,14 @@ const Login = () => {
         <Header>rE: market</Header>
         <TextBackground>
           <Text>
-            이화이언의 5월 행사, rE: mark는<br />
-            수강 신청으로 놓쳤던 인기 강의를 경험하고,<br />
-            이화 출신 선배님의 진솔한 이야기를<br />
-            들을 수 있는 특별한 자리입니다.<br /><br />
-            rE: mark의 굿즈부스에선<br />
+            이화이언의 5월 행사, <strong>rE: mark</strong>는<br />
+            <strong>수강 신청으로 놓쳤던 인기 강의를 경험</strong>하고,<br />
+            <strong>이화 출신 선배님의 진솔한 이야기</strong>를<br />
+            들을 수 있는 <strong>특별한 자리</strong>입니다.<br /><br />
+            <strong>rE: mark</strong>의 <strong>굿즈부스</strong>에선<br />
             벗들을 위한 다양한 굿즈를 판매하고 있습니다.<br /><br />
-            rE: market에 지금 바로 로그인해서<br />
-            마음에 드는 굿즈를 찾아보세요!
+            <strong>rE: market</strong>에 지금 바로 로그인해서<br />
+            <strong>마음에 드는 굿즈를 찾아보세요!</strong>
           </Text>
         </TextBackground>
         <ImageGallery>
