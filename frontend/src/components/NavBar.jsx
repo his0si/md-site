@@ -7,12 +7,18 @@ import cart from "../assets/cart.png";
 import ewhaianLogo from "../assets/ewhaianLogo.png";
 
 const NaviBar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-
+  
   padding: 10px;
+  background-color: white;
   //   border-bottom: 1px solid #ddd;
 `;
 
