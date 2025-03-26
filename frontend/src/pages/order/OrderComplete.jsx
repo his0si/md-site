@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import checkImage from '../../assets/check.png';
+import OrderCompleteIcon from '../../assets/OrderCompleteIcon.png';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -12,16 +13,25 @@ const Container = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   max-width: 500px;
-  background: radial-gradient(circle at 70% 40%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
+  background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   margin: auto;
   padding: 20px;
   box-sizing: border-box;
-  padding-top: 200px;
+  position: relative;
   overflow: hidden;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin-bottom: 100px;
+  margin-top: 100px;
 `;
 
 const Icon = styled.img`
@@ -44,6 +54,23 @@ const SubText = styled.div`
   text-align: center;
   margin-bottom: 40px;
   white-space: pre-line;
+
+  span {
+    color: #167D4E;
+    font-weight: bold;
+  }
+
+  .icon-text-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  img {
+    width: 12px;
+    height: 12px;
+    display: block;
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -53,8 +80,13 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  margin-top: 150px;
-  padding-bottom: 20px;
+  padding-bottom: 40px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  z-index: 10;
 `;
 
 const OutlinedButton = styled.button`
@@ -96,11 +128,20 @@ const OrderComplete = () => {
     <>
       <GlobalStyle />
       <Container>
-        <Icon src={checkImage} alt="Check" />
-        <MainText>주문이 완료되었습니다.</MainText>
-        <SubText>마이페이지 → 상품 수정 정보 확인하기에서{'\n'}자세한 상품 수정 정보를 확인하실 수 있습니다.</SubText>
+        <ContentWrapper>
+          <Icon src={checkImage} alt="Check" />
+          <MainText>주문이 완료되었습니다.</MainText>
+          <SubText>
+            <span>
+              <div className="icon-text-wrapper">
+                <img src={OrderCompleteIcon} alt="icon"/>
+                마이페이지 → 상품 수정 정보 확인하기
+              </div>
+            </span>에서{'\n'}자세한 상품 수정 정보를 확인하실 수 있습니다.
+          </SubText>
+        </ContentWrapper>
         <ButtonWrapper>
-          <OutlinedButton>계속 구매하기</OutlinedButton>
+          <OutlinedButton>계속 구경하기</OutlinedButton>
           <FilledButton>주문 마치기</FilledButton>
         </ButtonWrapper>
       </Container>
