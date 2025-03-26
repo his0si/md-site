@@ -29,7 +29,7 @@ const Header = styled.h1`
   background: linear-gradient(to right,rgb(154, 205, 205), #b0c77e,rgb(214, 214, 143));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-top: 20px;
+  margin-top: 15px;
   
 `;
 
