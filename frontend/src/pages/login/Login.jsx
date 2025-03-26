@@ -15,7 +15,7 @@ const Container = styled.div`
   height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   max-width: 500px;
-  background: rgb(255, 255, 255);
+  background: radial-gradient(circle at 50% 30%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +23,6 @@ const Container = styled.div`
   margin: auto;
   overflow: hidden;  // 혹시 내부 콘텐츠로 인해 스크롤이 생기는 것을 방지
 `;
-
 
 const Header = styled.h1`
   font-size: 35px;
@@ -35,10 +34,10 @@ const Header = styled.h1`
 `;
 
 const TextBackground = styled.div`
-  background: radial-gradient(circle, rgba(130, 211, 169, 0.3) 5%, rgba(245,245,245,0) 60%);
   padding: 20px;
   display: flex;
   justify-content: center;
+  width: 100%;
 `;
 
 const Text = styled.div`
