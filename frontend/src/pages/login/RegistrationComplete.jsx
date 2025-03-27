@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import checkImage from '../../assets/check.png';
+import Button from "../../components/button";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -9,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   max-width: 500px;
   background: radial-gradient(circle at 70% 40%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
@@ -18,6 +19,7 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
+  overflow: hidden;  // 혹시 내부 콘텐츠로 인해 스크롤이 생기는 것을 방지
 `;
 
 const Icon = styled.img`
@@ -41,21 +43,7 @@ const SubText = styled.div`
   margin-bottom: 40px;
 `;
 
-const Button = styled.button`
-  background-color: #167D4E;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  position: fixed; bottom: 60px;
-  width: 300px;
 
-  &:hover {
-    background-color: #0d5a3a;
-  }
-`;
 
 const RegistrationComplete = () => {
   return (
@@ -65,7 +53,7 @@ const RegistrationComplete = () => {
         <Icon src={checkImage} alt="Check" />
         <MainText>회원가입이 완료되었습니다.</MainText>
         <SubText>rE: market의 새로운 회원님을 환영합니다!</SubText>
-        <Button>회원가입 마치기</Button>
+        <Button text={"회원가입 마치기"}/>
       </Container>
     </>
   );

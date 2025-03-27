@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import Button from "../../components/button";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -8,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Container = styled.div`
-  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
   width: 100%;
   max-width: 500px;
   background: rgb(255, 255, 255);
@@ -17,7 +18,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   margin: auto;
+  overflow: hidden;  // 혹시 내부 콘텐츠로 인해 스크롤이 생기는 것을 방지
 `;
+
 const InstructionText = styled.div`
   font-size: 15px;
   color: #167D4E;
@@ -46,21 +49,6 @@ const InfoText = styled.div`
   width: 80%;
 `;
 
-const Button = styled.button`
-  background-color: #167D4E;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  position: fixed; bottom: 60px;
-  width: 300px;
-
-  &:hover {
-    background-color: #0d5a3a;
-  }
-`;
 
 const StudentNumber = () => {
   return (
@@ -70,7 +58,7 @@ const StudentNumber = () => {
         <InstructionText>학번을 입력해주세요.</InstructionText>
         <Input type="text" />
         <InfoText>행사 이후 모든 학번 및 회원 정보는 파기될 예정입니다.</InfoText>
-        <Button>다음</Button>
+        <Button text={"다음"}/>
       </Container>
     </>
   );

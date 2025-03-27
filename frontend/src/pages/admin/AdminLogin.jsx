@@ -13,8 +13,8 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   height: 100vh;
   width: 100%;
-  max-width: 500px;
-  background: radial-gradient(circle at 70% 40%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
+  max-width: 1200px;
+  background: radial-gradient(circle at 60% 40%, rgba(165, 223, 155, 0.2) 3%, rgba(245,245,245,0) 25%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -113,6 +113,8 @@ const ErrorMessage = styled.div`
   min-height: 20px;
 `;
 
+const ADMIN_PASSWORD = '2903';  // 상단에 비밀번호 변수 선언
+
 const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -127,7 +129,7 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === '1886') {
+    if (password === ADMIN_PASSWORD) {
       localStorage.setItem('adminLoggedIn', 'true');
       navigate('/#/admin');
     } else {
