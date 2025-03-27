@@ -135,9 +135,9 @@ const OrderComplete = () => {
             <span>
               <div className="icon-text-wrapper">
                 <img src={OrderCompleteIcon} alt="icon"/>
-                마이페이지 → 상품 수정 정보 확인하기
+                마이페이지 → 상품 수령 정보 확인하기
               </div>
-            </span>에서{'\n'}자세한 상품 수정 정보를 확인하실 수 있습니다.
+            </span>에서{'\n'}자세한 상품 수령 정보를 확인하실 수 있습니다.
           </SubText>
         </ContentWrapper>
         <ButtonWrapper>
