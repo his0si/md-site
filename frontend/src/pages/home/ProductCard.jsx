@@ -3,9 +3,9 @@ import styled from "styled-components";
 
 const Card = styled.div`
   border: none;
-  padding: 15px;
-  margin: 5px auto;
-  width: 90%;
+  padding: 15px 8px;
+  margin: 5px 0 5px 0;
+  width: 95%;
   background: rgb(255, 255, 255);
   // align-items: center;
   display: flex;
@@ -20,22 +20,21 @@ const ProductImage = styled.div`
   background: rgb(245, 245, 245);
 
   flex-shrink: 0;
-  flex-basis: 50%; //이미지가 카드 45%너비만 차지하도록 수정정
+  flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정
   //border-radius: 5px;
 `;
 
 const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
-  //justify-content: center;
+  margin-left: 20px;
   margin-top: 10px;
   gap: 10px;
   flex: 1;
 `;
 
 const ProductName = styled.div`
-  color: #167d4e;
+  color: #167D4E;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
@@ -49,8 +48,7 @@ const ProductPrice = styled.div`
 `;
 
 const ProductStatus = styled.div`
-  color: red;
-  font-weight: bold;
+  color: #FF0000;
 `;
 
 const ProductCard = ({ product }) => {
