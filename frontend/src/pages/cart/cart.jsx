@@ -61,7 +61,7 @@ const Cart = () => {
   return (
     <>
       <Container>
-        <NavBar2 />
+        {/* <NavBar2 /> */}
         <Title>장바구니</Title>
         <ScrollArea>
           <CartList />

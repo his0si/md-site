@@ -40,7 +40,7 @@ const ScrollableContent = styled.div`
 const MyPage_list = () => {
   return (
     <Container>
-      <NavBar2 />
+      {/* <NavBar2 /> */}
 
       <Title>내 주문 목록 </Title>
       <ScrollableContent>
