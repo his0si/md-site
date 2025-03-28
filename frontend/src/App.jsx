@@ -11,7 +11,6 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import NavBar from "./components/NavBar";
 import Cart from "./pages/cart/cart";
-import CartEmpty from "./pages/cart/cart_empty";
 import useViewportHeight from './components/useViewportHeight'; 
 import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
@@ -41,10 +40,13 @@ const App = () => {
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
   
   // NavBar1이 있는 페이지들 (아이콘 3개)
-  const navBar1Pages = ["/", "/cartEmpty", "/order-complete", "/product-detail"];
+
+  const navBar1Pages = ["/", "/order-complete"];
   
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
-  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info", "/cart"];
+  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info","/cart"];
+
+
 
   return (
     <div>
