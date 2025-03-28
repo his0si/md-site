@@ -11,7 +11,6 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminLogin from "./pages/admin/AdminLogin";
 import NavBar from "./components/NavBar";
 import Cart from "./pages/cart/cart";
-import CartEmpty from "./pages/cart/cart_empty";
 import useViewportHeight from './components/useViewportHeight'; 
 import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
