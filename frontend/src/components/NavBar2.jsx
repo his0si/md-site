@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
 const NaviBar = styled.div`
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background-color: #ffffff;
   display: flex;
-
   justify-content: space-between;
   align-items: center;
-  max-width:500px;
-  margin:auto;
-
+  max-width: 500px;
   padding: 10px;
+  z-index: 1000;
 `;
 
 const NavBar2 = () => {

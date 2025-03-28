@@ -1,8 +1,8 @@
 import Home from "./pages/home/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MyPage from "./pages/MyPage/MyPage";
-import MyPage_info from "./pages/MyPage/MyPage_info";
 import MyPage_list from "./pages/MyPage/MyPage_list";
+import MyPage_info from "./pages/MyPage/MyPage_info";
 import { useLocation } from "react-router-dom";
 import Login from "./pages/login/Login";
 import StudentNumber from "./pages/login/StudentNumber";
@@ -40,13 +40,10 @@ const App = () => {
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
   
   // NavBar1이 있는 페이지들 (아이콘 3개)
-
   const navBar1Pages = ["/", "/order-complete"];
   
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
-  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info","/cart"];
-
-
+  const navBar2Pages = ["/my-page", "/my-page/list", "/my-page/info","/cart"];
 
   return (
     <div>
@@ -59,9 +56,14 @@ const App = () => {
       )}
 
       <Routes>
-        <Route path="/MyPage" element={<MyPage />} />
-        <Route path="/MyPage/list" element={<MyPage_list />} />
-        <Route path="/MyPage/info" element={<MyPage_info />} />
+        {/* /mypage를 /my-page로 리다이렉트 */}
+        <Route path="/mypage" element={<Navigate to="/my-page" replace />} />
+        <Route path="/mypage/*" element={<Navigate to="/my-page" replace />} />
+        
+        {/* 기존 라우트들 */}
+        <Route path="/my-page" element={<MyPage />} />
+        <Route path="/my-page/list" element={<MyPage_list />} />
+        <Route path="/my-page/info" element={<MyPage_info />} />
         {/* <Route path="/MyPage/order" element={<MyOrderPage />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

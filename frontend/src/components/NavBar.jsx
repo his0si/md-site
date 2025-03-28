@@ -21,6 +21,7 @@ const NaviBar = styled.div`
   margin:auto;
 
   padding: 10px;
+  background-color: white;
 
 `;
 

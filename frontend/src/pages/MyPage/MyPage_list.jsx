@@ -5,22 +5,24 @@ import OrderList from "./OrderList";
 import styled from "styled-components";
 
 const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   max-width: 500px;
-  background: rgb(255, 255, 255);
+  background: rgb(256, 256, 256);
   display: flex;
   flex-direction: column;
-  //align-items: center;
-  justify-content: flex-start;
+  align-items: center;
+  justify-Content: flex-start;
   margin: auto;
+  padding-top: 50px;
 `;
 
 const Title = styled.h2`
   font-size: 20px;
   text-align: center;
   color: #167d4e;
-  margin-botton: 30px;
+  font-weight: 700;
+  margin-top: 5vh;
 `;
 
 const ScrollableContent = styled.div`
