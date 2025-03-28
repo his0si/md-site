@@ -73,7 +73,6 @@ const App = () => {
         <Route path="/order-complete" element={<OrderComplete />} />
         <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/cartEmpty" element={<CartEmpty />} />
       </Routes>
     </div>
   );

@@ -1,4 +1,3 @@
-import NavBar2 from "../../components/NavBar2"
 import styled from "styled-components";
 
 const Container = styled.div`
