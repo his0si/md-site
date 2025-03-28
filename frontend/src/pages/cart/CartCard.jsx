@@ -98,8 +98,8 @@ const SideArea = styled.div`
 `;
 
 const DeleteIcon = styled.img`
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   object-fit: contain; //  비율 유지 + 정렬
   cursor: pointer;
   transition: opacity 0.2s;

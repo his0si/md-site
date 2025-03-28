@@ -12,11 +12,11 @@ const Wrapper = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottm: 20px;
+  margin-bottm: 10px;
 `;
 
 const CloseButton = styled.button`
-  font-size: 24px;
+  font-size: 35px;
   border: none;
   background: none;
   cursor: pointer;
@@ -26,15 +26,17 @@ const GoodsInfo = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 12px;
+
   margin-bottom: 12px;
-  margin-top: 70px;
+  margin-top: 50px;
+  padding-left: 20px;
 `;
 
 const ImageBox = styled.div`
   width: 140px;
   height: 140px;
-  background-color: rgb(154, 137, 137);
+
+  background-color: rgb(245, 245, 245);
 `;
 
 const InfoBox = styled.div`
@@ -59,6 +61,7 @@ const QtyBox = styled.div`
   gap: 8px;
   margin-top: 30px;
   margin-left: 55px;
+  color: #2b6e44;
 `;
 
 const QtyBtn = styled.button`
@@ -68,6 +71,7 @@ const QtyBtn = styled.button`
   height: 24px;
   font-size: 14px;
   background: none;
+  color: #2b6e44;
 `;
 
 const QtyText = styled.span`
@@ -97,6 +101,7 @@ const Input = styled.input`
   width: 60%;
   border: 1px solid #ccc;
   border-radius: 4px;
+  background: transparent;
 `;
 
 const Footer = styled.div`
@@ -110,6 +115,8 @@ const AccountCard = styled.div`
 
   text-align: center;
   margin-bottom: 13px;
+  min-height: 170px;
+  line-height: 2;
 `;
 const AccountBox = styled.div`
   font-size: 14px;
@@ -193,13 +200,19 @@ const OrderPage = () => {
 
       <Summary>
         <Row>
-          입금액 <span>{totalPrice.toLocaleString()} 원</span>
+          입금액{" "}
+          <span>
+            <strong>{totalPrice.toLocaleString()} 원</strong>
+          </span>
         </Row>
 
         <Divider />
 
         <Row>
-          수령 일자 / 장소 <span>25.05.07 ECC 이삼봉홀</span>
+          수령 일자 / 장소{" "}
+          <span>
+            <strong>25.05.07 ECC 이삼봉홀</strong>
+          </span>
         </Row>
         <Divider />
         <Row>
