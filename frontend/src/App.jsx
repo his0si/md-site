@@ -56,9 +56,9 @@ const App = () => {
       )}
 
       <Routes>
-        <Route path="/MyPage" element={<MyPage />} />
-        <Route path="/MyPage/list" element={<MyPage_list />} />
-        <Route path="/MyPage/info" element={<MyPage_info />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/list" element={<MyPage_list />} />
+        <Route path="/mypage/info" element={<MyPage_info />} />
         {/* <Route path="/MyPage/order" element={<MyOrderPage />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -69,7 +69,7 @@ const App = () => {
         />
         <Route path="/order-complete" element={<OrderComplete />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/cartEmpty" element={<CartEmpty />} />
+
       </Routes>
     </div>
   );
