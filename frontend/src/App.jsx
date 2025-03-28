@@ -15,6 +15,7 @@ import CartEmpty from "./pages/cart/cart_empty";
 import useViewportHeight from './components/useViewportHeight'; 
 import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
+import ProductDetail from "./pages/product/ProductDetail";
 
 const App = () => {
   const location = useLocation();
@@ -40,10 +41,13 @@ const App = () => {
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
   
   // NavBar1이 있는 페이지들 (아이콘 3개)
+
   const navBar1Pages = ["/", "/order-complete"];
   
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
   const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info","/cart"];
+
+
 
   return (
     <div>
@@ -68,6 +72,7 @@ const App = () => {
           element={<RegistrationComplete />}
         />
         <Route path="/order-complete" element={<OrderComplete />} />
+        <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
 
       </Routes>
