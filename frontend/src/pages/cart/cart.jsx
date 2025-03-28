@@ -2,6 +2,19 @@ import React from "react";
 import NavBar2 from "../../components/NavBar2";
 import styled from "styled-components";
 import CartList from "./CartList";
+import Button from "../../components/button";
+
+const Container2 = styled.div`
+  height: 100vh;
+  width: 100%;
+  max-width: 500px;
+  background: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  justify-content: center;
+  margin: auto;
+`;
 
 const Container = styled.div`
   height: 100vh;
@@ -10,7 +23,7 @@ const Container = styled.div`
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  //align-items: center;
+  align-items: center;
   justify-content: center;
   margin: auto;
 `;
@@ -48,7 +61,18 @@ const BottomBar = styled.div`
   background: white;
 `;
 
-const Button = styled.button`
+const Button1 = styled.button`
+  background-color: #167d4e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 75%;
+`;
+
+const Button2 = styled.button`
   padding: 10px 20px;
   border: 1px solid #167d4e;
   background: ${(props) => (props.primary ? "#167d4e" : "white")};
@@ -57,20 +81,38 @@ const Button = styled.button`
   border-radius: 6px;
   cursor: pointer;
 `;
+
+const cartEmpty = true;
+
 const Cart = () => {
   return (
     <>
-      <Container>
-        {/* <NavBar2 /> */}
-        <Title>장바구니</Title>
-        <ScrollArea>
-          <CartList />
-        </ScrollArea>
-        <BottomBar>
-          <Button>선택 주문하기</Button>
-          <Button primary>전체 주문하기</Button>
-        </BottomBar>
-      </Container>
+      {cartEmpty ? (
+        <Container>
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "40vh",
+              marginTop: "30vh",
+            }}
+          >
+            장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
+            주세요!
+          </div>
+          <Button1>마켓구경하기</Button1>
+        </Container>
+      ) : (
+        <Container2>
+          <Title>장바구니</Title>
+          <ScrollArea>
+            <CartList />
+          </ScrollArea>
+          <BottomBar>
+            <Button2>선택 주문하기</Button2>
+            <Button2 primary>전체 주문하기</Button2>
+          </BottomBar>
+        </Container2>
+      )}
     </>
   );
 };

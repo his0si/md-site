@@ -16,10 +16,13 @@ const NaviBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
+  max-width:500px;
+  margin:auto;
+
   padding: 10px;
   background-color: white;
-  //   border-bottom: 1px solid #ddd;
+
 `;
 
 const Icon = styled.img`
