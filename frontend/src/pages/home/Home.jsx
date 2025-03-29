@@ -39,13 +39,13 @@ const Home = () => {
       { id: 4, name: "굿즈이름", price: "10,000", status: "sold-out" },
       { id: 5, name: "굿즈이름", price: "10,000", status: "sold-out" },
       { id: 6, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 1, name: "굿즈이름", price: "10,000", status: "sold-out" },
+      { id: 7, name: "굿즈이름", price: "10,000", status: "sold-out" },
+      { id: 8, name: "굿즈이름", price: "10,000", status: "available" },
+      { id: 9, name: "굿즈이름", price: "10,000", status: "sold-out" },
+      { id: 10, name: "굿즈이름", price: "10,000", status: "available" },
+      { id: 11, name: "굿즈이름", price: "10,000", status: "available" },
+      { id: 12, name: "굿즈이름", price: "10,000", status: "available" },
+      { id: 13, name: "굿즈이름", price: "10,000", status: "sold-out" },
     ];
     setProducts(mockData);
   }, []);

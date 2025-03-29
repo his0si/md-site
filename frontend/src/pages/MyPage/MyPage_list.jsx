@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-Content: flex-start;
+  justify-content: flex-start;
   margin: auto;
   padding-top: 50px;
 `;
@@ -42,8 +42,6 @@ const ScrollableContent = styled.div`
 const MyPage_list = () => {
   return (
     <Container>
-      
-
       <Title>내 주문 목록 </Title>
       <ScrollableContent>
         <OrderList />

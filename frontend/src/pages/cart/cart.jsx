@@ -24,7 +24,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-Content: center;
+  justify-content: center;
   margin: auto;
 `;
 
@@ -61,15 +61,16 @@ const BottomBar = styled.div`
   background: white;
 `;
 
-const Button1 =styled.button`
-  background-color: #167D4E;
+const Button1 = styled.button`
+  background-color: #167d4e;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  width:75%`
+  width: 75%;
+`;
 
 const Button2 = styled.button`
   padding: 10px 20px;
@@ -81,28 +82,37 @@ const Button2 = styled.button`
   cursor: pointer;
 `;
 
-const cartEmpty=true;
+const cartEmpty = true;
 
 const Cart = () => {
   return (
     <>
-    {cartEmpty ? 
+      {cartEmpty ? (
         <Container>
-            <div style={{textAlign:"center",marginBottom:"40vh",marginTop:"30vh"}}>장바구니가 비었습니다 <br/> 마음에 드는 상품으로 장바구니를 채워 주세요!</div>
-            <Button1>마켓구경하기</Button1>
-        </Container> : 
-
-    <Container2>
-        <Title>장바구니</Title>
-        <ScrollArea>
-          <CartList />
-        </ScrollArea>
-        <BottomBar>
-          <Button2>선택 주문하기</Button2>
-          <Button2 primary>전체 주문하기</Button2>
-        </BottomBar>
-      </Container2>}
-     
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "40vh",
+              marginTop: "30vh",
+            }}
+          >
+            장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
+            주세요!
+          </div>
+          <Button1>마켓구경하기</Button1>
+        </Container>
+      ) : (
+        <Container2>
+          <Title>장바구니</Title>
+          <ScrollArea>
+            <CartList />
+          </ScrollArea>
+          <BottomBar>
+            <Button2>선택 주문하기</Button2>
+            <Button2 primary>전체 주문하기</Button2>
+          </BottomBar>
+        </Container2>
+      )}
     </>
   );
 };
