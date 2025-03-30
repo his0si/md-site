@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ProductDetailModal from "./ProductDetailModal";
 
 const Container = styled.div`
   height: 100vh;
@@ -99,6 +100,7 @@ const ProductDetail = () => {
       <ProductStatus>
         testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
       </ProductStatus>
+      <ProductDetailModal modalOpen={true}></ProductDetailModal>
       
       <ButtonContainer>
         <Button className="compare">바로 구매하기</Button>
