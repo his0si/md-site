@@ -5,7 +5,7 @@ const Card = styled.div`
   border: none;
   padding: 15px;
   margin: 5px auto;
-  width: 90%;
+  width: 100%;
   background: rgb(255, 255, 255);
   // align-items: center;
   display: flex;
@@ -19,14 +19,13 @@ const ItemImage = styled.div`
   aspect-ratio: 1/1;
   background: rgb(245, 245, 245);
   flex-shrink: 0;
-  flex-basis: 50%; //이미지가 카드 45%너비만 차지하도록 수정정
-  //border-radius: 5px;
+  flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정
 `;
 
 const ItemInfo = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 40px;
+  margin-left: 20px;
   //justify-content: center;
   margin-top: 10px;
   gap: 10px;

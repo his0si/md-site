@@ -9,7 +9,6 @@ const Card = styled.div`
   margin: 5px auto;
   width: 90%;
   background: rgb(255, 255, 255);
-  // align-items: center;
   display: flex;
 
   gap: 15px;
@@ -20,7 +19,6 @@ const ItemImage = styled.div`
   width: 170px;
   aspect-ratio: 1/1;
   background: rgb(245, 245, 245);
-  //border-radius: 5px;
 
   flex-shrink: 0;
   flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정정
