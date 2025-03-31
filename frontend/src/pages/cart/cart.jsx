@@ -97,6 +97,17 @@ const Button = styled.button`
   }
 `;
 
+const EmptyCartButton = styled.button`
+  background-color: #167d4e;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 75%;
+`;
+
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
 
@@ -114,7 +125,7 @@ const Cart = () => {
             장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
             주세요!
           </div>
-          <Button className="purchase">마켓구경하기</Button>
+          <EmptyCartButton>마켓구경하기</EmptyCartButton>
         </Container>
       ) : (
         <Container2>
