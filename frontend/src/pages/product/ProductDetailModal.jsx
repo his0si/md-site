@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React  from "react";
 import Modal from "../../components/Modal";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -13,13 +13,12 @@ flex-direction : column;
 gap: 15px;
 `;
 
-const ProductDetailModal = ({ modalOpen }) => {
-  const [isModalOpen, setIsModalOpen] = useState(modalOpen);
+const ProductDetailModal = ({ modalOpen, setIsModalOpen }) => {
   const navigate = useNavigate();
   return (
     <div>
       <Modal
-        isOpen={isModalOpen}
+        isOpen={modalOpen}
         moveButtonHandler={() => {
           navigate("/cart");
         }}
