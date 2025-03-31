@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
+import OrderModal from "./OrderModal";
 
 const Wrapper = styled.div`
   padding: 20px;
@@ -144,6 +145,7 @@ const OrderBtn = styled.button`
 const OrderPage = () => {
   const location = useLocation();
   const state = location.state || {};
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const fallbackItem = {
     id: 0,
@@ -226,19 +228,19 @@ const OrderPage = () => {
       </Summary>
 
       <Divider />
-
+      <OrderModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></OrderModal>
       <Footer>
         <AccountCard>
           <AccountBox>
             입금처 계좌번호
             <br />
-            <strong>32-23425-234929 이화이언</strong>
+            <strong>신한 100-026-784849 이화이언</strong>
           </AccountBox>
           <DepositNote>
             입금명은 학번(ex. 217****)으로 입력해주세요!
           </DepositNote>
         </AccountCard>
-        <OrderBtn>주문하기 (입금 후 클릭해주세요!)</OrderBtn>
+        <OrderBtn onClick={()=>{setIsModalOpen(true)}}>주문하기 (입금 후 클릭해주세요!)</OrderBtn>
       </Footer>
     </Wrapper>
   );
