@@ -16,6 +16,7 @@ import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
 import ProductDetail from "./pages/product/ProductDetail";
 
+
 const App = () => {
   const location = useLocation();
   useViewportHeight();

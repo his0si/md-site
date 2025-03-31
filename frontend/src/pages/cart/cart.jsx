@@ -81,7 +81,7 @@ const Button2 = styled.button`
   cursor: pointer;
 `;
 
-const cartEmpty=true;
+const cartEmpty=false;
 
 const Cart = () => {
   return (
