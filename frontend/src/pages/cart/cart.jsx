@@ -98,14 +98,21 @@ const Button = styled.button`
 `;
 
 const EmptyCartButton = styled.button`
-  background-color: #167d4e;
+   background-color: #167D4E;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  width: 75%;
+  position: fixed; bottom: 60px;
+  width: 300px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: #0d5a3a;
+    transform: scale(1.05);
+  }
 `;
 
 const Cart = () => {
