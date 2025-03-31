@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import myPage from "../assets/myPage.png";
@@ -34,9 +34,15 @@ const Icon = styled.img`
 const NavBar = () => {
   return (
     <NaviBar>
-      <Icon src={myPage} alt="My Page" />
-      <Icon src={ewhaianLogo} alt="Ewhaian Logo" />
-      <Icon src={cart} alt="Cart" />
+      <Link to="/my-page">
+        <Icon src={myPage} alt="My Page" />
+      </Link>
+      <Link to="/">
+        <Icon src={ewhaianLogo} alt="Ewhaian Logo" />
+      </Link>
+      <Link to="/cart">
+        <Icon src={cart} alt="Cart" />
+      </Link>
     </NaviBar>
   );
 };
