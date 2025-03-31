@@ -9,7 +9,7 @@ const ModalOverlay = styled.div`
   height: 100vh;
   z-index: 1000;
   background: rgba(0, 0, 0, 0.5);
-  display: ${({ isOpen }) => (isOpen ? "flex" : "none")};
+  display: ${({ $isOpen }) => ($isOpen ? "flex" : "none")};
   align-items: center;
   justify-content: center;
 `;
@@ -64,7 +64,7 @@ const Modal = ({
   closeButton,
 }) => {
   return (
-    <ModalOverlay isOpen={isOpen} onClick={onClose}>
+    <ModalOverlay $isOpen={isOpen} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         {children}
         <ButtonContainer>
