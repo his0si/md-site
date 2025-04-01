@@ -1,30 +1,17 @@
 import React, { useState } from "react";
-import NavBar2 from "../../components/NavBar2";
 import styled from "styled-components";
 import CartList from "./CartList";
-
-const Container2 = styled.div`
-  height: 100vh;
-  width: 100%;
-  max-width: 500px;
-  background: rgb(255, 255, 255);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: auto;
-  padding-top: 50px;
-`;
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  height: 100vh;
   width: 100%;
   max-width: 500px;
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   margin: auto;
+  min-height: 100vh;
+  position: relative;
 `;
 
 const Title = styled.h2`
@@ -32,20 +19,24 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 800;
   color: #167d4e;
-  margin-top: 5vh;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
 `;
 
 const ScrollArea = styled.div`
   flex: 1;
-  overflow-y: auto; /* ✅ 내부 컨텐츠만 스크롤 가능하게 설정 */
-  padding: 50px 0 20px 0;
+  overflow-y: auto;
+  padding: 0 0 70px 0;
 
   /* 스크롤바 숨기기: 크로스 브라우징 처리 */
-  -ms-overflow-style: none; /* IE, Edge 브라우저 전용 제어 */
-  scrollbar-width: none; /* Firefox 브라우저 전용용 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera 브라우저 전용 */
+    display: none;
   }
 `;
 
@@ -98,25 +89,29 @@ const Button = styled.button`
 `;
 
 const EmptyCartButton = styled.button`
-   background-color: #167D4E;
+  background-color: #167D4E;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  position: fixed; bottom: 60px;
+  position: fixed;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 300px;
   transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: #0d5a3a;
-    transform: scale(1.05);
+    transform: translateX(-50%) scale(1.05);
   }
 `;
 
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -126,16 +121,17 @@ const Cart = () => {
             style={{
               textAlign: "center",
               marginBottom: "40vh",
-              marginTop: "30vh",
+              marginTop: "20vh",
+              fontSize: "15px",
             }}
           >
             장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
             주세요!
           </div>
-          <EmptyCartButton>마켓구경하기</EmptyCartButton>
+          <EmptyCartButton onClick={() => navigate("/")}>마켓구경하기</EmptyCartButton>
         </Container>
       ) : (
-        <Container2>
+        <Container>
           <Title>장바구니</Title>
           <ScrollArea>
             <CartList />
@@ -144,7 +140,7 @@ const Cart = () => {
             <Button className="compare">선택 주문하기</Button>
             <Button className="purchase">전체 주문하기</Button>
           </ButtonContainer>
-        </Container2>
+        </Container>
       )}
     </>
   );
