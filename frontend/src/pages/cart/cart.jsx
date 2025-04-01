@@ -108,7 +108,7 @@ const EmptyCartButton = styled.button`
 `;
 
 const Cart = () => {
-  const [cartEmpty, setCartEmpty] = useState(false);
+  const [cartEmpty, setCartEmpty] = useState(true);
   const navigate = useNavigate();
 
   return (
@@ -119,7 +119,8 @@ const Cart = () => {
             style={{
               textAlign: "center",
               marginBottom: "40vh",
-              marginTop: "30vh",
+              marginTop: "20vh",
+              fontSize: "15px",
             }}
           >
             장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
