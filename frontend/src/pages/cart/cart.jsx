@@ -4,16 +4,14 @@ import CartList from "./CartList";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
-  height: 100vh;
   width: 100%;
   max-width: 500px;
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   margin: auto;
-  padding-top: 50px;
-  overflow: hidden;
+  min-height: 100vh;
+  position: relative;
 `;
 
 const Title = styled.h2`
@@ -21,20 +19,24 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 800;
   color: #167d4e;
-  margin-top: 5vh;
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 1;
 `;
 
 const ScrollArea = styled.div`
   flex: 1;
-  overflow-y: auto; /* ✅ 내부 컨텐츠만 스크롤 가능하게 설정 */
-  padding: 50px 0 70px 0;
+  overflow-y: auto;
+  padding: 0 0 70px 0;
 
   /* 스크롤바 숨기기: 크로스 브라우징 처리 */
-  -ms-overflow-style: none; /* IE, Edge 브라우저 전용 제어 */
-  scrollbar-width: none; /* Firefox 브라우저 전용용 */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   &::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Opera 브라우저 전용 */
+    display: none;
   }
 `;
 

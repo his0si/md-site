@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   max-width: 500px;
   background: rgb(256, 256, 256);
