@@ -108,7 +108,7 @@ const EmptyCartButton = styled.button`
 `;
 
 const Cart = () => {
-  const [cartEmpty, setCartEmpty] = useState(true);
+  const [cartEmpty, setCartEmpty] = useState(false);
   const navigate = useNavigate();
 
   return (
