@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import checkImage from "../../assets/check.png";
 import OrderCompleteIcon from "../../assets/OrderCompleteIcon.png";
-=======
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled, { createGlobalStyle } from 'styled-components';
-import checkImage from '../../assets/check.png';
-import OrderCompleteIcon from '../../assets/OrderCompleteIcon.png';
->>>>>>> 47da32d39e9bb3267e3acf68a1ae2cc37ac95dd8
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -135,7 +128,7 @@ const OrderComplete = () => {
   const navigate = useNavigate();
 
   const handleNavigateHome = () => {
-    navigate('/');
+    navigate("/");
   };
 
   return (
@@ -156,7 +149,9 @@ const OrderComplete = () => {
           </SubText>
         </ContentWrapper>
         <ButtonWrapper>
-          <OutlinedButton onClick={handleNavigateHome}>계속 구경하기</OutlinedButton>
+          <OutlinedButton onClick={handleNavigateHome}>
+            계속 구경하기
+          </OutlinedButton>
           <FilledButton onClick={handleNavigateHome}>주문 마치기</FilledButton>
         </ButtonWrapper>
       </Container>
