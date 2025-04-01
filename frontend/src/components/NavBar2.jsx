@@ -4,24 +4,38 @@ import { Link, useNavigate } from "react-router-dom";
 const NaviBar = styled.div`
   position: fixed;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  background-color: #ffffff;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 500px;
+
+  max-width:500px;
+  margin:auto;
+
   padding: 10px;
-  z-index: 1000;
+  background-color: white;
+`;
+
+const Icon = styled.div`
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const BackButton = styled.div`
   cursor: pointer;
-`;
-
-const HomeButton = styled.div`
-  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
 `;
 
 const NavBar2 = () => {
@@ -36,19 +50,14 @@ const NavBar2 = () => {
       </BackButton>
 
       <Link to="/">
-        <HomeButton>
-          <svg width="21" height="23" viewBox="0 0 25 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Icon>
+          <svg width="21" height="21" viewBox="0 0 25 27" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M24 12.4262V26H16V19C16 17.8954 15.1046 17 14 17H11C9.89543 17 9 17.8954 9 19V26H1L0.999999 12.4262L0.498319 11.9036L1 12.4262L12.5 1.38622L13.1925 0.664831L12.5 1.38622L24 12.4262Z" stroke="black" strokeWidth="2"/>
           </svg>
-        </HomeButton>
+        </Icon>
       </Link>
     </NaviBar>
   );
 };
 
 export default NavBar2;
-  
-
-
-
-
