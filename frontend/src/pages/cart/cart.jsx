@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CartList from "./CartList";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   height: 100vh;
@@ -107,7 +108,8 @@ const EmptyCartButton = styled.button`
 `;
 
 const Cart = () => {
-  const [cartEmpty, setCartEmpty] = useState(true);
+  const [cartEmpty, setCartEmpty] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -123,7 +125,7 @@ const Cart = () => {
             장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
             주세요!
           </div>
-          <EmptyCartButton>마켓구경하기</EmptyCartButton>
+          <EmptyCartButton onClick={() => navigate("/")}>마켓구경하기</EmptyCartButton>
         </Container>
       ) : (
         <Container>
