@@ -1,7 +1,7 @@
-import React from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
-import checkImage from '../../assets/check.png';
-import OrderCompleteIcon from '../../assets/OrderCompleteIcon.png';
+import React from "react";
+import styled, { createGlobalStyle } from "styled-components";
+import checkImage from "../../assets/check.png";
+import OrderCompleteIcon from "../../assets/OrderCompleteIcon.png";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -56,7 +56,7 @@ const SubText = styled.div`
   white-space: pre-line;
 
   span {
-    color: #167D4E;
+    color: #167d4e;
     font-weight: bold;
   }
 
@@ -91,9 +91,9 @@ const ButtonWrapper = styled.div`
 
 const OutlinedButton = styled.button`
   background-color: white;
-  color: #167D4E;
+  color: #167d4e;
   padding: 10px 20px;
-  border: 1px solid #167D4E;
+  border: 1px solid #167d4e;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -107,10 +107,10 @@ const OutlinedButton = styled.button`
 `;
 
 const FilledButton = styled.button`
-  background-color: #167D4E;
+  background-color: #167d4e;
   color: white;
   padding: 10px 20px;
-  border: 1px solid #167D4E;
+  border: 1px solid #167d4e;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
@@ -134,10 +134,11 @@ const OrderComplete = () => {
           <SubText>
             <span>
               <div className="icon-text-wrapper">
-                <img src={OrderCompleteIcon} alt="icon"/>
+                <img src={OrderCompleteIcon} alt="icon" />
                 마이페이지 → 상품 수령 정보 확인하기
               </div>
-            </span>에서{'\n'}자세한 상품 수령 정보를 확인하실 수 있습니다.
+            </span>
+            에서{"\n"}자세한 상품 수령 정보를 확인하실 수 있습니다.
           </SubText>
         </ContentWrapper>
         <ButtonWrapper>
@@ -147,6 +148,6 @@ const OrderComplete = () => {
       </Container>
     </>
   );
-}
+};
 
-export default OrderComplete; 
+export default OrderComplete;
