@@ -2,7 +2,7 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   max-width: 500px;
   background: rgb(255,255,255);

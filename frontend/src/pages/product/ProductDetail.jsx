@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import ProductDetailModal from "./ProductDetailModal";
 
 const Container = styled.div`
   height: 100vh;
@@ -91,6 +92,7 @@ const Button = styled.button`
 `;
 
 const ProductDetail = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <Container>
       <ProductImage />
@@ -99,10 +101,11 @@ const ProductDetail = () => {
       <ProductStatus>
         testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
       </ProductStatus>
+      <ProductDetailModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></ProductDetailModal>
       
       <ButtonContainer>
         <Button className="compare">바로 구매하기</Button>
-        <Button className="purchase">장바구니에 담기</Button>
+        <Button onClick={()=>{setIsModalOpen(true)}} className="purchase">장바구니에 담기</Button>
       </ButtonContainer>
     </Container>
   );

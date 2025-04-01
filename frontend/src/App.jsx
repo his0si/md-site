@@ -12,8 +12,10 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import NavBar from "./components/NavBar";
 import Cart from "./pages/cart/cart";
 import useViewportHeight from "./components/useViewportHeight";
+import OrderPage from "./pages/order/OrderPage";
 import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
+import NavBar3 from "./components/NavBar3";
 import ProductDetail from "./pages/product/ProductDetail";
 import OrderPage from "./pages/order/OrderPage";
 
@@ -41,10 +43,13 @@ const App = () => {
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
 
   // NavBar1이 있는 페이지들 (아이콘 3개)
-  const navBar1Pages = ["/", "/order-complete"];
+  const navBar1Pages = ["/", "/cartEmpty", "/order-complete"];
 
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
   const navBar2Pages = ["/my-page", "/my-page/list", "/my-page/info", "/cart"];
+
+  // NavBar3가 있는 페이지들 (뒤로가기, 홈, 장바구니)
+  const navBar3Pages = ["/product-detail"];
 
   return (
     <div>
@@ -53,6 +58,7 @@ const App = () => {
         <>
           {navBar1Pages.includes(location.pathname) && <NavBar />}
           {navBar2Pages.includes(location.pathname) && <NavBar2 />}
+          {navBar3Pages.includes(location.pathname) && <NavBar3 />}
         </>
       )}
 
