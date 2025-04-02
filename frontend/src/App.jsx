@@ -14,6 +14,7 @@ import Cart from "./pages/cart/cart";
 import useViewportHeight from './components/useViewportHeight'; 
 import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
+import NavBar3 from "./components/NavBar3";
 import ProductDetail from "./pages/product/ProductDetail";
 
 
@@ -45,11 +46,13 @@ const App = () => {
     "/",
     "/cartEmpty",
     "/order-complete",
-    "/product-detail",
   ];
 
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
   const navBar2Pages = ["/my-page", "/my-page/list", "/my-page/info","/cart"];
+
+  // NavBar3가 있는 페이지들 (뒤로가기, 홈, 장바구니)
+  const navBar3Pages = ["/product-detail"];
 
   return (
     <div>
@@ -58,6 +61,7 @@ const App = () => {
         <>
           {navBar1Pages.includes(location.pathname) && <NavBar />}
           {navBar2Pages.includes(location.pathname) && <NavBar2 />}
+          {navBar3Pages.includes(location.pathname) && <NavBar3 />}
         </>
       )}
 

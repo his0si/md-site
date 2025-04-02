@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   max-width: 500px;
   background: rgb(256, 256, 256);
@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Box = styled.div`
   width: 90%;
-  height: 180px;
+  height: 150px;
   border-bottom: 1px solid RGB(220, 220, 220);
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@ const MyPage_info= () => {
     return (
       <Container>
         
-         <div style={{color:" #167D4E",fontSize:"20px",fontWeight:"700",marginBottom:"5vh",marginTop:"5vh"}}>상품 수령 정보</div>
+         <div style={{color:" #167D4E",fontSize:"20px",fontWeight:"700",marginBottom:"4vh",marginTop:"5vh"}}>상품 수령 정보</div>
         <Box>
           <p style={{color:"#167D4E",fontSize:"14px",fontWeight:"700"}}>상품 수령일자</p>
           <p style={{fontSize:"16px",fontWeight:"600"}}>2025.05.07 수요일</p>
