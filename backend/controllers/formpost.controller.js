@@ -9,7 +9,7 @@ import User from "../models/user.model.js";
  *     summary: "주문 생성"
  *     description: "로그인된 사용자가 상품들을 주문합니다."
  *     tags:
- *       - order
+ *       - Orders
  *     requestBody:
  *       required: true
  *       content:
