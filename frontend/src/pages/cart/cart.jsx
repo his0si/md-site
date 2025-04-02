@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import NavBar2 from "../../components/NavBar2";
 import styled from "styled-components";
 import CartList from "./CartList";
-import Button from "../../components/button";
 
 const Container2 = styled.div`
   height: 100vh;
@@ -11,9 +10,9 @@ const Container2 = styled.div`
   background: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
-  //align-items: center;
   justify-content: center;
   margin: auto;
+  padding-top: 50px;
 `;
 
 const Container = styled.div`
@@ -24,7 +23,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-Content: center;
+  justify-content: center;
   margin: auto;
 `;
 
@@ -33,8 +32,7 @@ const Title = styled.h2`
   text-align: center;
   font-weight: 800;
   color: #167d4e;
-  margin-botton: 30px;
-  margin-top: 30px;
+  margin-top: 5vh;
 `;
 
 const ScrollArea = styled.div`
@@ -51,18 +49,56 @@ const ScrollArea = styled.div`
   }
 `;
 
-const BottomBar = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  padding: 15px;
-  border-top: 1px solid #ccc;
-  position: sticky; // 또는 fixed
+  gap: 20px;
+  position: fixed;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 500px;
   background: white;
+  padding: 20px;
 `;
 
-const Button1 =styled.button`
-  background-color: #167D4E;
+const Button = styled.button`
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &.compare {
+    background-color: white;
+    color: black;
+    border: 1px solid #167D4E;
+    
+    &:hover {
+      background-color: #f5f5f5;
+      transform: scale(1.05);
+    }
+  }
+  
+  &.purchase {
+    background-color: #167D4E;
+    color: white;
+    border: 1px solid #167D4E;
+    
+    &:hover {
+      background-color: #0d5a3a;
+      transform: scale(1.05);
+    }
+  }
+`;
+
+const EmptyCartButton = styled.button`
+   background-color: #167D4E;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -81,28 +117,39 @@ const Button2 = styled.button`
   cursor: pointer;
 `;
 
-const cartEmpty=false;
+const cartEmpty=true;
 
 const Cart = () => {
+  const [cartEmpty, setCartEmpty] = useState(false);
+
   return (
     <>
-    {cartEmpty ? 
+      {cartEmpty ? (
         <Container>
-            <div style={{textAlign:"center",marginBottom:"40vh",marginTop:"30vh"}}>장바구니가 비었습니다 <br/> 마음에 드는 상품으로 장바구니를 채워 주세요!</div>
-            <Button1>마켓구경하기</Button1>
-        </Container> : 
-
-    <Container2>
-        <Title>장바구니</Title>
-        <ScrollArea>
-          <CartList />
-        </ScrollArea>
-        <BottomBar>
-          <Button2>선택 주문하기</Button2>
-          <Button2 primary>전체 주문하기</Button2>
-        </BottomBar>
-      </Container2>}
-     
+          <div
+            style={{
+              textAlign: "center",
+              marginBottom: "40vh",
+              marginTop: "30vh",
+            }}
+          >
+            장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
+            주세요!
+          </div>
+          <EmptyCartButton>마켓구경하기</EmptyCartButton>
+        </Container>
+      ) : (
+        <Container2>
+          <Title>장바구니</Title>
+          <ScrollArea>
+            <CartList />
+          </ScrollArea>
+          <ButtonContainer>
+            <Button className="compare">선택 주문하기</Button>
+            <Button className="purchase">전체 주문하기</Button>
+          </ButtonContainer>
+        </Container2>
+      )}
     </>
   );
 };

@@ -1,4 +1,4 @@
-import Order from '../models/orderModel.js'; // 모델 파일 경로에 맞게 수정
+import Order from '../models/order.model.js'; // 모델 파일 경로에 맞게 수정
 
 /**
  * @swagger

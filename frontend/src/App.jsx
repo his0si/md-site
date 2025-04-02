@@ -1,8 +1,8 @@
 import Home from "./pages/home/Home";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MyPage from "./pages/MyPage/MyPage";
-import MyPage_info from "./pages/MyPage/MyPage_info";
 import MyPage_list from "./pages/MyPage/MyPage_list";
+import MyPage_info from "./pages/MyPage/MyPage_info";
 import { useLocation } from "react-router-dom";
 import Login from "./pages/login/Login";
 import StudentNumber from "./pages/login/StudentNumber";
@@ -39,15 +39,17 @@ const App = () => {
 
   // 네비바가 없는 페이지들
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
-  
+
   // NavBar1이 있는 페이지들 (아이콘 3개)
+  const navBar1Pages = [
+    "/",
+    "/cartEmpty",
+    "/order-complete",
+    "/product-detail",
+  ];
 
-  const navBar1Pages = ["/", "/order-complete"];
-  
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
-  const navBar2Pages = ["/MyPage", "/MyPage/list", "/MyPage/info","/cart"];
-
-
+  const navBar2Pages = ["/my-page", "/my-page/list", "/my-page/info","/cart"];
 
   return (
     <div>
@@ -60,9 +62,9 @@ const App = () => {
       )}
 
       <Routes>
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/list" element={<MyPage_list />} />
-        <Route path="/mypage/info" element={<MyPage_info />} />
+        <Route path="/MyPage" element={<MyPage />} />
+        <Route path="/MyPage/list" element={<MyPage_list />} />
+        <Route path="/MyPage/info" element={<MyPage_info />} />
         {/* <Route path="/MyPage/order" element={<MyOrderPage />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -71,10 +73,11 @@ const App = () => {
           path="/registration-complete"
           element={<RegistrationComplete />}
         />
+        <Route path="/order-page" element={<OrderPage />} />
         <Route path="/order-complete" element={<OrderComplete />} />
         <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
-
+        <Route path="/cartEmpty" element={<CartEmpty />} />
       </Routes>
     </div>
   );

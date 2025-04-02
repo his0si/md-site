@@ -91,21 +91,6 @@ const LockIcon = styled.img`
   }
 `;
 
-const Button = styled.button`
-  background-color: #167D4E;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  width: 100%;
-  
-  &:hover {
-    background-color: #0d5a3a;
-  }
-`;
-
 const ErrorMessage = styled.div`
   color: #c5221f;
   margin-bottom: 20px;
@@ -113,15 +98,12 @@ const ErrorMessage = styled.div`
   min-height: 20px;
 `;
 
-const ADMIN_PASSWORD = '2903';  // 상단에 비밀번호 변수 선언
-
 const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // 이미 로그인된 상태라면 관리자 페이지로 리다이렉트
     if (localStorage.getItem('adminLoggedIn') === 'true') {
       navigate('/#/admin');
     }
@@ -129,7 +111,7 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
+    if (password === process.env.REACT_APP_ADMIN_PASSWORD) {
       localStorage.setItem('adminLoggedIn', 'true');
       navigate('/#/admin');
     } else {
