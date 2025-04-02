@@ -4,155 +4,221 @@ import styled from "styled-components";
 import { useState } from "react";
 import OrderModal from "./OrderModal";
 
-const Wrapper = styled.div`
-  padding: 20px;
+const Container = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background: #ffffff;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 `;
+
+const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+`;
+
 const Header = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottm: 8px;
+  width: 100%;
+  padding: 20px;
+  margin-bottom: 20px;
 `;
 
 const CloseButton = styled.button`
-  font-size: 40px;
+  font-size: 28px;
   border: none;
   background: none;
   cursor: pointer;
+  padding: 0;
+  color: #000;
+  line-height: 1;
 `;
 
 const GoodsInfo = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-
-  margin-bottom: 12px;
-  margin-top: 30px;
-  padding-left: 10px;
+  padding: 0 20px 24px;
+  gap: 24px;
+  margin-top: 40px;
 `;
 
 const ImageBox = styled.div`
-  width: 140px;
-  height: 140px;
-
-  background-color: rgb(245, 245, 245);
+  width: 120px;
+  height: 120px;
+  background-color: #f5f5f5;
+  flex-shrink: 0;
 `;
 
 const InfoBox = styled.div`
   flex: 1;
-  text-align: center;
-  padding-right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 20px;
+  margin-top: 10px;
 `;
 
 const GoodsName = styled.div`
-  font-size: 16px;
+  font-size: 15px;
+  color: #167d4e;
+  margin-bottom: 6px;
+  text-align: left;
   font-weight: bold;
-  color: #2b6e44;
 `;
 
 const GoodsPrice = styled.div`
-  font-size: 16px;
-  margin: 4px 0;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
 `;
 
 const QtyBox = styled.div`
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 30px;
-  margin-left: 45px;
-  font-weight: bold;
+  gap: 12px;
+  margin-top: 12px;
+  justify-content: flex-start;
 `;
 
 const QtyBtn = styled.button`
-  border: 1px solid #aaa;
+  border: 1px solid #e0e0e0;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  font-size: 14px;
-  background: none;
-  color: #2b6e44;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  background: white;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
 `;
 
 const QtyText = styled.span`
-  min-width: 20px;
+  min-width: 24px;
   text-align: center;
+  font-size: 15px;
 `;
 
 const Divider = styled.hr`
-  margin: 5px 0;
+  margin: 0 20px;
   border: none;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #e0e0e0;
+  width: calc(100% - 40px);
 `;
 
 const Summary = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  width: 100%;
 `;
 
 const Row = styled.div`
-  display: grid;
-  grid-template-columns: 110px 1fr; // 왼쪽 라벨 고정, 오른쪽 유동
-  justify-content: flex-start;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  margin-left: 15px;
-  gap: 12px;
+  padding: 15px 20px;
+  font-size: 15px;
+`;
+
+const RowWithThickDivider = styled(Row)`
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: 8px;
+    background-color:rgb(213, 213, 213);
+  }
+
+  strong {
+    font-weight: bold;
+  }
+`;
+
+const RowWithThinDivider = styled(Row)`
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    border-top: 1px solid #e0e0e0;
+  }
 `;
 
 const Input = styled.input`
-  padding: 6px;
-  width: 80%;
+  padding: 0;
+  width: 70%;
   border: none;
-  border-radius: 4px;
   background: transparent;
+  font-size: 15px;
+  text-align: right;
   outline: none;
-`;
-
-const Footer = styled.div`
-  margin-top: 20px;
-`;
-const GrayBox = styled.div`
-  background-color: #e0e0e0;
-  height: 7px;
-  width: 100%;
+  &::placeholder {
+    color: #999;
+  }
 `;
 
 const AccountCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 1px solid rgb(133, 130, 130);
-  border-radius: 12px;
-  padding: 24px 16px;
-
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 50px 20px;
+  margin: 20px 20px;
   text-align: center;
-  margin-bottom: 2px;
-  min-height: 170px;
-  line-height: 2;
 `;
+
 const AccountBox = styled.div`
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 1.8;
+
+  strong {
+    font-weight: bold;
+  }
 `;
 
 const DepositNote = styled.div`
-  font-size: 13px;
-  color: #2b6e44;
-  text-align: center;
+  font-size: 14px;
+  color: #167d4e;
+`;
+
+const Footer = styled.div`
+  width: 100%;
+  padding: 0 0 24px;
   margin-top: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const OrderBtn = styled.button`
-  background-color: #2b6e44;
+  background-color: #167d4e;
   color: white;
-  width: 100%;
-  padding: 12px;
-  margin-top: 16px;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 10px 20px;
+  border: 1px solid #167d4e;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 320px;
+  transition: all 0.2s ease-in-out;
+  margin: 0 auto;
+
+  &:hover {
+    background-color: #0d5a3a;
+    transform: scale(1.05);
+  }
 `;
 
 const OrderPage = () => {
@@ -162,7 +228,7 @@ const OrderPage = () => {
 
   const fallbackItem = {
     id: 0,
-    name: "굿즈이름",
+    name: "굿즈 이름",
     price: "10,000",
     quantity: 1,
   };
@@ -191,69 +257,50 @@ const OrderPage = () => {
   };
 
   return (
-    <Wrapper>
-      <Header>
-        <CloseButton onClick={() => window.history.back()}>×</CloseButton>
-      </Header>
+    <Container>
+      <Wrapper>
+        <Header>
+          <CloseButton onClick={() => window.history.back()}>×</CloseButton>
+        </Header>
 
-      <GoodsInfo>
-        <ImageBox />
-        <InfoBox>
-          <GoodsName>{goodsTitle}</GoodsName>
-          <GoodsPrice>
-            <strong>{singleItem.price} 원</strong>
-          </GoodsPrice>
-          {isSingle && (
-            <QtyBox>
-              <QtyBtn onClick={() => handleQtyChange(-1)}>
-                <strong>-</strong>
-              </QtyBtn>
-              <QtyText>{quantity}</QtyText>
-              <QtyBtn onClick={() => handleQtyChange(1)}>
-                <strong>+</strong>
-              </QtyBtn>
-            </QtyBox>
-          )}
-        </InfoBox>
-      </GoodsInfo>
-
-      <Divider />
-
-      <Summary>
-        <Row>
-          <div>입금액</div>
-          <div>
-            <strong>{totalPrice.toLocaleString()} 원</strong>
-          </div>
-        </Row>
+        <GoodsInfo>
+          <ImageBox />
+          <InfoBox>
+            <GoodsName>{goodsTitle}</GoodsName>
+            <GoodsPrice>{singleItem.price} 원</GoodsPrice>
+            {isSingle && (
+              <QtyBox>
+                <QtyBtn onClick={() => handleQtyChange(-1)}>-</QtyBtn>
+                <QtyText>{quantity}</QtyText>
+                <QtyBtn onClick={() => handleQtyChange(1)}>+</QtyBtn>
+              </QtyBox>
+            )}
+          </InfoBox>
+        </GoodsInfo>
 
         <Divider />
 
-        <Row>
-          <div>수령 일자/장소</div>
-          <div>
-            <strong>25.05.07 ECC 이삼봉홀</strong>
-          </div>
-        </Row>
+        <Summary>
+          <RowWithThinDivider>
+            <div>입금액</div>
+            <div><strong>{totalPrice.toLocaleString()} 원</strong></div>
+          </RowWithThinDivider>
 
-        <GrayBox />
+          <RowWithThickDivider>
+            <div>수령 일자/장소</div>
+            <div><strong>25.05.07 ECC 이삼봉홀</strong></div>
+          </RowWithThickDivider>
 
-        <Row>
-          연락처{" "}
-          <Input
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="010 - 0000 - 0000"
-          />
-        </Row>
-      </Summary>
+          <RowWithThinDivider>
+            <div>연락처</div>
+            <Input
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder="010 - 0000 - 0000"
+            />
+          </RowWithThinDivider>
+        </Summary>
 
-      <Divider />
-      <OrderModal
-        modalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-      ></OrderModal>
-      <Footer>
         <AccountCard>
           <AccountBox>
             입금처 계좌번호
@@ -261,18 +308,19 @@ const OrderPage = () => {
             <strong>32-23425-234929 이화이언</strong>
           </AccountBox>
           <DepositNote>
-            <strong>입금명은 학번(ex. 217****)으로 입력해주세요!</strong>
+            입금명은 학번(ex. 217****)으로 입력해주세요!
           </DepositNote>
         </AccountCard>
-        <OrderBtn
-          onClick={() => {
-            setIsModalOpen(true);
-          }}
-        >
-          주문하기 (입금 후 클릭해주세요!)
-        </OrderBtn>
-      </Footer>
-    </Wrapper>
+
+        <Footer>
+          <OrderBtn onClick={() => setIsModalOpen(true)}>
+            주문하기 (입금 후 클릭해주세요!)
+          </OrderBtn>
+        </Footer>
+      </Wrapper>
+
+      <OrderModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+    </Container>
   );
 };
 
