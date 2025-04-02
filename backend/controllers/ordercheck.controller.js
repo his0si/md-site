@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import Order from "../models/order.model.js";  // Order 모델 임포트 
 /**
  * @swagger
- * /api/OrderCheck:
+ * /api/ordercheck:
  *   get:
  *     summary: 주문확인창
  *     description: "결제완료, 수령완료 된 상품들만 띄우기"
  *     tags:
- *       - order
+ *       - Orders
  *     responses:
  *       200:
  *         description: 성공적으로 메시지를 반환합니다.
