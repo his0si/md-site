@@ -13,11 +13,11 @@ const Wrapper = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottm: 10px;
+  margin-bottm: 8px;
 `;
 
 const CloseButton = styled.button`
-  font-size: 35px;
+  font-size: 40px;
   border: none;
   background: none;
   cursor: pointer;
@@ -29,8 +29,8 @@ const GoodsInfo = styled.div`
   align-items: center;
 
   margin-bottom: 12px;
-  margin-top: 50px;
-  padding-left: 20px;
+  margin-top: 30px;
+  padding-left: 10px;
 `;
 
 const ImageBox = styled.div`
@@ -43,6 +43,7 @@ const ImageBox = styled.div`
 const InfoBox = styled.div`
   flex: 1;
   text-align: center;
+  padding-right: 30px;
 `;
 
 const GoodsName = styled.div`
@@ -52,7 +53,7 @@ const GoodsName = styled.div`
 `;
 
 const GoodsPrice = styled.div`
-  font-size: 14px;
+  font-size: 16px;
   margin: 4px 0;
 `;
 
@@ -61,8 +62,8 @@ const QtyBox = styled.div`
   align-items: center;
   gap: 8px;
   margin-top: 30px;
-  margin-left: 55px;
-  color: #2b6e44;
+  margin-left: 45px;
+  font-weight: bold;
 `;
 
 const QtyBtn = styled.button`
@@ -93,29 +94,41 @@ const Summary = styled.div`
 `;
 
 const Row = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 110px 1fr; // 왼쪽 라벨 고정, 오른쪽 유동
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 15px;
+  gap: 12px;
 `;
 
 const Input = styled.input`
   padding: 6px;
-  width: 60%;
-  border: 1px solid #ccc;
+  width: 80%;
+  border: none;
   border-radius: 4px;
   background: transparent;
+  outline: none;
 `;
 
 const Footer = styled.div`
   margin-top: 20px;
 `;
+const GrayBox = styled.div`
+  background-color: #e0e0e0;
+  height: 7px;
+  width: 100%;
+`;
 
 const AccountCard = styled.div`
+  display: flex;
+  flex-direction: column;
   border: 1px solid rgb(133, 130, 130);
   border-radius: 12px;
   padding: 24px 16px;
 
   text-align: center;
-  margin-bottom: 13px;
+  margin-bottom: 2px;
   min-height: 170px;
   line-height: 2;
 `;
@@ -125,10 +138,10 @@ const AccountBox = styled.div`
 `;
 
 const DepositNote = styled.div`
-  font-size: 12px;
+  font-size: 13px;
   color: #2b6e44;
   text-align: center;
-  margin-top: 14px;
+  margin-top: auto;
 `;
 
 const OrderBtn = styled.button`
@@ -187,12 +200,18 @@ const OrderPage = () => {
         <ImageBox />
         <InfoBox>
           <GoodsName>{goodsTitle}</GoodsName>
-          <GoodsPrice>{singleItem.price} 원</GoodsPrice>
+          <GoodsPrice>
+            <strong>{singleItem.price} 원</strong>
+          </GoodsPrice>
           {isSingle && (
             <QtyBox>
-              <QtyBtn onClick={() => handleQtyChange(-1)}>-</QtyBtn>
+              <QtyBtn onClick={() => handleQtyChange(-1)}>
+                <strong>-</strong>
+              </QtyBtn>
               <QtyText>{quantity}</QtyText>
-              <QtyBtn onClick={() => handleQtyChange(1)}>+</QtyBtn>
+              <QtyBtn onClick={() => handleQtyChange(1)}>
+                <strong>+</strong>
+              </QtyBtn>
             </QtyBox>
           )}
         </InfoBox>
@@ -202,21 +221,23 @@ const OrderPage = () => {
 
       <Summary>
         <Row>
-          입금액{" "}
-          <span>
+          <div>입금액</div>
+          <div>
             <strong>{totalPrice.toLocaleString()} 원</strong>
-          </span>
+          </div>
         </Row>
 
         <Divider />
 
         <Row>
-          수령 일자 / 장소{" "}
-          <span>
+          <div>수령 일자/장소</div>
+          <div>
             <strong>25.05.07 ECC 이삼봉홀</strong>
-          </span>
+          </div>
         </Row>
-        <Divider />
+
+        <GrayBox />
+
         <Row>
           연락처{" "}
           <Input
@@ -228,19 +249,28 @@ const OrderPage = () => {
       </Summary>
 
       <Divider />
-      <OrderModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></OrderModal>
+      <OrderModal
+        modalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      ></OrderModal>
       <Footer>
         <AccountCard>
           <AccountBox>
             입금처 계좌번호
             <br />
-            <strong>신한 100-026-784849 이화이언</strong>
+            <strong>32-23425-234929 이화이언</strong>
           </AccountBox>
           <DepositNote>
-            입금명은 학번(ex. 217****)으로 입력해주세요!
+            <strong>입금명은 학번(ex. 217****)으로 입력해주세요!</strong>
           </DepositNote>
         </AccountCard>
-        <OrderBtn onClick={()=>{setIsModalOpen(true)}}>주문하기 (입금 후 클릭해주세요!)</OrderBtn>
+        <OrderBtn
+          onClick={() => {
+            setIsModalOpen(true);
+          }}
+        >
+          주문하기 (입금 후 클릭해주세요!)
+        </OrderBtn>
       </Footer>
     </Wrapper>
   );
