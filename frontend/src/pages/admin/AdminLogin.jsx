@@ -111,7 +111,7 @@ const AdminLogin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === process.env.REACT_APP_ADMIN_PASSWORD) {
+    if (password === import.meta.env.VITE_ADMIN_PASSWORD)  {
       localStorage.setItem('adminLoggedIn', 'true');
       navigate('/#/admin');
     } else {
