@@ -43,7 +43,7 @@ const CloseButton = styled.button`
 
 const GoodsInfo = styled.div`
   display: flex;
-  padding: 0 20px 24px;
+  padding: 0 20px 16px;
   gap: 24px;
   margin-top: 40px;
 `;
@@ -173,7 +173,7 @@ const Input = styled.input`
   text-align: left;
   outline: none;
   &::placeholder {
-    color: #999;
+    color: #bbb;
   }
 `;
 
@@ -188,7 +188,7 @@ const AccountCard = styled.div`
 const AccountBox = styled.div`
   font-size: 15px;
   margin-bottom: 60px;
-  line-height: 1.8;
+  line-height: 2.5;
 
   strong {
     font-weight: bold;
