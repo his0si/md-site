@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import ProductDetailModal from "./ProductDetailModal";
+import { addToCart } from "../../api/cart";
 
 const Container = styled.div`
   height: 100vh;
@@ -93,6 +94,23 @@ const Button = styled.button`
 
 const ProductDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  const handleAddToCart = async () => {
+    try {
+      setLoading(true);
+      // 실제 상품 ID를 사용해야 합니다. 여기서는 예시로 하드코딩했습니다.
+      const productId = "your-product-id";
+      await addToCart(productId, quantity);
+      setIsModalOpen(true);
+    } catch (error) {
+      alert(error.message || "장바구니 추가에 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Container>
       <ProductImage />
