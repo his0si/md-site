@@ -87,18 +87,19 @@ const QtyBox = styled.div`
 `;
 
 const QtyBtn = styled.button`
-  border: 1px solid #e0e0e0;
+  border: 1px solid #e8e8e8;
   border-radius: 50%;
   width: 28px;
   height: 28px;
-  font-size: 16px;
+  font-size: 20px;
   background: white;
-  color: #000;
+  color: #167d4e;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
   cursor: pointer;
+  line-height: 1;
 `;
 
 const QtyText = styled.span`
@@ -122,10 +123,15 @@ const Summary = styled.div`
 
 const Row = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   padding: 15px 20px;
   font-size: 15px;
+  gap: 30px;
+
+  > div:first-child {
+    min-width: 100px;
+  }
 `;
 
 const RowWithThickDivider = styled(Row)`
@@ -133,11 +139,11 @@ const RowWithThickDivider = styled(Row)`
   &:after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: -4px;
     left: 20px;
     right: 20px;
     height: 8px;
-    background-color:rgb(213, 213, 213);
+    background-color: rgb(213, 213, 213);
   }
 
   strong {
@@ -164,7 +170,7 @@ const Input = styled.input`
   border: none;
   background: transparent;
   font-size: 15px;
-  text-align: right;
+  text-align: left;
   outline: none;
   &::placeholder {
     color: #999;
@@ -174,14 +180,14 @@ const Input = styled.input`
 const AccountCard = styled.div`
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  padding: 50px 20px;
+  padding: 40px 20px 30px;
   margin: 20px 20px;
   text-align: center;
 `;
 
 const AccountBox = styled.div`
   font-size: 15px;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   line-height: 1.8;
 
   strong {
@@ -197,7 +203,6 @@ const DepositNote = styled.div`
 const Footer = styled.div`
   width: 100%;
   padding: 0 0 24px;
-  margin-top: auto;
   display: flex;
   justify-content: center;
   align-items: center;
