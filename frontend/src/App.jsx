@@ -43,14 +43,10 @@ const App = () => {
   const noNavBarPages = ["/login", "/student-number", "/registration-complete"];
 
   // NavBar1이 있는 페이지들 (아이콘 3개)
-  const navBar1Pages = [
-    "/",
-    "/cartEmpty",
-    "/order-complete",
-  ];
+  const navBar1Pages = ["/", "/cartEmpty", "/order-complete"];
 
   // NavBar2가 있는 페이지들 (뒤로가기, 홈)
-  const navBar2Pages = ["/my-page", "/my-page/list", "/my-page/info","/cart"];
+  const navBar2Pages = ["/my-page", "/my-page/list", "/my-page/info", "/cart"];
 
   // NavBar3가 있는 페이지들 (뒤로가기, 홈, 장바구니)
   const navBar3Pages = ["/product-detail"];
@@ -67,9 +63,14 @@ const App = () => {
       )}
 
       <Routes>
-        <Route path="/MyPage" element={<MyPage />} />
-        <Route path="/MyPage/list" element={<MyPage_list />} />
-        <Route path="/MyPage/info" element={<MyPage_info />} />
+        {/* /mypage를 /my-page로 리다이렉트 */}
+        <Route path="/mypage" element={<Navigate to="/my-page" replace />} />
+        <Route path="/mypage/*" element={<Navigate to="/my-page" replace />} />
+
+        {/* 기존 라우트들 */}
+        <Route path="/my-page" element={<MyPage />} />
+        <Route path="/my-page/list" element={<MyPage_list />} />
+        <Route path="/my-page/info" element={<MyPage_info />} />
         {/* <Route path="/MyPage/order" element={<MyOrderPage />} /> */}
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
