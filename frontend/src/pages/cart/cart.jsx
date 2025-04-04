@@ -96,18 +96,6 @@ const EmptyCartButton = styled.button`
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-<<<<<<< HEAD
-  width:75%`
-
-const Button2 = styled.button`
-  padding: 10px 20px;
-  border: 1px solid #167d4e;
-  background: ${(props) => (props.primary ? "#167d4e" : "white")};
-  color: ${(props) => (props.primary ? "white" : "#167d4e")};
-  font-weight: bold;
-  border-radius: 6px;
-  cursor: pointer;
-=======
   position: fixed;
   bottom: 60px;
   left: 50%;
@@ -119,10 +107,7 @@ const Button2 = styled.button`
     background-color: #0d5a3a;
     transform: translateX(-50%) scale(1.05);
   }
->>>>>>> 47da32d39e9bb3267e3acf68a1ae2cc37ac95dd8
 `;
-
-const cartEmpty=true;
 
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
@@ -135,8 +120,8 @@ const Cart = () => {
           <div
             style={{
               textAlign: "center",
-              marginBottom: "40vh",
-              marginTop: "20vh",
+              marginBottom: "20vh",
+              marginTop: "40vh",
               fontSize: "15px",
             }}
           >

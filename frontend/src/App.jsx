@@ -16,6 +16,7 @@ import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
 import NavBar3 from "./components/NavBar3";
 import ProductDetail from "./pages/product/ProductDetail";
+import OrderPage from "./pages/order/OrderPage";
 
 
 const App = () => {
@@ -81,7 +82,6 @@ const App = () => {
         <Route path="/order-complete" element={<OrderComplete />} />
         <Route path="/product-detail" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/cartEmpty" element={<CartEmpty />} />
       </Routes>
     </div>
   );
