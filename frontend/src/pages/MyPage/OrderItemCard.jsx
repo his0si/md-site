@@ -52,8 +52,8 @@ const OrderItemCard = ({ item }) => {
     <Card>
       <ItemImage></ItemImage>
       <ItemInfo>
-        <ItemName>{item.name}</ItemName>
-        <ItemPrice>{item.price}</ItemPrice>
+        <ItemName>{item.productName}</ItemName>
+        <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
       </ItemInfo>
     </Card>
   );
