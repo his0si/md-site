@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import styled from "styled-components";
+import { axiosInstance } from './../../lib/axios';
 
 const Container = styled.div`
   min-height: 100vh;
@@ -34,23 +35,17 @@ const ScrollableContent = styled.div`
 const Home = () => {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const mockData = [
-      { id: 1, name: "봉제인형", price: "10,000", status: "available" },
-      { id: 2, name: "이화컵", price: "10,000", status: "available" },
-      { id: 3, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 4, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 5, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 6, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 7, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 8, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 9, name: "굿즈이름", price: "10,000", status: "sold-out" },
-      { id: 10, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 11, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 12, name: "굿즈이름", price: "10,000", status: "available" },
-      { id: 13, name: "굿즈이름", price: "10,000", status: "sold-out" },
-    ];
-    setProducts(mockData);
+  useEffect( () => {
+    const fetchProducts = async () =>{
+      try {
+        const res = await axiosInstance.get("/products");
+        setProducts(res.data);
+      } catch (error) {
+        console.log("상품 조회 오류" + error.message);
+      }
+    };
+
+    fetchProducts();
   }, []);
 
   return (
