@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Button from "../../components/button";
+import { Navigate, useNavigate } from 'react-router-dom';
+import { axiosInstance } from '../../lib/axios';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -51,14 +53,41 @@ const InfoText = styled.div`
 
 
 const StudentNumber = () => {
+  const [studentId, setStudentId] = useState('');
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) =>{
+    setStudentId(e.target.value);
+  };
+
+  const handleSubmit = async () =>{
+    console.log(studentId);
+    if(!studentId){
+      alert("학번을 입력해주세요!");
+      return;
+    }
+    try {
+      const res = await axiosInstance.post("/login/signup", {
+        studentId: studentId,
+      }).then((res)=>{
+        if(res.status === 201){
+          confirm("환영합니다!");
+          console.log(res.data);
+          navigate("/");
+        }
+      }) 
+    } catch (error) {
+      alert('오류가 발생했습니다.');
+    }
+  }
   return (
     <>
       <GlobalStyle />
       <Container>
         <InstructionText>학번을 입력해주세요.</InstructionText>
-        <Input type="text" />
+        <Input type="text" value={studentId} onChange={handleInputChange} />
         <InfoText>행사 이후 모든 학번 및 회원 정보는 파기될 예정입니다.</InfoText>
-        <Button text={"다음"}/>
+        <Button text={"다음"} onClick={handleSubmit} />
       </Container>
     </>
   );
