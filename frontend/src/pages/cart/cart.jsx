@@ -113,7 +113,6 @@ const EmptyCartButton = styled.button`
 
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
-  const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
 
   const api = axios.create({
@@ -163,12 +162,10 @@ const Cart = () => {
         <Container>
           <Title>장바구니</Title>
           <ScrollArea>
-            <CartList onSelectionChange={handleSelectedChange} />
+            <CartList />
           </ScrollArea>
           <ButtonContainer>
-            <Button className="compare" onClick={handleSelectOrder}>
-              선택 주문하기
-            </Button>
+            <Button className="compare">선택 주문하기</Button>
             <Button className="purchase">전체 주문하기</Button>
           </ButtonContainer>
         </Container>

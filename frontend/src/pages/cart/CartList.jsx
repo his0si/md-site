@@ -2,7 +2,7 @@ import CartCard from "./CartCard";
 import { useState, useEffect } from "react";
 import { getCart, increaseQuantity, decreaseQuantity,deleteProduct } from "../../api/cart";
 
-const CartList = ({ onSelectionChange }) => {
+const CartList = () => {
   const [cartList, setCartList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,24 +11,17 @@ const CartList = ({ onSelectionChange }) => {
     fetchCart();
   }, []);
 
-  useEffect(() => {
-    const selected = cartList.filter((item) => item.checked);
-    if (onSelectionChange) {
-      onSelectionChange(selected); // props로 넘어온 함수가 있으면 호출
-    }
-  }, [cartList]); // 의존성 배열에서 onSelectionChange는 빼줘
-
   const fetchCart = async () => {
     try {
       setLoading(true);
       const response = await getCart();
-      const cartItems = response.data.map((item) => ({
+      const cartItems = response.data.map(item => ({
         id: item.productID,
         name: item.productName,
         price: item.price.toLocaleString(),
         quantity: item.quantity,
         checked: false,
-        thumbnailimage: item.thumbnailimage,
+        thumbnailImage: item.thumbnailImage
       }));
       setCartList(cartItems);
     } catch (error) {
