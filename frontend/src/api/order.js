@@ -21,7 +21,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// 주문 생성 API 호출출
+// 주문 생성 API 호출
 export const createOrder = async (phone, products, totalPrice) => {
   try {
     const response = await api.post("/ordered", {

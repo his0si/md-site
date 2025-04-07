@@ -137,7 +137,7 @@ const Row = styled.div`
 const RowWithThickDivider = styled(Row)`
   position: relative;
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -4px;
     left: 20px;
@@ -155,7 +155,7 @@ const RowWithThinDivider = styled(Row)`
   position: relative;
 
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 20px;
@@ -253,6 +253,21 @@ const OrderPage = () => {
         return sum + Number(item.price.replace(",", "")) * item.quantity;
       }, 0);
 
+  //객체배열 수정 시도중
+  const formattedProducts = isSingle
+    ? [
+        {
+          productName: singleItem.name,
+          price: Number(singleItem.price.replace(",", "")),
+          quantity: quantity,
+        },
+      ]
+    : items.map((item) => ({
+        productName: item.name,
+        price: Number(item.price.replace(",", "")),
+        quantity: item.quantity ?? 1,
+      }));
+
   const goodsTitle = isSingle
     ? singleItem.name
     : `${items?.[0].name} 외 ${items.length - 1}개`;
@@ -288,12 +303,16 @@ const OrderPage = () => {
         <Summary>
           <RowWithThinDivider>
             <div>입금액</div>
-            <div><strong>{totalPrice.toLocaleString()} 원</strong></div>
+            <div>
+              <strong>{totalPrice.toLocaleString()} 원</strong>
+            </div>
           </RowWithThinDivider>
 
           <RowWithThickDivider>
             <div>수령 일자/장소</div>
-            <div><strong>25.05.07 ECC 이삼봉홀</strong></div>
+            <div>
+              <strong>25.05.07 ECC 이삼봉홀</strong>
+            </div>
           </RowWithThickDivider>
 
           <RowWithThinDivider>
@@ -324,7 +343,13 @@ const OrderPage = () => {
         </Footer>
       </Wrapper>
 
-      <OrderModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <OrderModal
+        modalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        phone={phone}
+        products={formattedProducts}
+        totalPrice={totalPrice}
+      />
     </Container>
   );
 };

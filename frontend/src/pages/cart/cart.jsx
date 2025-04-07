@@ -117,12 +117,28 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const api = axios.create({
-    baseURL: '/api',  // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
+    baseURL: "/api", // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
-  
+
+  const handleSelectedChange = (items) => {
+    setSelectedItems(items);
+  };
+
+  const handleSelectOrder = () => {
+    if (selectedItems.length === 0) {
+      alert("주문할 상품을 선택해주세요");
+      return;
+    }
+    navigate("/order-page", {
+      state: {
+        items: selectedItems,
+        type: "multi",
+      },
+    });
+  };
 
   return (
     <>
@@ -162,7 +178,3 @@ const Cart = () => {
 };
 
 export default Cart;
-<<<<<<< HEAD
-=======
-
->>>>>>> c2843988790fe0030c19e4cd9aba911a3ba165c3
