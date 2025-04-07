@@ -21,7 +21,7 @@ const CartList = () => {
         price: item.price.toLocaleString(),
         quantity: item.quantity,
         checked: false,
-        thumbnailimage: item.thumbnailimage
+        thumbnailImage: item.thumbnailImage
       }));
       setCartList(cartItems);
     } catch (error) {

@@ -2,7 +2,7 @@ import Order from '../models/order.model.js';
 
 /**
  * @swagger
- * /api/orders:
+ * /api/orderadmin:
  *   get:
  *     summary: "모든 주문 목록 조회"
  *     description: "모든 주문 목록을 조회하여 간결하게 필요한 정보만 반환"
@@ -89,7 +89,7 @@ export const getAllOrders = async (req, res) => {
 
 /**
  * @swagger
- * /api/orders/{orderId}/status:
+ * /api/orderadmin/{orderId}/status:
  *   patch:
  *     summary: "주문 상태 수정"
  *     description: "주문 ID를 기반으로 주문의 상태를 수정"

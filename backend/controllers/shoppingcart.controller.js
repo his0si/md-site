@@ -117,7 +117,7 @@ export const addProductInCart = async (req, res)=>{
                     productName : product.productName,
                     quantity : quantity,
                     price : product.price,
-                    thrumbnailimage : product.thumbnailimage
+                    thumbnailImage : product.thumbnailImage
                 }
             ]
         });
@@ -134,7 +134,7 @@ export const addProductInCart = async (req, res)=>{
                 productName: product.productName,
                 quantity: quantity,
                 price : product.price,
-                thumbnailimage : product.thumbnailimage
+                thumbnailImage : product.thumbnailImage
             })
         }
 

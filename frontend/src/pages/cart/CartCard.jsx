@@ -19,9 +19,19 @@ const ItemImage = styled.div`
   width: 170px;
   aspect-ratio: 1/1;
   background: rgb(245, 245, 245);
-
   flex-shrink: 0;
-  flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정정
+  flex-basis: 45%;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; // or contain, depending on your layout
+    border-radius: 8px; // Optional: 살짝 둥글게
+  }
 `;
 
 const ItemInfo = styled.div`
@@ -110,7 +120,7 @@ const DeleteIcon = styled.img`
 const CartCard = ({ item, onDelete, onCheck, onIncrease, onDecrease }) => {
   return (
     <Card>
-      <ItemImage></ItemImage>
+      <ItemImage><img src={item.thumbnailImage} /></ItemImage>
       <ItemInfo>
         <ItemName>{item.name}</ItemName>
         <ItemPrice>{item.price}</ItemPrice>
