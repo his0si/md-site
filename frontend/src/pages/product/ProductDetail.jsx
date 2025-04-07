@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import styled from "styled-components";
 import ProductDetailModal from "./ProductDetailModal";
 import { addToCart } from "../../api/cart";
-
+import { axiosInstance } from './../../lib/axios';
+import { useParams } from "react-router-dom"; //
 const Container = styled.div`
   height: 100vh;
   width: 100%;
@@ -21,6 +22,11 @@ const ProductImage = styled.div`
   margin: 60px 20px 20px 20px;
   aspect-ratio: 1;
   background-color: #f5f5f5;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const ProductName = styled.h1`
@@ -96,12 +102,28 @@ const ProductDetail = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [loading, setLoading] = useState(false);
+  const { id: productId } = useParams();
+  const [product, setProduct] = useState(null);
 
+   useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axiosInstance.get(`/products/${productId}`);
+        setProduct(res.data);
+      } catch (error) {
+        console.error("상품 조회 실패:", error);
+      }
+    };
+
+    fetchProduct();
+   }, [productId]);
+  
   const handleAddToCart = async () => {
     try {
       setLoading(true);
       // 실제 상품 ID를 사용해야 합니다. 여기서는 예시로 하드코딩했습니다.
-      const productId = "your-product-id";
+      // =>실제 상품 ID를 넣는 것으로 수정
+      const productId = product.id;
       await addToCart(productId, quantity);
       setIsModalOpen(true);
     } catch (error) {
@@ -110,16 +132,24 @@ const ProductDetail = () => {
       setLoading(false);
     }
   };
-
+  if (!product) {
+    return <p>로딩 중...</p>;
+  }
   return (
     <Container>
-      <ProductImage />
-      <ProductName>굿즈 이름</ProductName>
-      <ProductPrice>10,000</ProductPrice>
+      <ProductImage >
+        {product.detailImage ? (
+          <img src={product.thumbnailImage} alt={product.productName} />
+          ) : (
+            <p>이미지를 불러올 수 없습니다.</p>
+        )}
+      </ProductImage>
+      <ProductName>{product.productName}</ProductName>
+      <ProductPrice>{product.price}</ProductPrice>
       <ProductStatus>
-        testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+        상품설명란, 백엔드 product 모델에는 description이 없음 따라서 프론트에서 각각 만들어주거나 product 모델에 description 필드를 추가해줘야할 것 같습니다!
       </ProductStatus>
-      <ProductDetailModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}></ProductDetailModal>
+      <ProductDetailModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}> </ProductDetailModal>
       
       <ButtonContainer>
         <Button className="compare">바로 구매하기</Button>
