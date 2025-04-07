@@ -1,18 +1,17 @@
-import axios from "axios";
+import axios from 'axios';
 
 // axios 인스턴스 생성
 const api = axios.create({
-  baseURL: "/api", // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
+  baseURL: '/api',  // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
   headers: {
-    "Content-Type": "application/json",
-  },
-  withCredentials: true,
+    'Content-Type': 'application/json'
+  }
 });
 
 // 요청 인터셉터 추가
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -26,9 +25,9 @@ api.interceptors.request.use(
 // 장바구니에 상품 추가
 export const addToCart = async (productId, quantity) => {
   try {
-    const response = await api.post("/cart", {
+    const response = await api.post('/cart', {
       productID: productId,
-      quantity: quantity,
+      quantity: quantity
     });
     return response.data;
   } catch (error) {
@@ -39,7 +38,7 @@ export const addToCart = async (productId, quantity) => {
 // 장바구니 조회
 export const getCart = async () => {
   try {
-    const response = await api.get("/cart");
+    const response = await api.get('/cart');
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
@@ -49,8 +48,8 @@ export const getCart = async () => {
 // 상품 수량 증가
 export const increaseQuantity = async (productId) => {
   try {
-    const response = await api.patch("/cart/increase", {
-      productId: productId,
+    const response = await api.patch('/cart/increase', {
+      productId: productId
     });
     return response.data;
   } catch (error) {
@@ -61,16 +60,13 @@ export const increaseQuantity = async (productId) => {
 // 상품 수량 감소
 export const decreaseQuantity = async (productId) => {
   try {
-    const response = await api.patch("/cart/decrease", {
-      productId: productId,
+    const response = await api.patch('/cart/decrease', {
+      productId: productId
     });
     return response.data;
   } catch (error) {
     throw error.response?.data || error.message;
   }
-<<<<<<< HEAD
-};
-=======
 }; 
 
 export const deleteProduct = async (productId) => {
@@ -83,4 +79,3 @@ export const deleteProduct = async (productId) => {
     throw error.response?.data || error.message;
   }
 }; 
->>>>>>> c2843988790fe0030c19e4cd9aba911a3ba165c3

@@ -1,10 +1,8 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { createGlobalStyle } from "styled-components";
 import checkImage from "../../assets/check.png";
 import OrderCompleteIcon from "../../assets/OrderCompleteIcon.png";
-import { getOrderCheck } from "../../api/order";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -132,21 +130,6 @@ const OrderComplete = () => {
   const handleNavigateHome = () => {
     navigate("/");
   };
-
-  const [confirmedProducts, setConfirmedProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchConfirmed = async () => {
-      try {
-        const res = await getOrderCheck();
-        console.log("상품 목록 확정", res); //확인용
-        setConfirmedProducts(res);
-      } catch (err) {
-        console.error("주문확정 상품 불러오기 fail", err);
-      }
-    };
-    fetchConfirmed();
-  }, []);
 
   return (
     <>
