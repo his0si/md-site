@@ -71,8 +71,8 @@ export const decreaseQuantity = async (productId) => {
 
 export const deleteProduct = async (productId) => {
   try {
-    const response = await api.patch('/api/cart/products', {
-      productId: productId
+    const response = await api.patch('/cart/products', {
+      productIds: [ productId ]
     });
     return response.data;
   } catch (error) {
