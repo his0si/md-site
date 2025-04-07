@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Card = styled.div`
   border: none;
@@ -18,10 +19,19 @@ const ProductImage = styled.div`
   width: 170px;
   aspect-ratio: 1/1;
   background: rgb(245, 245, 245);
-
   flex-shrink: 0;
-  flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정
-  //border-radius: 5px;
+  flex-basis: 45%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지 비율 유지하면서 영역 꽉 채우기 */
+    border-radius: 5px; /* 원하면 라운딩 효과도 */
+  }
 `;
 
 const ProductInfo = styled.div`
@@ -52,13 +62,17 @@ const ProductStatus = styled.div`
 `;
 
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+  const handleProductDetail = ()=>{
+    navigate(`/product-detail/${product._id}`)
+  }
   return (
-    <Card>
-      <ProductImage></ProductImage>
+    <Card onClick={handleProductDetail}>
+      <ProductImage><img src={product.thumbnailImage} /></ProductImage>
       <ProductInfo>
-        <ProductName>{product.name}</ProductName>
+        <ProductName>{product.productName}</ProductName>
         <ProductPrice>{product.price}</ProductPrice>
-        {product.status === "sold-out" && (
+        {product.stock <= 5 && (
           <ProductStatus>매진임박!</ProductStatus>
         )}
       </ProductInfo>

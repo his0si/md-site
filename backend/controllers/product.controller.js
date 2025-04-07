@@ -1,7 +1,9 @@
-// 모든 상품 목록 조회 (id, 상품명, 가격, 남은 수량)
+
+import Product from "../models/product.model.js";
+
 /**
  * @swagger
- * /products:
+ * /api/products:
  *   get:
  *     summary: 모든 상품 목록 조회
  *     description: 상품의 id, 상품명, 가격, 남은 수량을 조회합니다.
