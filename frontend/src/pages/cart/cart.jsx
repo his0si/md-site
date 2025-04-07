@@ -4,6 +4,7 @@ import CartList from "./CartList";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
+import { axiosInstance } from './../../lib/axios';
 
 const Container = styled.div`
   width: 100%;
@@ -114,6 +115,33 @@ const EmptyCartButton = styled.button`
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const fetchGetCart = async () => {
+      try {
+        const res = await axiosInstance.get("/cart");
+        // 성공적으로 장바구니 받아옴 → 비었는지는 데이터로 판단 가능
+        if (res.data.length === 0) {
+          setCartEmpty(true);
+        } else {
+          setCartEmpty(false);
+        }
+      } catch (error) {
+        // 여기서 상태 코드로 분기
+        if (error.response) {
+          if (error.response.status === 401) {
+            navigate("/login");
+          } else if (error.response.status === 404) {
+            setCartEmpty(true);
+          }
+        } else {
+          console.error("요청 실패:", error.message);
+        }
+      }
+    };
+
+    fetchGetCart();
+  }, []);
 
   const api = axios.create({
     baseURL: '/api',  // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
