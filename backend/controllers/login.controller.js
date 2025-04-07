@@ -270,3 +270,80 @@ export const signup = async (req, res)=>{
         })
     }
 }
+
+/**
+ * @swagger
+ * /api/login/logout:
+ *   post:
+ *     summary: "로그아웃"
+ *     description: "세션을 제거하여 로그아웃합니다."
+ *     tags:
+ *       - "Login"
+ *     responses:
+ *       200:
+ *         description: "로그아웃 성공"
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "로그아웃 완료 💤"
+ */
+export const logout = (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("❌ 로그아웃 실패:", err);
+        return res.status(500).json({ message: "로그아웃 중 오류 발생" });
+      }
+      res.clearCookie("connect.sid"); // 선택사항: 세션 쿠키 삭제
+      return res.status(200).json({ message: "로그아웃 완료 💤" });
+    });
+  };
+  
+  /**
+   * @swagger
+   * /api/login/withdraw:
+   *   delete:
+   *     summary: "회원 탈퇴"
+   *     description: "세션에 저장된 이메일 기준으로 회원 탈퇴합니다."
+   *     tags:
+   *       - "Login"
+   *     responses:
+   *       200:
+   *         description: "회원 탈퇴 성공"
+   *         content:
+   *           application/json:
+   *             schema:
+   *               type: object
+   *               properties:
+   *                 message:
+   *                   type: string
+   *                   example: "회원 탈퇴 성공 👋"
+   *       404:
+   *         description: "사용자 없음"
+   *       500:
+   *         description: "서버 오류"
+   */
+  export const withdraw = async (req, res) => {
+    const email = req.session.user?.email;
+  
+    if (!email) {
+      return res.status(404).json({ message: "세션에 이메일이 없습니다." });
+    }
+  
+    try {
+      const result = await User.findOneAndDelete({ email });
+  
+      if (!result) {
+        return res.status(404).json({ message: "사용자를 찾을 수 없습니다." });
+      }
+  
+      req.session.destroy();
+      return res.status(200).json({ message: "회원 탈퇴 성공 👋" });
+    } catch (error) {
+      console.error("❌ 회원 탈퇴 실패:", error);
+      return res.status(500).json({ message: "회원 탈퇴 중 오류 발생" });
+    }
+  };
