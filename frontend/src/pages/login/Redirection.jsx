@@ -1,13 +1,33 @@
 import React, { useEffect } from 'react'
+import styled, { createGlobalStyle } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../lib/axios';
+
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
+
+const Container = styled.div`
+  height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  max-width: 500px;
+  background: radial-gradient(circle at 50% 30%, rgba(165, 223, 155, 0.3) 5%, rgba(245,245,245,0) 35%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  overflow: hidden;  // 혹시 내부 콘텐츠로 인해 스크롤이 생기는 것을 방지
+`;
 
 const Redirection = () => {
     const navigate = useNavigate();
   const code = new URLSearchParams(window.location.search).get("code");
 
   useEffect(() => {
-    console.log(code);
     if (code) {
       axiosInstance
         .get("/login/kakao-login", {
@@ -28,9 +48,13 @@ const Redirection = () => {
     }
   }, [code, navigate]);
   return (
-    <div>
-      로그인 중입니다...
-    </div>
+    <>
+    <GlobalStyle/>
+    <Container>
+      로그인 중입니다.<br/>
+      잠시만 기다려주세요.
+    </Container>
+    </>
   )
 }
 
