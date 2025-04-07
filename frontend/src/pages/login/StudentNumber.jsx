@@ -61,7 +61,6 @@ const StudentNumber = () => {
   };
 
   const handleSubmit = async () =>{
-    console.log(studentId);
     if(!studentId){
       alert("학번을 입력해주세요!");
       return;
@@ -71,13 +70,12 @@ const StudentNumber = () => {
         studentId: studentId,
       }).then((res)=>{
         if(res.status === 201){
-          confirm("환영합니다!");
-          console.log(res.data);
-          navigate("/");
+          navigate("/registration-complete");
         }
       }) 
     } catch (error) {
       alert('오류가 발생했습니다.');
+      navigate("/");
     }
   }
   return (

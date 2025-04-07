@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import checkImage from '../../assets/check.png';
 import Button from "../../components/button";
+import { useNavigate } from 'react-router-dom';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -46,6 +47,10 @@ const SubText = styled.div`
 
 
 const RegistrationComplete = () => {
+  const navigate = useNavigate();
+  const handlerButton = ()=>{
+    navigate("/");
+  };
   return (
     <>
       <GlobalStyle />
@@ -53,7 +58,7 @@ const RegistrationComplete = () => {
         <Icon src={checkImage} alt="Check" />
         <MainText>회원가입이 완료되었습니다.</MainText>
         <SubText>rE: market의 새로운 회원님을 환영합니다!</SubText>
-        <Button text={"회원가입 마치기"}/>
+        <Button onClick={handlerButton} text={"회원가입 마치기"}/>
       </Container>
     </>
   );

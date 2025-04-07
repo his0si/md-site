@@ -3,7 +3,7 @@ import Product from "../models/product.model.js";
 // 모든 상품 목록 조회 (id, 상품명, 가격, 남은 수량)
 export const getAllProducts = async (req, res) => {
    try {
-     const products = await Product.find({}, "id productName price stock");
+     const products = await Product.find({}, "id productName price thumbnailImage stock");
      
      console.log("조회된 상품 목록:", products); // 추가된 로그
  
@@ -19,7 +19,7 @@ export const getAllProducts = async (req, res) => {
 export const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await Product.findById(id, "id productName price stock detailImage");
+    const product = await Product.findById(id, "id productName price stock thumbnailImage detailImage");
     
     if (!product) {
       return res.status(404).json({ message: "상품을 찾을 수 없습니다." });
