@@ -1,6 +1,6 @@
 import CartCard from "./CartCard";
 import { useState, useEffect } from "react";
-import { getCart, increaseQuantity, decreaseQuantity } from "../../api/cart";
+import { getCart, increaseQuantity, decreaseQuantity,deleteProduct } from "../../api/cart";
 
 const CartList = () => {
   const [cartList, setCartList] = useState([]);
@@ -31,8 +31,14 @@ const CartList = () => {
     }
   };
 
-  const handleDelete = (id) => {
-    setCartList((prevList) => prevList.filter((item) => item.id !== id));
+  const handleDelete = async (id) => {
+    try{
+      await deleteProduct(id);
+      setCartList((prevList) => prevList.filter((item) => item.id !== id));
+    }catch(error){
+      alert(error.message || "삭제에 실패했습니다.");
+    }
+    
   };
 
   const handleCheck = (id) => {
