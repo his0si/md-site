@@ -18,10 +18,10 @@ const ButtonsStyle = styled.button`
   }
 `;
 
-const Button=({text})=>{
+const Button=({text, onClick })=>{
     return (
         <>
-        <ButtonsStyle>{text}</ButtonsStyle>
+        <ButtonsStyle onClick={onClick}>{text}</ButtonsStyle>
         </>
     )
 }

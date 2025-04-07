@@ -68,4 +68,19 @@ export const decreaseQuantity = async (productId) => {
   } catch (error) {
     throw error.response?.data || error.message;
   }
+<<<<<<< HEAD
 };
+=======
+}; 
+
+export const deleteProduct = async (productId) => {
+  try {
+    const response = await api.patch('/api/cart/products', {
+      productId: productId
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+}; 
+>>>>>>> c2843988790fe0030c19e4cd9aba911a3ba165c3

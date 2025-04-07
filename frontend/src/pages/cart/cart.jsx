@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CartList from "./CartList";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100%;
@@ -114,22 +116,13 @@ const Cart = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
 
-  const handleSelectedChange = (items) => {
-    setSelectedItems(items);
-  };
-
-  const handleSelectOrder = () => {
-    if (selectedItems.length === 0) {
-      alert("주문할 상품을 선택해주세요.");
-      return;
+  const api = axios.create({
+    baseURL: '/api',  // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
+    headers: {
+      'Content-Type': 'application/json'
     }
-    navigate("/order-page", {
-      state: {
-        items: selectedItems,
-        type: "multi",
-      },
-    });
-  };
+  });
+  
 
   return (
     <>
@@ -138,8 +131,8 @@ const Cart = () => {
           <div
             style={{
               textAlign: "center",
-              marginBottom: "40vh",
-              marginTop: "20vh",
+              marginBottom: "20vh",
+              marginTop: "40vh",
               fontSize: "15px",
             }}
           >
@@ -169,3 +162,7 @@ const Cart = () => {
 };
 
 export default Cart;
+<<<<<<< HEAD
+=======
+
+>>>>>>> c2843988790fe0030c19e4cd9aba911a3ba165c3

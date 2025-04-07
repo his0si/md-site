@@ -5,6 +5,7 @@ import image1 from '../../assets/image1.png';
 import image2 from '../../assets/image2.png';
 import image3 from '../../assets/image3.png';
 import image4 from '../../assets/image4.png';
+import { axiosInstance } from './../../lib/axios';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -95,6 +96,11 @@ const ImageItem = styled.img`
 const Login = () => {
   const images = [image1, image2, image3, image4];
 
+  const loginHandler = async () =>{
+    const res = await axiosInstance.get("/login/authorize");
+    window.location.href = res.data.kakaoAuthUrl;
+  };
+
   return (
     <>
       <GlobalStyle />
@@ -120,7 +126,7 @@ const Login = () => {
             ))}
           </ImageContainer>
         </ImageGallery>
-        <ImageButton src={kakaoLoginImage} alt="카카오로 3초만에 시작하기" />
+        <ImageButton onClick={loginHandler} src={kakaoLoginImage} alt="카카오로 3초만에 시작하기" />
       </Container>
     </>
   )
