@@ -117,7 +117,7 @@ export const addProductInCart = async (req, res)=>{
                     productName : product.productName,
                     quantity : quantity,
                     price : product.price,
-                    thrumbnailimage : product.thumbnailimage
+                    thumbnailimage : product.thumbnailimage
                 }
             ]
         });
