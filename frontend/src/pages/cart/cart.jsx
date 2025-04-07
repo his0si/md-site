@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import CartList from "./CartList";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100%;
@@ -113,6 +115,14 @@ const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
   const navigate = useNavigate();
 
+  const api = axios.create({
+    baseURL: '/api',  // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  
+
   return (
     <>
       {cartEmpty ? (
@@ -120,8 +130,8 @@ const Cart = () => {
           <div
             style={{
               textAlign: "center",
-              marginBottom: "40vh",
-              marginTop: "20vh",
+              marginBottom: "20vh",
+              marginTop: "40vh",
               fontSize: "15px",
             }}
           >
@@ -147,3 +157,4 @@ const Cart = () => {
 };
 
 export default Cart;
+
