@@ -1,5 +1,6 @@
 import express from "express";
-import { getAuthorizaionCode, kakaoLogin, signup, logout, withdraw} from "../controllers/login.controller.js";
+import { getAuthorizaionCode, kakaoLogin, signup, logout, withdraw } from "../controllers/login.controller.js";
+import { checkAuthentication } from "../middleware/checkAuthentication.js";
 
 const router = express.Router();
 
