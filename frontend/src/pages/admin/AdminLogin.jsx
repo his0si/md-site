@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import styled, { createGlobalStyle } from "styled-components";
-import { useNavigate } from "react-router-dom";
-import lockIcon from "../../assets/lock.png";
+import React, { useState, useEffect } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import lockIcon from '../../assets/lock.png';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -14,11 +14,7 @@ const Container = styled.div`
   height: 100vh;
   width: 100%;
   max-width: 1200px;
-  background: radial-gradient(
-    circle at 60% 40%,
-    rgba(165, 223, 155, 0.2) 3%,
-    rgba(245, 245, 245, 0) 25%
-  );
+  background: radial-gradient(circle at 60% 40%, rgba(165, 223, 155, 0.2) 3%, rgba(245,245,245,0) 25%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,10 +54,10 @@ const Input = styled.input`
   font-size: 16px;
   box-sizing: border-box;
   height: 44px;
-
+  
   &:focus {
     outline: none;
-    border-color: #167d4e;
+    border-color: #167D4E;
   }
 `;
 
@@ -80,7 +76,7 @@ const SubmitButton = styled.button`
   transition: border-color 0.2s;
 
   &:hover {
-    border-color: #167d4e;
+    border-color: #167D4E;
   }
 `;
 
@@ -103,21 +99,21 @@ const ErrorMessage = styled.div`
 `;
 
 const AdminLogin = () => {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("adminLoggedIn") === "true") {
-      navigate("/#/admin");
+    if (localStorage.getItem('adminLoggedIn') === 'true') {
+      navigate('/#/admin');
     }
   }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password === import.meta.env.VITE_ADMIN_PASSWORD) {
-      localStorage.setItem("adminLoggedIn", "true");
-      navigate("/#/admin");
+    if (password === import.meta.env.VITE_ADMIN_PASSWORD)  {
+      localStorage.setItem('adminLoggedIn', 'true');
+      navigate('/#/admin');
     } else {
       setError(true);
     }
@@ -144,12 +140,12 @@ const AdminLogin = () => {
             </SubmitButton>
           </InputContainer>
           <ErrorMessage>
-            {error ? "비밀번호가 올바르지 않습니다." : ""}
+            {error ? '비밀번호가 올바르지 않습니다.' : ''}
           </ErrorMessage>
         </FormContainer>
       </Container>
     </>
   );
-};
+}
 
-export default AdminLogin;
+export default AdminLogin; 
