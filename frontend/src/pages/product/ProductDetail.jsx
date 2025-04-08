@@ -48,6 +48,11 @@ const ProductStatus = styled.p`
   margin: 10px 20px 8px 20px;
   width: calc(100% - 40px);
   word-break: break-all; // 글자 단위로 줄바꿈
+  img {
+    width: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다. 
+    height: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다. 
+    object-fit: cover;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -115,7 +120,7 @@ const ProductDetail = () => {
       }
     };
 
-    fetchProduct();
+    fetchProduct(); // 함수 호출
    }, [productId]);
   
   const handleAddToCart = async () => {
@@ -147,7 +152,11 @@ const ProductDetail = () => {
       <ProductName>{product.productName}</ProductName>
       <ProductPrice>{product.price}</ProductPrice>
       <ProductStatus>
-        상품설명란, 백엔드 product 모델에는 description이 없음 따라서 프론트에서 각각 만들어주거나 product 모델에 description 필드를 추가해줘야할 것 같습니다!
+        {product.detailImage ? (
+          <img src={product.detailImage} alt={product.productName} />
+          ) : (
+            <p>이미지를 불러올 수 없습니다.</p>
+        )}
       </ProductStatus>
       <ProductDetailModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}> </ProductDetailModal>
       
