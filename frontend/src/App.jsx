@@ -59,7 +59,7 @@ const App = () => {
         <>
           {navBar1Pages.includes(location.pathname) && <NavBar />}
           {navBar2Pages.includes(location.pathname) && <NavBar2 />}
-          {navBar3Pages.includes(location.pathname) && <NavBar3 />}
+          {navBar3Pages.some(path => location.pathname.startsWith(path)) && <NavBar3 />}
         </>
       )}
 
