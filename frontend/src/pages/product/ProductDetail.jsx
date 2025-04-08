@@ -124,10 +124,7 @@ const ProductDetail = () => {
   const handleAddToCart = async () => {
     try {
       setLoading(true);
-      // 실제 상품 ID를 사용해야 합니다. 여기서는 예시로 하드코딩했습니다.
-      // =>실제 상품 ID를 넣는 것으로 수정
-      const productId = product.id;
-      await addToCart(productId, quantity);
+      await addToCart(productId, 1); // 수량을 1로 고정
       setIsModalOpen(true);
     } catch (error) {
       alert(error.message || "장바구니 추가에 실패했습니다.");
@@ -160,7 +157,7 @@ const ProductDetail = () => {
       
       <ButtonContainer>
         <Button className="compare">바로 구매하기</Button>
-        <Button onClick={()=>{setIsModalOpen(true)}} className="purchase">장바구니에 담기</Button>
+        <Button onClick={handleAddToCart} className="purchase">장바구니에 담기</Button>
       </ButtonContainer>
     </Container>
   );

@@ -33,7 +33,9 @@ const NavBar3 = () => {
             </svg>
             </div>
       <Icon src={ewhaianLogo} alt="Ewhaian Logo" onClick={()=> navigate("/")}/>
-      <Icon src={cart} alt="Cart" />
+      <Icon src={cart} alt="Cart" onClick={
+        ()=> navigate("/cart")
+        }/>
     </NaviBar>
   );
 };
