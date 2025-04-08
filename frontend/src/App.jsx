@@ -82,7 +82,7 @@ const App = () => {
         />
         <Route path="/order-page" element={<OrderPage />} />
         <Route path="/order-complete" element={<OrderComplete />} />
-        <Route path="/product-detail" element={<ProductDetail />} />
+        <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/oauth/kakao" element={<Redirection />} />
       </Routes>
