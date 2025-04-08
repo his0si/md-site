@@ -25,7 +25,6 @@ const ProductImage = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
   }
 `;
 
@@ -51,7 +50,6 @@ const ProductStatus = styled.p`
   img {
     width: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다. 
     height: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다. 
-    object-fit: cover;
   }
 `;
 
@@ -143,7 +141,7 @@ const ProductDetail = () => {
   return (
     <Container>
       <ProductImage >
-        {product.detailImage ? (
+        {product.thumbnailImage ? (
           <img src={product.thumbnailImage} alt={product.productName} />
           ) : (
             <p>이미지를 불러올 수 없습니다.</p>
