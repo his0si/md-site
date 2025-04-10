@@ -65,7 +65,7 @@ const EventDate = styled.p`
 `;
 
 const PitdotImage = styled.img`
-  width: 70%;
+  width: 60%;
   margin: 60px auto;
   display: block;
 `;

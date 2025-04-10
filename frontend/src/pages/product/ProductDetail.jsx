@@ -5,7 +5,7 @@ import { addToCart } from "../../api/cart";
 import { axiosInstance } from './../../lib/axios';
 import { useParams } from "react-router-dom"; //
 const Container = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   max-width: 500px;
   background: rgb(255, 255, 255);
@@ -13,8 +13,7 @@ const Container = styled.div`
   flex-direction: column;
   margin: auto;
   padding: 20px;
-  position: relative;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
 `;
 
 const ProductImage = styled.div`
