@@ -1,8 +1,19 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect, useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 import pitdotImage from '../../assets/pitdot.png';
 import kimSeungWooImage from '../../assets/KimSeungWoo.png';
 import choiJaeCheonImage from '../../assets/ChoiJaeCheon.png';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Container = styled.div`
   min-height: 100vh;
@@ -14,6 +25,12 @@ const Container = styled.div`
   margin: auto;
   padding: 0 16px 80px;
   position: relative;
+`;
+
+const AnimatedSection = styled.div`
+  opacity: 0;
+  animation: ${fadeIn} 0.8s ease-out forwards;
+  animation-delay: ${props => props.delay}s;
 `;
 
 const Title = styled.h1`
@@ -211,67 +228,83 @@ const BoothListItem = styled.p`
   }
 `;
 
+
 const EventIntro = () => {
   return (
     <Container>
-      <Title>이화이언 5월 행사</Title>
-      <Subtitle>&lt;&nbsp;rE:mark&nbsp;&gt;</Subtitle>
-      <Description>
-        이화이언의 5월 행사, rE: mark는<br />
-        이화 교수님들의 강의를 경험하고<br />
-        이화이언 강연회에서만 들을 수 있는<br />
-        이야기를 공유하는 행사입니다.
-      </Description>
-      <EventDetails>
-        <EventTitle>픽닷 이대점 X 이화이언 콜라보 이벤트</EventTitle>
-        <EventDate>(2025. 05. 07 - 2025. 05. 14)</EventDate>
-        <PitdotImage src={pitdotImage} alt="Pitdot" />
-        <PromotionText>
-          rE: mark 행사 당일<br />
-          픽닷 X 이화이언 콜라보 프레임 촬영 인증 시<br />
-          <span>강연회 티켓 4000원 할인!</span>
-        </PromotionText>
-      </EventDetails>
-      <ScheduleContainer>
-        <ScheduleTitle>행사 일시</ScheduleTitle>
-        <ScheduleDate>2025.05.07 수요일</ScheduleDate>
-        <ScheduleGrid>
-          <ScheduleLabel>이벤트 부스</ScheduleLabel>
-          <ScheduleTime>11:00 - 15:00</ScheduleTime>
-          <ScheduleLabel>강연회 (1부)</ScheduleLabel>
-          <ScheduleTime>18:30 - 19:30</ScheduleTime>
-          <ScheduleLabel>강연회 (2부)</ScheduleLabel>
-          <ScheduleTime>20:00 - 21:00</ScheduleTime>
-        </ScheduleGrid>
-      </ScheduleContainer>
-      <LocationContainer>
-        <LocationTitle>행사 장소</LocationTitle>
-        <LocationText>ECC 지하 4층 이삼봉홀</LocationText>
-      </LocationContainer>
+      <AnimatedSection delay={0.2}>
+        <Title>이화이언 5월 행사</Title>
+        <Subtitle>&lt;&nbsp;rE:mark&nbsp;&gt;</Subtitle>
+        <Description>
+          이화이언의 5월 행사, rE: mark는<br />
+          이화 교수님들의 강의를 경험하고<br />
+          이화이언 강연회에서만 들을 수 있는<br />
+          이야기를 공유하는 행사입니다.
+        </Description>
+      </AnimatedSection>
 
-      <SpeakersContainer>
-        <SpeakersTitle>강연자 / 강연명</SpeakersTitle>
-        <SpeakerCard>
-          <SpeakerImage src={kimSeungWooImage} alt="김승우 교수님" />
-          <SpeakerName>이화여자대학교 김승우 교수님</SpeakerName>
-          <LecturePart>강연 1부</LecturePart>
-          <LectureTitle>&lt;조선의 여성들: 부자유한 시대에 너무나 비범했던&gt;</LectureTitle>
-        </SpeakerCard>
-        <SpeakerCard>
-          <SpeakerImage src={choiJaeCheonImage} alt="최재천 교수님" />
-          <SpeakerName>이화여자대학교 최재천 교수님</SpeakerName>
-          <LecturePart>강연 2부</LecturePart>
-          <LectureTitle>&lt;양심, 공감, 숙론&gt;</LectureTitle>
-        </SpeakerCard>
-      </SpeakersContainer>
+      <AnimatedSection delay={0.4}>
+        <EventDetails>
+          <EventTitle>픽닷 이대점 X 이화이언 콜라보 이벤트</EventTitle>
+          <EventDate>(2025. 05. 07 - 2025. 05. 14)</EventDate>
+          <PitdotImage src={pitdotImage} alt="Pitdot" />
+          <PromotionText>
+            rE: mark 행사 당일<br />
+            픽닷 X 이화이언 콜라보 프레임 촬영 인증 시<br />
+            <span>강연회 티켓 4000원 할인!</span>
+          </PromotionText>
+        </EventDetails>
+      </AnimatedSection>
 
-      <BoothInfoContainer>
-        <BoothInfoTitle>부스 정보</BoothInfoTitle>
-        <BoothListItem>01 굿즈 부스</BoothListItem>
-        <BoothListItem>02 벗에게 보내는 편지</BoothListItem>
-        <BoothListItem>03 럭키드로우</BoothListItem>
-        <BoothListItem>04 포토존 (나만의 네컷)</BoothListItem>
-      </BoothInfoContainer>
+      <AnimatedSection delay={0.6}>
+        <ScheduleContainer>
+          <ScheduleTitle>행사 일시</ScheduleTitle>
+          <ScheduleDate>2025.05.07 수요일</ScheduleDate>
+          <ScheduleGrid>
+            <ScheduleLabel>이벤트 부스</ScheduleLabel>
+            <ScheduleTime>11:00 - 15:00</ScheduleTime>
+            <ScheduleLabel>강연회 (1부)</ScheduleLabel>
+            <ScheduleTime>18:30 - 19:30</ScheduleTime>
+            <ScheduleLabel>강연회 (2부)</ScheduleLabel>
+            <ScheduleTime>20:00 - 21:00</ScheduleTime>
+          </ScheduleGrid>
+        </ScheduleContainer>
+      </AnimatedSection>
+
+      <AnimatedSection delay={0.8}>
+        <LocationContainer>
+          <LocationTitle>행사 장소</LocationTitle>
+          <LocationText>ECC 지하 4층 이삼봉홀</LocationText>
+        </LocationContainer>
+      </AnimatedSection>
+
+      <AnimatedSection delay={1.0}>
+        <SpeakersContainer>
+          <SpeakersTitle>강연자 / 강연명</SpeakersTitle>
+          <SpeakerCard>
+            <SpeakerImage src={kimSeungWooImage} alt="김승우 교수님" />
+            <SpeakerName>이화여자대학교 김승우 교수님</SpeakerName>
+            <LecturePart>강연 1부</LecturePart>
+            <LectureTitle>&lt;조선의 여성들: 부자유한 시대에 너무나 비범했던&gt;</LectureTitle>
+          </SpeakerCard>
+          <SpeakerCard>
+            <SpeakerImage src={choiJaeCheonImage} alt="최재천 교수님" />
+            <SpeakerName>이화여자대학교 최재천 교수님</SpeakerName>
+            <LecturePart>강연 2부</LecturePart>
+            <LectureTitle>&lt;양심, 공감, 숙론&gt;</LectureTitle>
+          </SpeakerCard>
+        </SpeakersContainer>
+      </AnimatedSection>
+
+      <AnimatedSection delay={1.2}>
+        <BoothInfoContainer>
+          <BoothInfoTitle>부스 정보</BoothInfoTitle>
+          <BoothListItem>01 굿즈 부스</BoothListItem>
+          <BoothListItem>02 벗에게 보내는 편지</BoothListItem>
+          <BoothListItem>03 럭키드로우</BoothListItem>
+          <BoothListItem>04 포토존 (나만의 네컷)</BoothListItem>
+        </BoothInfoContainer>
+      </AnimatedSection>
     </Container>
   );
 };
