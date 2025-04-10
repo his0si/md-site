@@ -15,6 +15,25 @@ const fadeIn = keyframes`
   }
 `;
 
+const scrollIndicatorAnimation = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+`;
+
 const Container = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -228,10 +247,36 @@ const BoothListItem = styled.p`
   }
 `;
 
+const ScrollIndicator = styled.div`
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(22, 125, 78, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  animation: ${scrollIndicatorAnimation} 5s ease-in-out forwards;
+  z-index: 1000;
+  pointer-events: none;
+  margin-right: 10px;
+`;
 
 const EventIntro = () => {
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowScrollIndicator(false);
+    }, 5000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Container>
+      {showScrollIndicator && <ScrollIndicator>스크롤하여 rE: mark의 더 많은 이야기를 만나보세요 ↓</ScrollIndicator>}
       <AnimatedSection delay={0.2}>
         <Title>이화이언 5월 행사</Title>
         <Subtitle>&lt;&nbsp;rE:mark&nbsp;&gt;</Subtitle>
