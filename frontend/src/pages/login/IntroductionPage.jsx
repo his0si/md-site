@@ -34,7 +34,7 @@ const Subtitle = styled.h2`
 const Description = styled.p`
   font-size: 1.0em;
   color: #4b4b4b;
-  margin: 30px 20px 40px;
+  margin: 50px 20px 40px;
   text-align: center;
   line-height: 1.6;
   font-weight: 700;
@@ -78,7 +78,7 @@ const PromotionText = styled.p`
   margin: 0;
   
   span {
-    font-weight: bold;
+    font-weight: 800;
   }
 `;
 
@@ -97,8 +97,8 @@ const ScheduleTitle = styled.p`
 `;
 
 const ScheduleDate = styled.p`
-  font-size: 1.1em;
-  color: #333; 
+  font-size: 1.0em;
+  color: #333;
   margin: 0 0 30px;
   font-weight: bold;
 `;
@@ -106,7 +106,7 @@ const ScheduleDate = styled.p`
 const ScheduleGrid = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 10px 20px; /* Row gap and column gap */
+  gap: 1px 20px;
   align-items: center;
 `;
 
@@ -197,13 +197,13 @@ const BoothInfoContainer = styled.div`
 `;
 
 const BoothInfoTitle = styled(LocationTitle)`
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 `;
 
 const BoothListItem = styled.p`
   font-size: 1.0em;
   color: #333;
-  margin: 0 0 8px;
+  margin: 0 0 5px;
   font-weight: bold;
 
   &:last-child {
