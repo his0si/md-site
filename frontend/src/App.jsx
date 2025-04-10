@@ -15,9 +15,11 @@ import useViewportHeight from './components/useViewportHeight';
 import OrderComplete from "./pages/order/OrderComplete";
 import NavBar2 from "./components/NavBar2";
 import NavBar3 from "./components/NavBar3";
+import NavBar4 from "./components/NavBar4";
 import ProductDetail from "./pages/product/ProductDetail";
 import Redirection from "./pages/login/Redirection";
 import OrderPage from "./pages/order/OrderPage";
+import IntroductionPage from "./pages/login/IntroductionPage";
 
 
 const App = () => {
@@ -52,6 +54,9 @@ const App = () => {
   // NavBar3가 있는 페이지들 (뒤로가기, 홈, 장바구니)
   const navBar3Pages = ["/product-detail"];
 
+  // NavBar4가 있는 페이지들 (뒤로가기, 홈, 장바구니)
+  const navBar4Pages = ["/introduction-page"];
+
   return (
     <div>
       {/* 네비바 조건부 렌더링 */}
@@ -60,6 +65,7 @@ const App = () => {
           {navBar1Pages.includes(location.pathname) && <NavBar />}
           {navBar2Pages.includes(location.pathname) && <NavBar2 />}
           {navBar3Pages.some(path => location.pathname.startsWith(path)) && <NavBar3 />}
+          {navBar4Pages.includes(location.pathname) && <NavBar4 />}
         </>
       )}
 
@@ -85,6 +91,7 @@ const App = () => {
         <Route path="/product-detail/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/oauth/kakao" element={<Redirection />} />
+        <Route path="/introduction-page" element={<IntroductionPage />} />
       </Routes>
     </div>
   );
