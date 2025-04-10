@@ -1,8 +1,13 @@
 import CartCard from "./CartCard";
 import { useState, useEffect } from "react";
-import { getCart, increaseQuantity, decreaseQuantity,deleteProduct } from "../../api/cart";
+import {
+  getCart,
+  increaseQuantity,
+  decreaseQuantity,
+  deleteProduct,
+} from "../../api/cart";
 
-const CartList = () => {
+const CartList = ({ onSelectionChange }) => {
   const [cartList, setCartList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,17 +16,22 @@ const CartList = () => {
     fetchCart();
   }, []);
 
+  useEffect(() => {
+    const selectedItems = cartList.filter((item) => item.checked);
+    onSelectionChange?.(selectedItems); //선택상품 data 관련
+  }, [cartList]);
+
   const fetchCart = async () => {
     try {
       setLoading(true);
       const response = await getCart();
-      const cartItems = response.data.map(item => ({
+      const cartItems = response.data.map((item) => ({
         id: item.productID,
         name: item.productName,
         price: item.price.toLocaleString(),
         quantity: item.quantity,
         checked: false,
-        thumbnailImage: item.thumbnailImage
+        thumbnailImage: item.thumbnailImage,
       }));
       setCartList(cartItems);
     } catch (error) {
@@ -32,13 +42,12 @@ const CartList = () => {
   };
 
   const handleDelete = async (id) => {
-    try{
+    try {
       await deleteProduct(id);
       setCartList((prevList) => prevList.filter((item) => item.id !== id));
-    }catch(error){
+    } catch (error) {
       alert(error.message || "삭제에 실패했습니다.");
     }
-    
   };
 
   const handleCheck = (id) => {

@@ -4,7 +4,7 @@ import CartList from "./CartList";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { axiosInstance } from './../../lib/axios';
+import { axiosInstance } from "./../../lib/axios";
 
 const Container = styled.div`
   width: 100%;
@@ -114,9 +114,10 @@ const EmptyCartButton = styled.button`
 
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchGetCart = async () => {
       try {
         const res = await axiosInstance.get("/cart");
@@ -190,10 +191,12 @@ const Cart = () => {
         <Container>
           <Title>장바구니</Title>
           <ScrollArea>
-            <CartList />
+            <CartList onSelectionChange={handleSelectedChange} />
           </ScrollArea>
           <ButtonContainer>
-            <Button className="compare">선택 주문하기</Button>
+            <Button className="compare" onClick={handleSelectOrder}>
+              선택 주문하기
+            </Button>
             <Button className="purchase">전체 주문하기</Button>
           </ButtonContainer>
         </Container>

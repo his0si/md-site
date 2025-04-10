@@ -55,6 +55,8 @@ const OrderModal = ({
   const navigate = useNavigate();
 
   const handleConfirmOrder = async () => {
+    console.log(" !!products:", products);
+    console.log(" !! totalPrice:", totalPrice);
     console.log("주문버튼 클릭됨"); //확인용용
     try {
       const res = await createOrder(phone, products, totalPrice);
