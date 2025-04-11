@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
-import { orderAdmin } from '../../api/cart';
+import { orderAdmin } from '../../api/order';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -66,14 +66,27 @@ const ActionButton = styled.button`
 `;
 
 const AdminPage = () => {
-  const [orders, setOrders] = useState(orderAdmin());
+  const [orders, setOrders] = useState([]);
 
-  const handleStatusChange = (orderId, field) => {
-    setOrders(orders.map(order => 
-      order.id === orderId 
-        ? { ...order, [field]: !order[field] }
-        : order
-    ));
+  useEffect(() => {
+    const fetchOrders = async () => {
+      const data = await orderAdmin();
+      setOrders(data); 
+    };
+    fetchOrders();
+  }, []);
+
+  const handleStatusChange = (orderIndex) => {
+    setOrders(prev =>
+      prev.map((order, idx) =>
+        idx === orderIndex
+          ? {
+              ...order,
+              status: order.status === '결제완료' ? '결제확인중' : '결제완료'
+            }
+          : order
+      )
+    );
   };
 
   return (
@@ -89,39 +102,42 @@ const AdminPage = () => {
               <Th>굿즈 이름</Th>
               <Th>주문 개수</Th>
               <Th>입금 여부</Th>
-              <Th>수령 날짜</Th>
+              <Th>주문 날짜</Th>
               <Th>수령 여부</Th>
               <Th>관리</Th>
             </tr>
           </thead>
           <tbody>
-            {orders.map(order => (
-              <tr key={order.id}>
-                <Td>{order.user.studentId}</Td>
-                <Td>{order.products.prodectName}</Td>
-                <Td>{order.products.quantity}</Td>
-                <Td>
-                  <StatusBadge paid={order.status}>
-                    {order.status ? '입금완료' : '미입금'}
-                  </StatusBadge>
-                </Td>
-                <Td>{order.totalPrice}</Td>
-                <Td>
-                  <StatusBadge paid={order.isPickedUp}>
-                    {order.isPickedUp ? '수령완료' : '미수령'}
-                  </StatusBadge>
-                </Td>
-                <Td>
-                  <ActionButton onClick={() => handleStatusChange(order.id, 'isPaid')}>
-                    입금상태 변경
-                  </ActionButton>
-                  <ActionButton onClick={() => handleStatusChange(order.id, 'isPickedUp')}>
-                    수령상태 변경
-                  </ActionButton>
-                </Td>
-              </tr>
-            ))}
-          </tbody>
+  {orders.flatMap((order,orderIndex) =>
+    order.products.map((product, productIndex) => (
+      <tr key={`${order.user.studentId}-${orderIndex}-${productIndex}`}>
+        <Td>{order.user.studentId}</Td>
+        <Td>{product.productName}</Td>
+        <Td>{product.quantity}</Td>
+        <Td>
+          <StatusBadge paid={order.status === '결제완료'}>
+            {order.status}
+          </StatusBadge>
+        </Td>
+        <Td>{new Date(order.createdAt).toLocaleDateString()}</Td>
+        <Td>
+          <StatusBadge paid={false}>
+            {/* 예시로 "미수령" 고정 */}
+            미수령
+          </StatusBadge>
+        </Td>
+        <Td>
+          <ActionButton onClick={() =>handleStatusChange(orderIndex)}>
+            입금상태 변경
+          </ActionButton>
+          <ActionButton onClick={() => console.log('수령 상태 변경')}>
+            수령상태 변경
+          </ActionButton>
+        </Td>
+      </tr>
+    ))
+  )}
+</tbody>
         </Table>
       </Container>
     </>
