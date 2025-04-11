@@ -4,7 +4,7 @@ import CartList from "./CartList";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { axiosInstance } from './../../lib/axios';
+import { axiosInstance } from "./../../lib/axios";
 
 const Container = styled.div`
   width: 100%;
@@ -67,23 +67,23 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   &.compare {
     background-color: white;
     color: black;
-    border: 1px solid #167D4E;
-    
+    border: 1px solid #167d4e;
+
     &:hover {
       background-color: #f5f5f5;
       transform: scale(1.05);
     }
   }
-  
+
   &.purchase {
-    background-color: #167D4E;
+    background-color: #167d4e;
     color: white;
-    border: 1px solid #167D4E;
-    
+    border: 1px solid #167d4e;
+
     &:hover {
       background-color: #0d5a3a;
       transform: scale(1.05);
@@ -92,7 +92,7 @@ const Button = styled.button`
 `;
 
 const EmptyCartButton = styled.button`
-  background-color: #167D4E;
+  background-color: #167d4e;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -114,9 +114,10 @@ const EmptyCartButton = styled.button`
 
 const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
+  const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const fetchGetCart = async () => {
       try {
         const res = await axiosInstance.get("/cart");
@@ -144,12 +145,28 @@ const Cart = () => {
   }, []);
 
   const api = axios.create({
-    baseURL: '/api',  // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
+    baseURL: "/api", // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
     headers: {
-      'Content-Type': 'application/json'
-    }
+      "Content-Type": "application/json",
+    },
   });
-  
+
+  const handleSelectedChange = (items) => {
+    setSelectedItems(items);
+  };
+
+  const handleSelectOrder = () => {
+    if (selectedItems.length === 0) {
+      alert("주문할 상품을 선택해주세요");
+      return;
+    }
+    navigate("/order-page", {
+      state: {
+        items: selectedItems,
+        type: "multi",
+      },
+    });
+  };
 
   return (
     <>
@@ -166,16 +183,20 @@ const Cart = () => {
             장바구니가 비었습니다 <br /> 마음에 드는 상품으로 장바구니를 채워
             주세요!
           </div>
-          <EmptyCartButton onClick={() => navigate("/")}>마켓구경하기</EmptyCartButton>
+          <EmptyCartButton onClick={() => navigate("/")}>
+            마켓구경하기
+          </EmptyCartButton>
         </Container>
       ) : (
         <Container>
           <Title>장바구니</Title>
           <ScrollArea>
-            <CartList />
+            <CartList onSelectionChange={handleSelectedChange} />
           </ScrollArea>
           <ButtonContainer>
-            <Button className="compare">선택 주문하기</Button>
+            <Button className="compare" onClick={handleSelectOrder}>
+              선택 주문하기
+            </Button>
             <Button className="purchase">전체 주문하기</Button>
           </ButtonContainer>
         </Container>
@@ -185,4 +206,3 @@ const Cart = () => {
 };
 
 export default Cart;
-

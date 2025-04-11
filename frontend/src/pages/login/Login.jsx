@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import kakaoLoginImage from '../../assets/kakaoLogin.png';
 import image1 from '../../assets/image1.png';
 import image2 from '../../assets/image2.png';
@@ -63,6 +64,24 @@ const ImageButton = styled.img`
   }
 `;
 
+const IntroductionPageButton = styled.button`
+  background-color: #167d4e;
+  color: white;
+  padding: 9px 20px;
+  border: 1px solid #167d4e;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 242px;
+  transition: all 0.2s ease-in-out;
+  margin-top: 3px;
+
+  &:hover {
+    background-color: #0d5a3a;
+    transform: scale(1.05);
+  }
+`;
+
 const ImageGallery = styled.div`
   display: flex;
   overflow: hidden;
@@ -95,10 +114,15 @@ const ImageItem = styled.img`
 
 const Login = () => {
   const images = [image1, image2, image3, image4];
+  const navigate = useNavigate();
 
   const loginHandler = async () =>{
     const res = await axiosInstance.get("/login/authorize");
     window.location.href = res.data.kakaoAuthUrl;
+  };
+
+  const handleIntroductionClick = () => {
+    navigate('/introduction-page');
   };
 
   return (
@@ -127,6 +151,7 @@ const Login = () => {
           </ImageContainer>
         </ImageGallery>
         <ImageButton onClick={loginHandler} src={kakaoLoginImage} alt="카카오로 3초만에 시작하기" />
+        <IntroductionPageButton onClick={handleIntroductionClick}>행사 정보 더보기</IntroductionPageButton>
       </Container>
     </>
   )
