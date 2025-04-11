@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
+import { orderAdmin } from '../../api/cart';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -65,18 +66,7 @@ const ActionButton = styled.button`
 `;
 
 const AdminPage = () => {
-  const [orders, setOrders] = useState([
-    {
-      id: 1,
-      studentId: '20240001',
-      goodsName: 'rE: market 티셔츠',
-      quantity: 2,
-      isPaid: true,
-      pickupDate: '2024-03-20',
-      isPickedUp: false
-    },
-    // 더미 데이터
-  ]);
+  const [orders, setOrders] = useState(orderAdmin());
 
   const handleStatusChange = (orderId, field) => {
     setOrders(orders.map(order => 
@@ -107,15 +97,15 @@ const AdminPage = () => {
           <tbody>
             {orders.map(order => (
               <tr key={order.id}>
-                <Td>{order.studentId}</Td>
-                <Td>{order.goodsName}</Td>
-                <Td>{order.quantity}</Td>
+                <Td>{order.user.studentId}</Td>
+                <Td>{order.products.prodectName}</Td>
+                <Td>{order.products.quantity}</Td>
                 <Td>
-                  <StatusBadge paid={order.isPaid}>
-                    {order.isPaid ? '입금완료' : '미입금'}
+                  <StatusBadge paid={order.status}>
+                    {order.status ? '입금완료' : '미입금'}
                   </StatusBadge>
                 </Td>
-                <Td>{order.pickupDate}</Td>
+                <Td>{order.totalPrice}</Td>
                 <Td>
                   <StatusBadge paid={order.isPickedUp}>
                     {order.isPickedUp ? '수령완료' : '미수령'}

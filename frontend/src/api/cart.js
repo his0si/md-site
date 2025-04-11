@@ -79,3 +79,13 @@ export const deleteProduct = async (productId) => {
     throw error.response?.data || error.message;
   }
 }; 
+
+
+export const orderAdmin = async () => {
+  try {
+    const response = await api.get('/api/orderadmin');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+};
