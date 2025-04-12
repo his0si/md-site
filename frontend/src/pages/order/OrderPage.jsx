@@ -260,12 +260,14 @@ const OrderPage = () => {
           productName: singleItem.name,
           price: Number(singleItem.price.replace(",", "")),
           quantity: quantity,
+          thumbnailImage: singleItem.thumbnailImage || "",
         },
       ]
     : items.map((item) => ({
         productName: item.name,
         price: Number(item.price.replace(",", "")),
         quantity: item.quantity ?? 1,
+        thumbnailImage: item.thumbnailImage || "",
       }));
 
   const goodsTitle = isSingle
@@ -329,7 +331,7 @@ const OrderPage = () => {
           <AccountBox>
             입금처 계좌번호
             <br />
-            <strong>32-23425-234929 이화이언</strong>
+            <strong>100-026-784849 이화이언</strong>
           </AccountBox>
           <DepositNote>
             입금명은 학번(ex. 217****)으로 입력해주세요!

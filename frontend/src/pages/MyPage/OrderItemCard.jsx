@@ -20,6 +20,10 @@ const ItemImage = styled.div`
   background: rgb(245, 245, 245);
   flex-shrink: 0;
   flex-basis: 45%; //이미지가 카드 45%너비만 차지하도록 수정
+  background-image: url(${(props) => props.$src || ""});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const ItemInfo = styled.div`
@@ -48,12 +52,13 @@ const ItemPrice = styled.div`
 `;
 
 const OrderItemCard = ({ item }) => {
+  console.log("썸네일 확인:", item.thumbnailImage);
   return (
     <Card>
-      <ItemImage></ItemImage>
+      <ItemImage $src={item.thumbnailImage} />
       <ItemInfo>
-        <ItemName>{item.name}</ItemName>
-        <ItemPrice>{item.price}</ItemPrice>
+        <ItemName>{item.productName}</ItemName>
+        <ItemPrice>{item.price}원</ItemPrice>
       </ItemInfo>
     </Card>
   );

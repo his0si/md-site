@@ -29,7 +29,7 @@ import User from "../models/user.model.js";
  *                   properties:
  *                     productId:
  *                       type: string
- *                       format: objectId  
+ *                       format: objectId
  *                       description: "상품의 MongoDB ObjectId"
  *                       example: "6601038c0a4f51f729c56ef4"
  *                     productName:
@@ -82,7 +82,7 @@ import User from "../models/user.model.js";
  *               properties:
  *                 message:
  *                   type: string
- *                   example:  "유저 정보가 없습니다." 
+ *                   example:  "유저 정보가 없습니다."
  *       500:
  *         description: "서버 에러 또는 주문 생성 실패"
  *         content:
@@ -99,12 +99,11 @@ import User from "../models/user.model.js";
  */
 
 export const createOrdered = async (req, res) => {
-   
   try {
     if (!req.session.user) {
       return res.status(401).json({ message: "로그인이 필요합니다." });
     }
-      
+
     //session에 저장된 userId 정보로 db에 있는 user정보(studentId) 가져오기
     const userId = req.session.user.id;
     const db_user = await User.findById(userId);
@@ -113,46 +112,41 @@ export const createOrdered = async (req, res) => {
       return res.status(404).json({ message: "유저 정보가 없습니다." });
     }
     const db_studentId = db_user.studentId;
-      
+
     //front에서 받아옴
-    const {
-        products,      
-        totalPrice,
-        phone
-    } = req.body;
+    const { products, totalPrice, phone } = req.body;
 
     //mongoose object타입으로 바꿔줘야함
-    const convertedProducts = products.map(product => ({
+    const convertedProducts = products.map((product) => ({
       productId: new mongoose.Types.ObjectId(product.productId),
       productName: product.productName,
       quantity: product.quantity,
       price: product.price,
-      thumbnailImage: product.thumbnailImage
+      thumbnailImage: product.thumbnailImage,
     }));
-
 
     const newOrder = new Order({
       user: {
-            userId: db_user._id,
-            studentId : db_studentId,
-            phone:phone,
+        userId: db_user._id,
+        studentId: db_studentId,
+        phone: phone,
       },
       products: convertedProducts, //  변환된 배열 사용
       totalPrice,
-      status: "결제확인중"
+      status: "결제완료",
     });
 
     await newOrder.save();
 
     return res.status(201).json({
       message: "주문이 들어갔으며, 결제확인중입니다.",
-      orderId: newOrder._id
+      orderId: newOrder._id,
     });
   } catch (error) {
     console.error("주문 생성 실패:", error);
     return res.status(500).json({
       message: "주문 생성 실패",
-      error: error.message
+      error: error.message,
     });
   }
 };
