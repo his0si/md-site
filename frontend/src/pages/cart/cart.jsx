@@ -168,6 +168,36 @@ const Cart = () => {
     });
   };
 
+  const handleOrderAll = async () => {
+    try {
+      const res = await axiosInstance.get("/cart");
+      console.log("cart응답 내용:", res.data); //오류 확인용
+      const cartItems = res.data.data;
+
+      if (cartItems.length === 0) {
+        alert("장바구니가 비어있습니다");
+        return;
+      }
+
+      const formattedItems = cartItems.map((item) => ({
+        name: item.productName,
+        price: item.price.toLocaleString(), // "15,000" 같은 문자열
+        quantity: item.quantity ?? 1,
+        thumbnailImage: item.thumbnailImage || "",
+      }));
+
+      navigate("/order-page", {
+        state: {
+          items: formattedItems,
+          type: "multi",
+        },
+      });
+    } catch (error) {
+      console.log("전체주문에러", error);
+      alert("장바구니 전체 정보를 불러오지 못했습니다");
+    }
+  };
+
   return (
     <>
       {cartEmpty ? (
@@ -197,7 +227,9 @@ const Cart = () => {
             <Button className="compare" onClick={handleSelectOrder}>
               선택 주문하기
             </Button>
-            <Button className="purchase">전체 주문하기</Button>
+            <Button className="purchase" onClick={handleOrderAll}>
+              전체 주문하기
+            </Button>
           </ButtonContainer>
         </Container>
       )}
