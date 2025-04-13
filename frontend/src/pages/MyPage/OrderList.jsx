@@ -1,29 +1,28 @@
 import React from "react";
 import OrderItemCard from "./OrderItemCard";
 import { useEffect, useState } from "react";
+import { getOrderCheck } from "../../api/order";
 
 const OrderList = () => {
   const [orderList, setOrderList] = useState([]);
 
   useEffect(() => {
-    const tempData = [
-      { id: 1, name: "굿즈 이름", price: "12,000", image: "" },
-      { id: 2, name: "굿즈 이름", price: "12,000", image: "" },
-      { id: 3, name: "그굿즈 이름", price: "15,000", image: "" },
-      { id: 4, name: "굿즈 이름", price: "12,000", image: "" },
-      { id: 5, name: "굿즈 이름", price: "12,000", image: "" },
-      { id: 6, name: "굿즈 이름", price: "12,000", image: "" },
-      { id: 7, name: "굿즈 이름", price: "12,000", image: "" },
-      { id: 8, name: "굿즈 이름", price: "12,000", image: "" },
-    ];
+    const fetchOrderList = async () => {
+      try {
+        const data = await getOrderCheck();
+        setOrderList(data);
+      } catch (error) {
+        console.log("주문목록 불러오기 실패함", error);
+      }
+    };
 
-    setOrderList(tempData);
+    fetchOrderList();
   }, []);
 
   return (
     <div>
-      {orderList.map((item) => (
-        <OrderItemCard key={item.id} item={item} />
+      {orderList.map((item, index) => (
+        <OrderItemCard key={`${item.productName}-${index}`} item={item} />
       ))}
     </div>
   );

@@ -28,6 +28,7 @@ export const createOrder = async (phone, products, totalPrice) => {
       phone,
       products,
       totalPrice,
+      status,
     });
     return response.data;
   } catch (error) {
