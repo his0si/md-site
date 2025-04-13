@@ -55,3 +55,12 @@ export const getOrderCheck = async () => {
     throw error.response?.data || error.message;
   }
 };
+
+export const orderAdmin = async () => {
+  try {
+    const response = await api.get('/orderadmin');
+    return response.data;
+  } catch (error) {
+    throw error.response?.data || error.message;
+  }
+};
