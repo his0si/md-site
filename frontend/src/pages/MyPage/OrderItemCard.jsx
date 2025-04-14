@@ -52,7 +52,7 @@ const ItemPrice = styled.div`
 `;
 
 const OrderItemCard = ({ item }) => {
-  console.log("썸네일 확인:", item.thumbnailImage);
+  //console.log("썸네일 확인:", item.thumbnailImage);
   return (
     <Card>
       <ItemImage $src={item.thumbnailImage} />

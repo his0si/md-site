@@ -248,7 +248,7 @@ const OrderPage = () => {
   const singleItem = items?.[0];
 
   const totalPrice = isSingle
-    ? Number(singleItem?.price.replace(",", "")) * quantity
+    ? singleItem?.price * quantity
     : items?.reduce((sum, item) => {
         return sum + Number(item.price.replace(",", "")) * item.quantity;
       }, 0);
@@ -257,21 +257,21 @@ const OrderPage = () => {
   const formattedProducts = isSingle
     ? [
         {
-          productName: singleItem.name,
-          price: Number(singleItem.price.replace(",", "")),
+          productName: singleItem.productName,
+          price: singleItem.price,
           quantity: quantity,
           thumbnailImage: singleItem.thumbnailImage || "",
         },
       ]
     : items.map((item) => ({
-        productName: item.name,
-        price: Number(item.price.replace(",", "")),
+        productName: item.productName,
+        price: item.price,
         quantity: item.quantity ?? 1,
         thumbnailImage: item.thumbnailImage || "",
       }));
 
   const goodsTitle = isSingle
-    ? singleItem.name
+    ? singleItem.productName
     : `${items?.[0].name} 외 ${items.length - 1}개`;
 
   const handleQtyChange = (delta) => {

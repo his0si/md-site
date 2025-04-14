@@ -1,9 +1,10 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ProductDetailModal from "./ProductDetailModal";
 import { addToCart } from "../../api/cart";
-import { axiosInstance } from './../../lib/axios';
+import { axiosInstance } from "./../../lib/axios";
 import { useParams } from "react-router-dom"; //
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   min-height: 100vh;
   width: 100%;
@@ -30,7 +31,7 @@ const ProductImage = styled.div`
 const ProductName = styled.h1`
   font-size: 18px;
   margin: 20px 20px 8px 20px;
-  color: #167D4E;
+  color: #167d4e;
   font-weight: bold;
 `;
 
@@ -47,8 +48,8 @@ const ProductStatus = styled.p`
   width: calc(100% - 40px);
   word-break: break-all; // 글자 단위로 줄바꿈
   img {
-    width: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다. 
-    height: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다. 
+    width: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다.
+    height: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다.
   }
 `;
 
@@ -76,23 +77,23 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   &.compare {
     background-color: white;
     color: black;
-    border: 1px solid #167D4E;
-    
+    border: 1px solid #167d4e;
+
     &:hover {
       background-color: #f5f5f5;
       transform: scale(1.05);
     }
   }
-  
+
   &.purchase {
-    background-color: #167D4E;
+    background-color: #167d4e;
     color: white;
-    border: 1px solid #167D4E;
-    
+    border: 1px solid #167d4e;
+
     &:hover {
       background-color: #0d5a3a;
       transform: scale(1.05);
@@ -106,8 +107,9 @@ const ProductDetail = () => {
   const [loading, setLoading] = useState(false);
   const { id: productId } = useParams();
   const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
 
-   useEffect(() => {
+  useEffect(() => {
     const fetchProduct = async () => {
       try {
         const res = await axiosInstance.get(`/products/${productId}`);
@@ -118,8 +120,8 @@ const ProductDetail = () => {
     };
 
     fetchProduct(); // 함수 호출
-   }, [productId]);
-  
+  }, [productId]);
+
   const handleAddToCart = async () => {
     try {
       setLoading(true);
@@ -134,13 +136,30 @@ const ProductDetail = () => {
   if (!product) {
     return <p>로딩 중...</p>;
   }
+
+  const handleDirectBuy = () => {
+    const selectedItem = {
+      productId: product._id,
+      productName: product.productName,
+      price: product.price,
+      quantity: 1,
+      thumbnailImage: product.thumbnailImage,
+    };
+    navigate("/order-page", {
+      state: {
+        items: [selectedItem],
+        type: "single", // 타입 구분용- 단일상품 주문
+      },
+    });
+  };
+
   return (
     <Container>
-      <ProductImage >
+      <ProductImage>
         {product.thumbnailImage ? (
           <img src={product.thumbnailImage} alt={product.productName} />
-          ) : (
-            <p>이미지를 불러올 수 없습니다.</p>
+        ) : (
+          <p>이미지를 불러올 수 없습니다.</p>
         )}
       </ProductImage>
       <ProductName>{product.productName}</ProductName>
@@ -148,18 +167,27 @@ const ProductDetail = () => {
       <ProductStatus>
         {product.detailImage ? (
           <img src={product.detailImage} alt={product.productName} />
-          ) : (
-            <p>이미지를 불러올 수 없습니다.</p>
+        ) : (
+          <p>이미지를 불러올 수 없습니다.</p>
         )}
       </ProductStatus>
-      <ProductDetailModal modalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}> </ProductDetailModal>
-      
+      <ProductDetailModal
+        modalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      >
+        {" "}
+      </ProductDetailModal>
+
       <ButtonContainer>
-        <Button className="compare">바로 구매하기</Button>
-        <Button onClick={handleAddToCart} className="purchase">장바구니에 담기</Button>
+        <Button onClick={handleDirectBuy} className="compare">
+          바로 구매하기
+        </Button>
+        <Button onClick={handleAddToCart} className="purchase">
+          장바구니에 담기
+        </Button>
       </ButtonContainer>
     </Container>
   );
 };
 
-export default ProductDetail; 
+export default ProductDetail;
