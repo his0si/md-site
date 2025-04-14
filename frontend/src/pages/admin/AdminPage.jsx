@@ -1,11 +1,13 @@
-import React, { useState,useEffect } from 'react';
+// AdminPage.js
+import React, { useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { orderAdmin } from '../../api/order';
+import { updatePaymentStatus, updateReceivedStatus } from '../../api/admin';
 
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
-    background-color:rgb(255, 255, 255);
+    background-color: rgb(255, 255, 255);
   }
 `;
 
@@ -47,8 +49,8 @@ const StatusBadge = styled.span`
   padding: 5px 10px;
   border-radius: 15px;
   font-size: 12px;
-  background-color: ${props => props.paid ? '#e6f4ea' : '#fce8e6'};
-  color: ${props => props.paid ? '#167D4E' : '#c5221f'};
+  background-color: ${props => props.primary ? '#e6f4ea' : '#fce8e6'};
+  color: ${props => props.primary ? '#167D4E' : '#c5221f'};
 `;
 
 const ActionButton = styled.button`
@@ -71,22 +73,39 @@ const AdminPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       const data = await orderAdmin();
-      setOrders(data); 
+      setOrders(data);
     };
     fetchOrders();
   }, []);
 
-  const handleStatusChange = (orderIndex) => {
-    setOrders(prev =>
-      prev.map((order, idx) =>
-        idx === orderIndex
-          ? {
-              ...order,
-              status: order.status === '결제완료' ? '결제확인중' : '결제완료'
-            }
-          : order
-      )
-    );
+  // 결제 상태 변경: 결제 상태를 '결제완료'와 '결제확인중' 사이에서 토글합니다.
+  const handlePaymentStatusChange = async (orderId, currentStatus) => {
+    const newStatus = currentStatus === '결제완료' ? '결제확인중' : '결제완료';
+    try {
+      await updatePaymentStatus(orderId, newStatus);
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order.orderId === orderId ? { ...order, status: newStatus } : order
+        )
+      );
+    } catch (error) {
+      console.error('결제 상태 변경 실패:', error);
+    }
+  };
+
+  // 수령 상태 변경: 수령 상태를 true(수령완료)와 false(미수령) 사이에서 토글합니다.
+  const handleReceivedStatusChange = async (orderId, currentReceived) => {
+    const newReceived = !currentReceived;
+    try {
+      await updateReceivedStatus(orderId, newReceived);
+      setOrders(prevOrders =>
+        prevOrders.map(order =>
+          order.orderId === orderId ? { ...order, received: newReceived } : order
+        )
+      );
+    } catch (error) {
+      console.error('수령 상태 변경 실패:', error);
+    }
   };
 
   return (
@@ -94,6 +113,7 @@ const AdminPage = () => {
       <GlobalStyle />
       <Container>
         <Header>
+          <h2>주문 관리</h2>
         </Header>
         <Table>
           <thead>
@@ -108,40 +128,39 @@ const AdminPage = () => {
             </tr>
           </thead>
           <tbody>
-  {orders.flatMap((order,orderIndex) =>
-    order.products.map((product, productIndex) => (
-      <tr key={`${order.user.studentId}-${orderIndex}-${productIndex}`}>
-        <Td>{order.user.studentId}</Td>
-        <Td>{product.productName}</Td>
-        <Td>{product.quantity}</Td>
-        <Td>
-          <StatusBadge paid={order.status === '결제완료'}>
-            {order.status}
-          </StatusBadge>
-        </Td>
-        <Td>{new Date(order.createdAt).toLocaleDateString()}</Td>
-        <Td>
-          <StatusBadge paid={false}>
-            {/* 예시로 "미수령" 고정 */}
-            미수령
-          </StatusBadge>
-        </Td>
-        <Td>
-          <ActionButton onClick={() =>handleStatusChange(orderIndex)}>
-            입금상태 변경
-          </ActionButton>
-          <ActionButton onClick={() => console.log('수령 상태 변경')}>
-            수령상태 변경
-          </ActionButton>
-        </Td>
-      </tr>
-    ))
-  )}
-</tbody>
+            {orders.flatMap((order, orderIndex) =>
+              order.products.map((product, productIndex) => (
+                <tr key={`${order.user.studentId}-${orderIndex}-${productIndex}`}>
+                  <Td>{order.user.studentId}</Td>
+                  <Td>{product.productName}</Td>
+                  <Td>{product.quantity}</Td>
+                  <Td>
+                    <StatusBadge primary={order.status === '결제완료'}>
+                      {order.status}
+                    </StatusBadge>
+                  </Td>
+                  <Td>{new Date(order.createdAt).toLocaleDateString()}</Td>
+                  <Td>
+                    <StatusBadge primary={order.received === true}>
+                      {order.received ? '수령완료' : '미수령'}
+                    </StatusBadge>
+                  </Td>
+                  <Td>
+                    <ActionButton onClick={() => handlePaymentStatusChange(order.orderId, order.status)}>
+                      입금상태 변경
+                    </ActionButton>
+                    <ActionButton onClick={() => handleReceivedStatusChange(order.orderId, order.received)}>
+                      수령상태 변경
+                    </ActionButton>
+                  </Td>
+                </tr>
+              ))
+            )}
+          </tbody>
         </Table>
       </Container>
     </>
   );
-}
+};
 
-export default AdminPage; 
+export default AdminPage;

@@ -1,9 +1,19 @@
 import express from 'express';
-import { getAllOrders, updateOrderStatus } from '../controllers/orderadmin.controller.js';
+import { 
+  getAllOrders, 
+  updatePaymentStatus, 
+  updateReceivedStatus 
+} from '../controllers/orderadmin.controller.js';
 
 const router = express.Router();
 
+// 주문 목록 조회
 router.get('/', getAllOrders);
-router.patch('/:orderId/status', updateOrderStatus);
+
+// 결제 상태 업데이트
+router.patch('/:orderId/payment', updatePaymentStatus);
+
+// 수령 상태 업데이트
+router.patch('/:orderId/received', updateReceivedStatus);
 
 export default router;

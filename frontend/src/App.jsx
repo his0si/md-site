@@ -92,6 +92,8 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/oauth/kakao" element={<Redirection />} />
         <Route path="/introduction-page" element={<IntroductionPage />} />
+
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </div>
   );
