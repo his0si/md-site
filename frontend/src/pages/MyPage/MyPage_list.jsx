@@ -18,8 +18,8 @@ const Container = styled.div`
 const Title = styled.h2`
   font-size: 20px;
   text-align: center;
-  font-weight: 800;
-  color: #167d4e;
+  font-weight: 700;
+  color: #167D4E;
   margin-top: 5vh;
 `;
 
