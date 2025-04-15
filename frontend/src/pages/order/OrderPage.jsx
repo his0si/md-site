@@ -53,7 +53,7 @@ const ImageBox = styled.div`
   height: 120px;
   background-color: #f5f5f5;
   flex-shrink: 0;
-
+  flex-basis: 45%;
   background-image: url(${(props) => props.$src || ""});
   background-size: cover;
   background-position: center;
