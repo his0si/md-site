@@ -27,8 +27,8 @@ const CartList = ({ onSelectionChange }) => {
       const response = await getCart();
       const cartItems = response.data.map((item) => ({
         id: item.productID,
-        name: item.productName,
-        price: item.price.toLocaleString(),
+        productName: item.productName,
+        price: Number(String(item.price).replaceAll(",", "")),
         quantity: item.quantity,
         checked: false,
         thumbnailImage: item.thumbnailImage,

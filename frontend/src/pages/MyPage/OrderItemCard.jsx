@@ -58,7 +58,7 @@ const OrderItemCard = ({ item }) => {
       <ItemImage $src={item.thumbnailImage} />
       <ItemInfo>
         <ItemName>{item.productName}</ItemName>
-        <ItemPrice>{item.price}원</ItemPrice>
+        <ItemPrice>{Number(item.price).toLocaleString()}원</ItemPrice>
       </ItemInfo>
     </Card>
   );

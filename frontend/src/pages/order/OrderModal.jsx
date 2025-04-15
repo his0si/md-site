@@ -61,7 +61,16 @@ const OrderModal = ({
     console.log(" !! totalPrice:", totalPrice); //확인용용
     console.log("주문버튼 클릭됨"); //확인용용
     try {
-      const res = await createOrder(phone, products, totalPrice, "결제완료");
+      const formattedProducts = products.map((item) => ({
+        ...item,
+        price: Number(String(item.price).replaceAll(",", "")),
+      }));
+      const res = await createOrder(
+        phone,
+        formattedProducts,
+        totalPrice,
+        "결제확인중"
+      );
       console.log("주문 생성 성공:", res);
       navigate("/order-complete");
     } catch (err) {

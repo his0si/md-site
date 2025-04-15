@@ -141,7 +141,7 @@ const ProductDetail = () => {
     const selectedItem = {
       productId: product._id,
       productName: product.productName,
-      price: product.price,
+      price: Number(product.price),
       quantity: 1,
       thumbnailImage: product.thumbnailImage,
     };

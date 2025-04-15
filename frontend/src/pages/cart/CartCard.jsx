@@ -21,7 +21,7 @@ const ItemImage = styled.div`
   background: rgb(245, 245, 245);
   flex-shrink: 0;
   flex-basis: 45%;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -120,10 +120,12 @@ const DeleteIcon = styled.img`
 const CartCard = ({ item, onDelete, onCheck, onIncrease, onDecrease }) => {
   return (
     <Card>
-      <ItemImage><img src={item.thumbnailImage} /></ItemImage>
+      <ItemImage>
+        <img src={item.thumbnailImage} />
+      </ItemImage>
       <ItemInfo>
-        <ItemName>{item.name}</ItemName>
-        <ItemPrice>{item.price}</ItemPrice>
+        <ItemName>{item.productName}</ItemName>
+        <ItemPrice>{Number(item.price).toLocaleString()}</ItemPrice>
         <Counter>
           <button onClick={() => onDecrease(item.id)}>-</button>
           <span>{item.quantity}</span>

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Order from "../models/order.model.js";  // Order 모델 임포트 
+import Order from "../models/order.model.js"; // Order 모델 임포트
 /**
  * @swagger
  * /api/ordercheck:
@@ -39,33 +39,32 @@ import Order from "../models/order.model.js";  // Order 모델 임포트
  *                   example: "주문 확인이 실패되었습니다."
  */
 export const getOrderCheck = async (req, res) => {
-     try {
-    
+  try {
     if (!req.session.user) {
-        return res.status(401).json({ message: "로그인이 필요합니다." });
+      return res.status(401).json({ message: "로그인이 필요합니다." });
     }
-    
-     const userId = new mongoose.Types.ObjectId(req.session.user.id);
+
+    const userId = new mongoose.Types.ObjectId(req.session.user.id);
     //console.log(userId);
     // 주문내역 조회: 해당 아이디를 가진 사람의 결제완료,수령완료 제품을 모음
     const orders = await Order.find({
       "user.userId": userId,
-      status: { $in: ["결제완료", "수령완료"] }
+      status: { $in: ["결제확인중", "결제완료", "수령완료"] },
     }).select("products");
 
     // products 배열에서 productName, price, thumbnailImage만 추출
-    const products = orders.flatMap(order =>
-      order.products.map(product => ({
+    const products = orders.flatMap((order) =>
+      order.products.map((product) => ({
         productName: product.productName,
         price: product.price,
-        thumbnailImage: product.thumbnailImage
+        thumbnailImage: product.thumbnailImage,
       }))
-       );
-     
+    );
+
     //주문한 상품이 없을 경우
     if (products.length === 0) {
       return res.status(404).json({ message: "주문이 없습니다" });
-       }
+    }
     //주문한 상품을 json으로 띄움
     return res.status(200).json(products);
   } catch (error) {
