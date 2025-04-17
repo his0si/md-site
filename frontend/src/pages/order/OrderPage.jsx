@@ -53,6 +53,11 @@ const ImageBox = styled.div`
   height: 120px;
   background-color: #f5f5f5;
   flex-shrink: 0;
+  flex-basis: 45%;
+  background-image: url(${(props) => props.$src || ""});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const InfoBox = styled.div`
@@ -248,9 +253,10 @@ const OrderPage = () => {
   const singleItem = items?.[0];
 
   const totalPrice = isSingle
-    ? singleItem?.price * quantity
+    ? Number(String(singleItem?.price).replaceAll(",", "")) * quantity
     : items?.reduce((sum, item) => {
-        return sum + Number(item.price.replace(",", "")) * item.quantity;
+        const price = Number(String(item.price).replaceAll(",", ""));
+        return sum + price * (item.quantity ?? 1);
       }, 0);
 
   //객체배열 수정 시도중
@@ -258,7 +264,7 @@ const OrderPage = () => {
     ? [
         {
           productName: singleItem.productName,
-          price: singleItem.price,
+          price: Number(String(singleItem.price).replaceAll(",", "")),
           quantity: quantity,
           thumbnailImage: singleItem.thumbnailImage || "",
         },
@@ -270,9 +276,10 @@ const OrderPage = () => {
         thumbnailImage: item.thumbnailImage || "",
       }));
 
-  const goodsTitle = isSingle
-    ? singleItem.productName
-    : `${items?.[0].name} 외 ${items.length - 1}개`;
+  const goodsTitle =
+    items.length === 1
+      ? items[0].productName
+      : `${items[0].productName} 외 ${items.length - 1}개`;
 
   const handleQtyChange = (delta) => {
     setQuantity((prev) => Math.max(1, prev + delta));
@@ -286,10 +293,12 @@ const OrderPage = () => {
         </Header>
 
         <GoodsInfo>
-          <ImageBox />
+          <ImageBox $src={singleItem.thumbnailImage} />
           <InfoBox>
             <GoodsName>{goodsTitle}</GoodsName>
-            <GoodsPrice>{singleItem.price} 원</GoodsPrice>
+            <GoodsPrice>
+              {Number(singleItem.price).toLocaleString()} 원
+            </GoodsPrice>
             {isSingle && (
               <QtyBox>
                 <QtyBtn onClick={() => handleQtyChange(-1)}>-</QtyBtn>

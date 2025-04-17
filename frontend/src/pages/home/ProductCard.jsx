@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Card = styled.div`
   border: none;
@@ -44,7 +44,7 @@ const ProductInfo = styled.div`
 `;
 
 const ProductName = styled.div`
-  color: #167D4E;
+  color: #167d4e;
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   font-weight: bold;
@@ -58,23 +58,23 @@ const ProductPrice = styled.div`
 `;
 
 const ProductStatus = styled.div`
-  color: #FF0000;
+  color: #ff0000;
 `;
 
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  const handleProductDetail = ()=>{
-    navigate(`/product-detail/${product._id}`)
-  }
+  const handleProductDetail = () => {
+    navigate(`/product-detail/${product._id}`);
+  };
   return (
     <Card onClick={handleProductDetail}>
-      <ProductImage><img src={product.thumbnailImage} /></ProductImage>
+      <ProductImage>
+        <img src={product.thumbnailImage} />
+      </ProductImage>
       <ProductInfo>
         <ProductName>{product.productName}</ProductName>
-        <ProductPrice>{product.price}</ProductPrice>
-        {product.stock <= 5 && (
-          <ProductStatus>매진임박!</ProductStatus>
-        )}
+        <ProductPrice>{Number(product.price).toLocaleString()}</ProductPrice>
+        {product.stock <= 5 && <ProductStatus>매진임박!</ProductStatus>}
       </ProductInfo>
     </Card>
   );

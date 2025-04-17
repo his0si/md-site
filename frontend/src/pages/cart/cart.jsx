@@ -160,9 +160,18 @@ const Cart = () => {
       alert("주문할 상품을 선택해주세요");
       return;
     }
+
+    const formattedItems = selectedItems.map((item) => ({
+      productId: item.productId,
+      productName: item.productName,
+      price: Number(String(item.price).replaceAll(",", "")),
+      quantity: item.quantity ?? 1,
+      thumbnailImage: item.thumbnailImage || "",
+    }));
+
     navigate("/order-page", {
       state: {
-        items: selectedItems,
+        items: formattedItems,
         type: "multi",
       },
     });
@@ -180,8 +189,9 @@ const Cart = () => {
       }
 
       const formattedItems = cartItems.map((item) => ({
-        name: item.productName,
-        price: item.price.toLocaleString(), // "15,000" 같은 문자열
+        productId: item.productId,
+        productName: item.productName,
+        price: Number(String(item.price).replaceAll(",", "")),
         quantity: item.quantity ?? 1,
         thumbnailImage: item.thumbnailImage || "",
       }));
