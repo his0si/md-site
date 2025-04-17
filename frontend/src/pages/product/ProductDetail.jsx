@@ -137,20 +137,29 @@ const ProductDetail = () => {
     return <p>로딩 중...</p>;
   }
 
-  const handleDirectBuy = () => {
-    const selectedItem = {
-      productId: product._id,
-      productName: product.productName,
-      price: Number(product.price),
-      quantity: 1,
-      thumbnailImage: product.thumbnailImage,
-    };
-    navigate("/order-page", {
-      state: {
-        items: [selectedItem],
-        type: "single", // 타입 구분용- 단일상품 주문
-      },
-    });
+  const handleDirectBuy = async () => {
+    try {
+      await axiosInstance.get("/login/check-auth");
+      const selectedItem = {
+        productId: product._id,
+        productName: product.productName,
+        price: Number(product.price),
+        quantity: 1,
+        thumbnailImage: product.thumbnailImage,
+      };
+      navigate("/order-page", {
+        state: {
+          items: [selectedItem],
+          type: "single", // 타입 구분용- 단일상품 주문
+        },
+      });
+    } catch (error) {
+      alert("로그인 후 이용해주세요!");
+      navigate("/login");
+      console.log(error.message);
+    }
+    
+    
   };
 
   return (

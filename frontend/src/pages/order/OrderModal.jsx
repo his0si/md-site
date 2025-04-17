@@ -51,7 +51,7 @@ const OrderModal = ({
   products,
   totalPrice,
 }) => {
-  const bankingNumber = "신한 10-026-784849";
+  const bankingNumber = "신한 100-026-784849";
   const navigate = useNavigate();
 
   const handleConfirmOrder = async () => {

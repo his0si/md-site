@@ -347,3 +347,8 @@ export const logout = (req, res) => {
       return res.status(500).json({ message: "회원 탈퇴 중 오류 발생" });
     }
   };
+
+  export const isLogin = async (req, res)=>{
+    const userId = req.userId;
+    return res.status(200).json({message : "로그인 확인 완료"});
+  }

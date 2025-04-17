@@ -133,7 +133,7 @@ export const createOrdered = async (req, res) => {
       },
       products: convertedProducts, //  변환된 배열 사용
       totalPrice,
-      status: "결제완료",
+      status: "결제확인중",
     });
 
     await newOrder.save();
