@@ -73,8 +73,8 @@ const options = {
   apis: ["./controllers/*.js"],
 };
 
-const specs = swaggerJSDoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
+// const specs = swaggerJSDoc(options);
+// app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 app.use("/api", shoppingCartRoutes);
 app.use("/api/test", testRoutes);
 app.use("/api/products", productRoutes);
