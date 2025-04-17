@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import { useEffect } from "react";
+import { axiosInstance } from './../../lib/axios';
 
 const Container = styled.div`
   height: 100vh;
@@ -28,6 +30,19 @@ const Box=styled.div`
 `;
 
 const MyPage = () => {
+  const navigate = useNavigate();
+useEffect(()=>{
+  const fetchAuth = async () =>{
+    try {
+      await axiosInstance.get("/login/check-auth");
+    } catch (error) {
+      alert("로그인 후 이용해주세요!");
+      navigate("/login");
+      console.log(error.message);
+    }
+  };
+  fetchAuth();
+},[])
     return (
       <>
         <Container>
