@@ -2,8 +2,8 @@ import React, { useEffect, useRef } from 'react'
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import kakaoLoginImage from '../../assets/kakaoLogin.png';
-import image1 from '../../assets/image1.png';
-import image2 from '../../assets/image2.png';
+import image1 from '../../assets/image1.jpg';
+import image2 from '../../assets/image2.jpg';
 import image3 from '../../assets/image3.png';
 import image4 from '../../assets/image4.png';
 import { axiosInstance } from './../../lib/axios';
@@ -110,6 +110,8 @@ const ImageItem = styled.img`
   height: 160px;
   margin: 0 auto;
   flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 10px;
 `;
 
 const Login = () => {
@@ -133,8 +135,8 @@ const Login = () => {
         <TextBackground>
           <Text>
             이화이언의 5월 행사, <strong>rE: mark</strong>는<br />
-            <strong>수강 신청으로 놓쳤던 인기 강의를 경험</strong>하고,<br />
-            <strong>이화 출신 선배님의 진솔한 이야기</strong>를<br />
+            <strong>수강 신청으로 놓쳤던 인기 강의를 경험</strong>함과 더불어,<br />
+            <strong>사회에서 활약 중이신<br/> 이화 교수님들의 진심 어린 이야기</strong>를<br />
             들을 수 있는 <strong>특별한 자리</strong>입니다.<br /><br />
             <strong>rE: mark</strong>의 <strong>굿즈부스</strong>에선<br />
             벗들을 위한 다양한 굿즈를 판매하고 있습니다.<br /><br />

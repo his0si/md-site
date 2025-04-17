@@ -10,6 +10,7 @@ const OrderList = () => {
     const fetchOrderList = async () => {
       try {
         const data = await getOrderCheck();
+        console.log(data);
         setOrderList(data);
       } catch (error) {
         console.log("주문목록 불러오기 실패함", error);

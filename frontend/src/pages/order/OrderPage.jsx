@@ -51,13 +51,18 @@ const GoodsInfo = styled.div`
 const ImageBox = styled.div`
   width: 120px;
   height: 120px;
-  background-color: #f5f5f5;
   flex-shrink: 0;
   flex-basis: 45%;
-  background-image: url(${(props) => props.$src || ""});
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`;
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const InfoBox = styled.div`
@@ -285,6 +290,11 @@ const OrderPage = () => {
     setQuantity((prev) => Math.max(1, prev + delta));
   };
 
+  const isValidPhone = (phone) => {
+    const phoneRegex = /^010-\d{4}-\d{4}$/;
+    return phoneRegex.test(phone);
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -293,7 +303,9 @@ const OrderPage = () => {
         </Header>
 
         <GoodsInfo>
-          <ImageBox $src={singleItem.thumbnailImage} />
+          <ImageBox>
+            <StyledImg src={singleItem.thumbnailImage} alt="썸네일" />
+          </ImageBox>
           <InfoBox>
             <GoodsName>{goodsTitle}</GoodsName>
             <GoodsPrice>
@@ -348,7 +360,15 @@ const OrderPage = () => {
         </AccountCard>
 
         <Footer>
-          <OrderBtn onClick={() => setIsModalOpen(true)}>
+          <OrderBtn
+            onClick={() => {
+              if (!phone || !isValidPhone(phone)) {
+                alert("연락처를 정확히 입력해주세요. 예: 010-1234-5678");
+                return;
+              }
+              setIsModalOpen(true);
+            }}
+          >
             주문하기 (입금 후 클릭해주세요!)
           </OrderBtn>
         </Footer>
