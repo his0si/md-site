@@ -1,12 +1,6 @@
-import axios from "axios";
+import { axiosInstance } from './../lib/axios';
 
-// axios 인스턴스 생성
-const api = axios.create({
-  baseURL: "/api", // 프록시 설정을 통해 /api로 시작하는 요청은 백엔드로 전달됨
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const api = axiosInstance;
 
 // 요청 인터셉터 추가
 api.interceptors.request.use(

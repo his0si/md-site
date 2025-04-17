@@ -42,7 +42,7 @@ useEffect(()=>{
     }
   };
   fetchAuth();
-},[])
+},[navigate])
     return (
       <>
         <Container>
