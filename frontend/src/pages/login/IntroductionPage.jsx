@@ -296,7 +296,7 @@ const EventIntro = () => {
           <PromotionText>
             rE: mark 행사 당일<br />
             픽닷 X 이화이언 콜라보 프레임 촬영 인증 시<br />
-            <span>강연회 티켓 4000원 할인!</span>
+            <span>강연회 티켓 할인!</span>
           </PromotionText>
         </EventDetails>
       </AnimatedSection>
@@ -307,11 +307,11 @@ const EventIntro = () => {
           <ScheduleDate>2025.05.07 수요일</ScheduleDate>
           <ScheduleGrid>
             <ScheduleLabel>이벤트 부스</ScheduleLabel>
-            <ScheduleTime>11:00 - 15:00</ScheduleTime>
+            <ScheduleTime>11:00 - 16:00</ScheduleTime>
             <ScheduleLabel>강연회 (1부)</ScheduleLabel>
-            <ScheduleTime>18:30 - 19:30</ScheduleTime>
+            <ScheduleTime>18:40 - 19:20</ScheduleTime>
             <ScheduleLabel>강연회 (2부)</ScheduleLabel>
-            <ScheduleTime>20:00 - 21:00</ScheduleTime>
+            <ScheduleTime>19:20 - 20:40</ScheduleTime>
           </ScheduleGrid>
         </ScheduleContainer>
       </AnimatedSection>
