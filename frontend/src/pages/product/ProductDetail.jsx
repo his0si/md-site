@@ -22,9 +22,15 @@ const ProductImage = styled.div`
   margin: 60px 20px 20px 20px;
   aspect-ratio: 1;
   background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -41,15 +47,17 @@ const ProductPrice = styled.p`
   font-weight: bold;
 `;
 
-const ProductStatus = styled.p`
+const ProductStatus = styled.div`
   font-size: 14px;
   color: #666;
   margin: 10px 20px 8px 20px;
   width: calc(100% - 40px);
-  word-break: break-all; // 글자 단위로 줄바꿈
-  img {
-    width: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다.
-    height: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다.
+  word-break: break-all;
+
+  .detail-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 `;
 
@@ -158,8 +166,6 @@ const ProductDetail = () => {
       navigate("/login");
       console.log(error.message);
     }
-    
-    
   };
 
   return (
@@ -175,7 +181,11 @@ const ProductDetail = () => {
       <ProductPrice>{product.price}</ProductPrice>
       <ProductStatus>
         {product.detailImage ? (
-          <img src={product.detailImage} alt={product.productName} />
+          <img
+            src={product.detailImage}
+            alt={product.productName}
+            className="detail-img"
+          />
         ) : (
           <p>이미지를 불러올 수 없습니다.</p>
         )}

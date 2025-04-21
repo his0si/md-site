@@ -309,9 +309,9 @@ const EventIntro = () => {
             <ScheduleLabel>이벤트 부스</ScheduleLabel>
             <ScheduleTime>11:00 - 16:00</ScheduleTime>
             <ScheduleLabel>강연회 (1부)</ScheduleLabel>
-            <ScheduleTime>18:40 - 19:20</ScheduleTime>
+            <ScheduleTime>18:40 - 19:40</ScheduleTime>
             <ScheduleLabel>강연회 (2부)</ScheduleLabel>
-            <ScheduleTime>19:20 - 20:40</ScheduleTime>
+            <ScheduleTime>20:00 - 21:00</ScheduleTime>
           </ScheduleGrid>
         </ScheduleContainer>
       </AnimatedSection>
@@ -327,16 +327,16 @@ const EventIntro = () => {
         <SpeakersContainer>
           <SpeakersTitle>강연자 / 강연명</SpeakersTitle>
           <SpeakerCard>
-            <SpeakerImage src={kimSeungWooImage} alt="김승우 교수님" />
-            <SpeakerName>이화여자대학교 김승우 교수님</SpeakerName>
-            <LecturePart>강연 1부</LecturePart>
-            <LectureTitle>&lt;조선의 여성들: 부자유한 시대에 너무나 비범했던&gt;</LectureTitle>
-          </SpeakerCard>
-          <SpeakerCard>
             <SpeakerImage src={choiJaeCheonImage} alt="최재천 교수님" />
             <SpeakerName>이화여자대학교 최재천 교수님</SpeakerName>
-            <LecturePart>강연 2부</LecturePart>
+            <LecturePart>강연 1부</LecturePart>
             <LectureTitle>&lt;양심, 공감, 숙론&gt;</LectureTitle>
+          </SpeakerCard>
+          <SpeakerCard>
+            <SpeakerImage src={kimSeungWooImage} alt="김승우 교수님" />
+            <SpeakerName>이화여자대학교 김승우 교수님</SpeakerName>
+            <LecturePart>강연 2부</LecturePart>
+            <LectureTitle>&lt;조선의 여성들: 부자유한 시대에 너무나 비범했던&gt;</LectureTitle>
           </SpeakerCard>
         </SpeakersContainer>
       </AnimatedSection>
