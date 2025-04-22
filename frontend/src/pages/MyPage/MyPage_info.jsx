@@ -30,7 +30,7 @@ const MyPage_info= () => {
          <div style={{color:" #167D4E",fontSize:"20px",fontWeight:"700",marginBottom:"4vh",marginTop:"5vh"}}>상품 수령 정보</div>
         <Box>
           <p style={{color:"#167D4E",fontSize:"14px",fontWeight:"700"}}>상품 수령일자</p>
-          <p style={{fontSize:"16px",fontWeight:"600"}}>2025.05.07 수요일 10시~17시</p>
+          <p style={{fontSize:"16px",fontWeight:"600"}}>2025.05.07 수요일 10:30~17:00</p>
         </Box>
         <Box>
           <p style={{color:"#167D4E",fontSize:"14px",fontWeight:"700"}}>상품 수령장소</p>

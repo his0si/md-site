@@ -197,14 +197,25 @@ const ProductDetail = () => {
         {" "}
       </ProductDetailModal>
 
-      <ButtonContainer>
-        <Button onClick={handleDirectBuy} className="compare">
-          바로 구매하기
-        </Button>
-        <Button onClick={handleAddToCart} className="purchase">
-          장바구니에 담기
-        </Button>
-      </ButtonContainer>
+      {product.stock === 0 ? (
+        <ButtonContainer>
+          <p style={{ color: "red", fontWeight: "bold", margin: "auto" }}>
+            품절되었습니다
+          </p>
+        </ButtonContainer>
+      ) : (
+        <ButtonContainer>
+          <Button onClick={handleDirectBuy} className="compare">
+            바로 구매하기
+          </Button>
+          <Button
+            onClick={handleAddToCart}
+            className="purchase"
+          >
+            장바구니에 담기
+          </Button>
+        </ButtonContainer>
+      )}
     </Container>
   );
 };

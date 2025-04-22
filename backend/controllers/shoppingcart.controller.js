@@ -221,22 +221,42 @@ export const addProductInCart = async (req, res)=>{
  *                   type: string
  *                   example: Internal server error
  */
-export const getUserCart = async (req, res)=>{
+export const getUserCart = async (req, res) => {
     try {
-        const userId = req.userId;
-        const cart = await ShoppingCart.findOne({"user.userId": userId});
-        if(!cart || cart.products.length === 0){
-            return res.status(404).json({message : "장바구니에 아직 상품이 없습니다😎"});
+      const userId = req.userId;
+      const cart = await ShoppingCart.findOne({ "user.userId": userId });
+  
+      if (!cart || cart.products.length === 0) {
+        return res.status(404).json({ message: "장바구니에 아직 상품이 없습니다😎" });
+      }
+  
+      // 재고가 0인 상품 필터링
+      const validProducts = [];
+  
+      for (const product of cart.products) {
+        const dbProduct = await Product.findById(product.productID);
+  
+        if (!dbProduct || dbProduct.stock === 0) {
+          // 해당 상품은 장바구니에서 제거
+          continue;
         }
-        // 상품 아이디, 상품 이름, 상품 썸네일, 가격, 수량 가져오면 됨...
-        return res.status(200).json({
-            message : "장바구니에 있는 상품 목록 전달",
-            data : cart.products
-        });
+  
+        validProducts.push(product);
+      }
+  
+      // cart에서 재고 없는 상품 제거 후 저장
+      cart.products = validProducts;
+      await cart.save();
+  
+      return res.status(200).json({
+        message: "장바구니에 있는 상품 목록 전달",
+        data: cart.products,
+      });
     } catch (error) {
-        return res.status(500).json({message : "Internal server error"});
+      console.error("장바구니 불러오기 에러:", error);
+      return res.status(500).json({ message: "Internal server error" });
     }
-}
+  };
 
 const changeProductQuantity = async (userId, productId, count) =>{
     const cart = await ShoppingCart.findOne({"user.userId": userId});

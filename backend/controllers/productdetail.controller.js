@@ -85,6 +85,7 @@ export const productDetail = async (req, res)=>{
         const price = db_product.price;
         const thumbnailImage = db_product.thumbnailImage;
         const detailImage = db_product.detailImage;
+        const stock = db_product.stock;
 
         //front에 db에서 찾은 정보들 넘겨주기
         return res.status(200).json({
@@ -94,7 +95,8 @@ export const productDetail = async (req, res)=>{
                 productName,
                 price,
                 thumbnailImage,
-                detailImage
+                detailImage,
+                stock
             }
          });
 

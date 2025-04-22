@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Order from "../models/order.model.js";
 import User from "../models/user.model.js";
+import Product from "../models/product.model.js";
 
 /**
  * @swagger
@@ -115,15 +116,32 @@ export const createOrdered = async (req, res) => {
 
     //front에서 받아옴
     const { products, totalPrice, phone } = req.body;
-
-    //mongoose object타입으로 바꿔줘야함
-    const convertedProducts = products.map((product) => ({
-      productId: new mongoose.Types.ObjectId(product.productId),
-      productName: product.productName,
-      quantity: product.quantity,
-      price: product.price,
-      thumbnailImage: product.thumbnailImage,
-    }));
+    const convertedProducts = [];
+    for (const product of products) {
+      // 기존: const productObjectId = new mongoose.Types.ObjectId(product.productId);
+      //       const db_product = await Product.findById(productObjectId);
+    
+      const db_product = await Product.findOne({ productName: product.productName });
+    
+      if (!db_product) {
+        return res.status(404).json({ message: `상품을 찾을 수 없습니다: ${product.productName}` });
+      }
+    
+      if (db_product.stock < product.quantity) {
+        return res.status(400).json({ message: `상품 ${product.productName}의 재고가 부족합니다.` });
+      }
+    
+      db_product.stock -= product.quantity;
+      await db_product.save();
+    
+      convertedProducts.push({
+        productId: db_product._id,
+        productName: db_product.productName,
+        quantity: product.quantity,
+        price: product.price,
+        thumbnailImage: product.thumbnailImage,
+      });
+    }
 
     const newOrder = new Order({
       user: {
