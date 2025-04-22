@@ -334,7 +334,7 @@ const OrderPage = () => {
           <RowWithThickDivider>
             <div>수령 일자/장소</div>
             <div>
-              <strong>25.05.07 ECC 이삼봉홀</strong>
+              <strong>25.05.07 ECC 이삼봉홀 10시~17시</strong>
             </div>
           </RowWithThickDivider>
 
