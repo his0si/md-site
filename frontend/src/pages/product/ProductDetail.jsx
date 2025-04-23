@@ -180,6 +180,9 @@ const ProductDetail = () => {
       <ProductName>{product.productName}</ProductName>
       <ProductPrice>{product.price}</ProductPrice>
       <ProductStatus>
+        {product.productName.includes("M") ? "상세 사이즈 : 가슴단면 50.5 총길이 64" : ""}
+        {product.productName.includes("반다나") ? "상세 사이즈 : 60 x 60" : ""}
+        {product.productName.includes("XL") ? "상세 사이즈 : 가슴단면 55.5 총길이 70" : ""}
         {product.detailImage ? (
           <img
             src={product.detailImage}
