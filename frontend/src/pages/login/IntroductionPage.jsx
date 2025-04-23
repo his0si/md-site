@@ -294,9 +294,7 @@ const EventIntro = () => {
           <EventDate>(2025. 05. 07 - 2025. 05. 14)</EventDate>
           <PitdotImage src={pitdotImage} alt="Pitdot" />
           <PromotionText>
-            rE: mark 행사 당일<br />
-            픽닷 X 이화이언 콜라보 프레임 촬영 인증 시<br />
-            <span>강연회 티켓 할인!</span>
+            
           </PromotionText>
         </EventDetails>
       </AnimatedSection>
