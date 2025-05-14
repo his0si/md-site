@@ -30,6 +30,16 @@ const ModalContent = styled.div`
     linear-gradient(270deg, #bcdfca 0%, #fffdea 100%);
 `;
 
+const TextContentWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: ${({ hasSingleButton }) => (hasSingleButton ? "center" : "space-between")};
@@ -70,7 +80,9 @@ const Modal = ({
   return (
     <ModalOverlay $isOpen={isOpen} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        {children}
+        <TextContentWrapper>
+          {children}
+        </TextContentWrapper>
         <ButtonContainer hasSingleButton={hasSingleButton}>
           {hasCloseButton && (
             <CloseButton onClick={onClose} isSingle={hasSingleButton}>
