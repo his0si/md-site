@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ProductDetailModal from "./ProductDetailModal";
+import Modal from "../../components/Modal";
 import { addToCart } from "../../api/cart";
 import { axiosInstance } from "./../../lib/axios";
 import { useParams } from "react-router-dom"; //
@@ -108,6 +109,8 @@ const ProductDetail = () => {
   const { id: productId } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -128,7 +131,8 @@ const ProductDetail = () => {
       await addToCart(productId, 1); // 수량을 1로 고정
       setIsModalOpen(true);
     } catch (error) {
-      alert(error.message || "장바구니 추가에 실패했습니다.");
+      setAlertMessage(error.message || "장바구니 추가에 실패했습니다.");
+      setIsAlertModalOpen(true);
     } finally {
       setLoading(false);
     }
@@ -154,8 +158,8 @@ const ProductDetail = () => {
         },
       });
     } catch (error) {
-      alert("로그인 후 이용해주세요!");
-      navigate("/login");
+      setAlertMessage("로그인 후 이용해주세요!");
+      setIsAlertModalOpen(true);
       console.log(error.message);
     }
     
@@ -186,6 +190,19 @@ const ProductDetail = () => {
       >
         {" "}
       </ProductDetailModal>
+
+      <Modal
+        isOpen={isAlertModalOpen}
+        onClose={() => {
+          setIsAlertModalOpen(false);
+          if (alertMessage === "로그인 후 이용해주세요!") {
+            navigate("/login");
+          }
+        }}
+        closeButton="확인"
+      >
+        <p>{alertMessage}</p>
+      </Modal>
 
       <ButtonContainer>
         <Button onClick={handleDirectBuy} className="compare">
