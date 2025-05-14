@@ -1,5 +1,6 @@
 import CartCard from "./CartCard";
 import { useState, useEffect } from "react";
+import Modal from "../../components/Modal";
 import {
   getCart,
   increaseQuantity,
@@ -11,6 +12,8 @@ const CartList = ({ onSelectionChange }) => {
   const [cartList, setCartList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     fetchCart();
@@ -46,7 +49,8 @@ const CartList = ({ onSelectionChange }) => {
       await deleteProduct(id);
       setCartList((prevList) => prevList.filter((item) => item.id !== id));
     } catch (error) {
-      alert(error.message || "삭제에 실패했습니다.");
+      setModalMessage(error.message || "삭제에 실패했습니다.");
+      setIsModalOpen(true);
     }
   };
 
@@ -67,7 +71,8 @@ const CartList = ({ onSelectionChange }) => {
         )
       );
     } catch (error) {
-      alert(error.message || "수량 증가에 실패했습니다.");
+      setModalMessage(error.message || "수량 증가에 실패했습니다.");
+      setIsModalOpen(true);
     }
   };
 
@@ -82,7 +87,8 @@ const CartList = ({ onSelectionChange }) => {
         )
       );
     } catch (error) {
-      alert(error.message || "수량 감소에 실패했습니다.");
+      setModalMessage(error.message || "수량 감소에 실패했습니다.");
+      setIsModalOpen(true);
     }
   };
 
@@ -106,6 +112,13 @@ const CartList = ({ onSelectionChange }) => {
           onDecrease={handleDecrease}
         />
       ))}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        closeButton="확인"
+      >
+        <p>{modalMessage}</p>
+      </Modal>
     </div>
   );
 };

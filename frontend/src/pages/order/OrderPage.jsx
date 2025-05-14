@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useState } from "react";
 import OrderModal from "./OrderModal";
+import Modal from "../../components/Modal";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -240,6 +241,8 @@ const OrderPage = () => {
   const location = useLocation();
   const state = location.state || {};
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAlertModalOpen, setIsAlertModalOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
 
   const fallbackItem = {
     id: 0,
@@ -264,7 +267,6 @@ const OrderPage = () => {
         return sum + price * (item.quantity ?? 1);
       }, 0);
 
-  //객체배열 수정 시도중
   const formattedProducts = isSingle
     ? [
         {
@@ -295,8 +297,31 @@ const OrderPage = () => {
     return phoneRegex.test(phone);
   };
 
+  const handleOrder = () => {
+    if (!isValidPhone(phone)) {
+      setAlertMessage("연락처를 정확히 입력해주세요. 예: 010-1234-5678");
+      setIsAlertModalOpen(true);
+      return;
+    }
+    setIsModalOpen(true);
+  };
+
   return (
     <Container>
+      <OrderModal
+        modalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        phone={phone}
+        products={formattedProducts}
+        totalPrice={totalPrice}
+      />
+      <Modal
+        isOpen={isAlertModalOpen}
+        onClose={() => setIsAlertModalOpen(false)}
+        closeButton="확인"
+      >
+        <p>{alertMessage}</p>
+      </Modal>
       <Wrapper>
         <Header>
           <CloseButton onClick={() => window.history.back()}>×</CloseButton>
@@ -360,27 +385,9 @@ const OrderPage = () => {
         </AccountCard>
 
         <Footer>
-          <OrderBtn
-            onClick={() => {
-              if (!phone || !isValidPhone(phone)) {
-                alert("연락처를 정확히 입력해주세요. 예: 010-1234-5678");
-                return;
-              }
-              setIsModalOpen(true);
-            }}
-          >
-            주문하기 (입금 후 클릭해주세요!)
-          </OrderBtn>
+          <OrderBtn onClick={handleOrder}>주문하기 (입금 후 클릭해주세요!)</OrderBtn>
         </Footer>
       </Wrapper>
-
-      <OrderModal
-        modalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-        phone={phone}
-        products={formattedProducts}
-        totalPrice={totalPrice}
-      />
     </Container>
   );
 };
