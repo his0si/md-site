@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import { Link,useNavigate} from "react-router-dom";
-import { logoutAPI,withdrawAPI } from "../../api/user";
+import { Link, useNavigate } from "react-router-dom";
+import { logoutAPI, withdrawAPI } from "../../api/user";
+import WithdrawModal from "./WithdrawModal";
+import { useState } from "react";
 
 const Container = styled.div`
   height: 100vh;
@@ -26,6 +28,8 @@ const Box = styled.button`
   gap: 20px;
   margin: 0px;
   justify-content: center;
+
+  background: white;
 `;
 
 const Row = styled.div`
@@ -36,31 +40,33 @@ const Row = styled.div`
 `;
 
 const MyPage = () => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const handleLogout=async()=>{
-    try{
+  const [withdrawModalOpen, setWithdrawModalOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
       await logoutAPI();
       alert("로그아웃 되었습니다");
       navigate("/login");
-    }catch(err){
+    } catch (err) {
       console.log(err);
-      alert("로그아웃 중 오류가 발생했습니다.")
+      alert("로그아웃 중 오류가 발생했습니다.");
     }
-  }
+  };
 
-  const handleWithdraw= async()=>{
-    if(!window.confirm("정말 탈퇴하시겠습니까?")) return;
+  const handleWithdraw = async () => {
+    if (!window.confirm("정말 탈퇴하시겠습니까?")) return;
 
-    try{
+    try {
       await withdrawAPI();
       alert("회원탈퇴가 완료되었습니다");
       navigate("/");
-    }catch(err){
+    } catch (err) {
       console.log(err);
       alert("회원탈퇴 중 오류가 발생하였습니다");
     }
-  }
+  };
 
   return (
     <>
@@ -136,12 +142,21 @@ const MyPage = () => {
           <Box onClick={handleLogout} style={{ width: "50%", height: "120%" }}>
             <p style={{ fontSize: "12px", fontWeight: "600" }}>로그아웃</p>
           </Box>
-          <Box onClick={handleWithdraw} style={{ width: "50%", height: "120%" }}>
+          <Box
+            onClick={() => setWithdrawModalOpen(true)}
+            style={{ width: "50%", height: "120%" }}
+          >
             <p style={{ fontSize: "12px", fontWeight: "600" }}>회원탈퇴</p>
           </Box>
         </Row>
-
       </Container>
+
+      {withdrawModalOpen && (
+        <WithdrawModal
+          modalOpen={withdrawModalOpen}
+          setModalOpen={setWithdrawModalOpen}
+        />
+      )}
     </>
   );
 };
