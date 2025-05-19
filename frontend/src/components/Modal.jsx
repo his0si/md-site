@@ -30,13 +30,23 @@ const ModalContent = styled.div`
     linear-gradient(270deg, #bcdfca 0%, #fffdea 100%);
 `;
 
+const TextContentWrapper = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ hasSingleButton }) => (hasSingleButton ? "center" : "space-between")};
 `;
 
 const MoveButton = styled.button`
-  width: 50%;
+  width: ${({ isSingle }) => (isSingle ? "100%" : "50%")};
   padding: 10px 12px;
   background: 0;
   color: white;
@@ -46,7 +56,7 @@ const MoveButton = styled.button`
 `;
 
 const CloseButton = styled.button`
-  width: 50%;
+  width: ${({ isSingle }) => (isSingle ? "100%" : "50%")};
   padding: 10px 12px;
   background: 0;
   color: white;
@@ -63,13 +73,27 @@ const Modal = ({
   moveButtonHandler,
   closeButton,
 }) => {
+  const hasMoveButton = !!moveButton;
+  const hasCloseButton = !!closeButton;
+  const hasSingleButton = (hasMoveButton && !hasCloseButton) || (!hasMoveButton && hasCloseButton);
+
   return (
     <ModalOverlay $isOpen={isOpen} onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        {children}
-        <ButtonContainer>
-          <CloseButton onClick={onClose}>{closeButton}</CloseButton>
-          <MoveButton onClick={moveButtonHandler}>{moveButton}</MoveButton>
+        <TextContentWrapper>
+          {children}
+        </TextContentWrapper>
+        <ButtonContainer hasSingleButton={hasSingleButton}>
+          {hasCloseButton && (
+            <CloseButton onClick={onClose} isSingle={hasSingleButton}>
+              {closeButton}
+            </CloseButton>
+          )}
+          {hasMoveButton && (
+            <MoveButton onClick={moveButtonHandler} isSingle={hasSingleButton}>
+              {moveButton}
+            </MoveButton>
+          )}
         </ButtonContainer>
       </ModalContent>
     </ModalOverlay>

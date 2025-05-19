@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import CartList from "./CartList";
+import Modal from "../../components/Modal";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
@@ -116,6 +117,8 @@ const Cart = () => {
   const [cartEmpty, setCartEmpty] = useState(false);
   const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   useEffect(() => {
     const fetchGetCart = async () => {
@@ -157,7 +160,8 @@ const Cart = () => {
 
   const handleSelectOrder = () => {
     if (selectedItems.length === 0) {
-      alert("주문할 상품을 선택해주세요");
+      setModalMessage("주문할 상품을 선택해주세요");
+      setIsModalOpen(true);
       return;
     }
 
@@ -184,7 +188,8 @@ const Cart = () => {
       const cartItems = res.data.data;
 
       if (cartItems.length === 0) {
-        alert("장바구니가 비어있습니다");
+        setModalMessage("장바구니가 비어있습니다");
+        setIsModalOpen(true);
         return;
       }
 
@@ -204,7 +209,8 @@ const Cart = () => {
       });
     } catch (error) {
       console.log("전체주문에러", error);
-      alert("장바구니 전체 정보를 불러오지 못했습니다");
+      setModalMessage("장바구니 전체 정보를 불러오지 못했습니다");
+      setIsModalOpen(true);
     }
   };
 
@@ -234,13 +240,20 @@ const Cart = () => {
             <CartList onSelectionChange={handleSelectedChange} />
           </ScrollArea>
           <ButtonContainer>
-            <Button className="compare" onClick={handleSelectOrder}>
-              선택 주문하기
+            <Button onClick={handleOrderAll} className="compare">
+              전체 상품 주문하기
             </Button>
-            <Button className="purchase" onClick={handleOrderAll}>
-              전체 주문하기
+            <Button onClick={handleSelectOrder} className="purchase">
+              선택 상품 주문하기
             </Button>
           </ButtonContainer>
+          <Modal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            closeButton="확인"
+          >
+            <p>{modalMessage}</p>
+          </Modal>
         </Container>
       )}
     </>

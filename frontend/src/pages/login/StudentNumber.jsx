@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import Button from "../../components/button";
+import Modal from "../../components/Modal";
 import { Navigate, useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../lib/axios';
 
@@ -55,6 +56,8 @@ const InfoText = styled.div`
 const StudentNumber = () => {
   const [studentId, setStudentId] = useState('');
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleInputChange = (e) =>{
     setStudentId(e.target.value);
@@ -62,7 +65,8 @@ const StudentNumber = () => {
 
   const handleSubmit = async () =>{
     if(!studentId){
-      alert("학번을 입력해주세요!");
+      setModalMessage("학번을 입력해주세요!");
+      setIsModalOpen(true);
       return;
     }
     try {
@@ -74,8 +78,8 @@ const StudentNumber = () => {
         }
       }) 
     } catch (error) {
-      alert('오류가 발생했습니다.');
-      navigate("/");
+      setModalMessage('오류가 발생했습니다.');
+      setIsModalOpen(true);
     }
   }
   return (
@@ -87,6 +91,18 @@ const StudentNumber = () => {
         <InfoText>행사 이후 모든 학번 및 회원 정보는 파기될 예정입니다.</InfoText>
         <Button text={"다음"} onClick={handleSubmit} />
       </Container>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          if (modalMessage === '오류가 발생했습니다.') {
+            navigate("/");
+          }
+        }}
+        closeButton="확인"
+      >
+        <p>{modalMessage}</p>
+      </Modal>
     </>
   );
 }
