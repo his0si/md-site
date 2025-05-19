@@ -8,6 +8,7 @@ import orderedRoutes from "./routes/ordered.route.js";
 import orderadminRoutes from "./routes/orderadmin.route.js";
 import shoppingCartRoutes from "./routes/shoppingcart.route.js";
 import productRoutes from "./routes/product.route.js";
+import introductionRoutes from "./routes/introduction.route.js";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./lib/db.js";
@@ -82,6 +83,7 @@ app.use("/api/login", loginRoutes);
 app.use("/api/ordercheck", ordercheckRoutes);
 app.use("/api/ordered", orderedRoutes);
 app.use("/api/orderadmin", orderadminRoutes);
+app.use("/api", introductionRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`);

@@ -294,9 +294,7 @@ const EventIntro = () => {
           <EventDate>(2025. 05. 07 - 2025. 05. 14)</EventDate>
           <PitdotImage src={pitdotImage} alt="Pitdot" />
           <PromotionText>
-            rE: mark 행사 당일<br />
-            픽닷 X 이화이언 콜라보 프레임 촬영 인증 시<br />
-            <span>강연회 티켓 4000원 할인!</span>
+            
           </PromotionText>
         </EventDetails>
       </AnimatedSection>
@@ -307,9 +305,9 @@ const EventIntro = () => {
           <ScheduleDate>2025.05.07 수요일</ScheduleDate>
           <ScheduleGrid>
             <ScheduleLabel>이벤트 부스</ScheduleLabel>
-            <ScheduleTime>11:00 - 15:00</ScheduleTime>
+            <ScheduleTime>11:00 - 16:00</ScheduleTime>
             <ScheduleLabel>강연회 (1부)</ScheduleLabel>
-            <ScheduleTime>18:30 - 19:30</ScheduleTime>
+            <ScheduleTime>18:40 - 19:40</ScheduleTime>
             <ScheduleLabel>강연회 (2부)</ScheduleLabel>
             <ScheduleTime>20:00 - 21:00</ScheduleTime>
           </ScheduleGrid>
@@ -327,16 +325,16 @@ const EventIntro = () => {
         <SpeakersContainer>
           <SpeakersTitle>강연자 / 강연명</SpeakersTitle>
           <SpeakerCard>
-            <SpeakerImage src={kimSeungWooImage} alt="김승우 교수님" />
-            <SpeakerName>이화여자대학교 김승우 교수님</SpeakerName>
-            <LecturePart>강연 1부</LecturePart>
-            <LectureTitle>&lt;조선의 여성들: 부자유한 시대에 너무나 비범했던&gt;</LectureTitle>
-          </SpeakerCard>
-          <SpeakerCard>
             <SpeakerImage src={choiJaeCheonImage} alt="최재천 교수님" />
             <SpeakerName>이화여자대학교 최재천 교수님</SpeakerName>
-            <LecturePart>강연 2부</LecturePart>
+            <LecturePart>강연 1부</LecturePart>
             <LectureTitle>&lt;양심, 공감, 숙론&gt;</LectureTitle>
+          </SpeakerCard>
+          <SpeakerCard>
+            <SpeakerImage src={kimSeungWooImage} alt="김승우 교수님" />
+            <SpeakerName>이화여자대학교 김승우 교수님</SpeakerName>
+            <LecturePart>강연 2부</LecturePart>
+            <LectureTitle>&lt;조선의 여성들: 부자유한 시대에 너무나 비범했던&gt;</LectureTitle>
           </SpeakerCard>
         </SpeakersContainer>
       </AnimatedSection>

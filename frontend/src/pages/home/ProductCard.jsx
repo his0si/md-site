@@ -74,7 +74,8 @@ const ProductCard = ({ product }) => {
       <ProductInfo>
         <ProductName>{product.productName}</ProductName>
         <ProductPrice>{Number(product.price).toLocaleString()}</ProductPrice>
-        {product.stock <= 5 && <ProductStatus>매진임박!</ProductStatus>}
+        {product.stock <= 5 && product.stock > 0 && <ProductStatus>매진임박!</ProductStatus>}
+        {product.stock <= 0 && <ProductStatus>품절</ProductStatus>}
       </ProductInfo>
     </Card>
   );

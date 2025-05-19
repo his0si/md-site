@@ -23,9 +23,15 @@ const ProductImage = styled.div`
   margin: 60px 20px 20px 20px;
   aspect-ratio: 1;
   background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
   img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -42,15 +48,17 @@ const ProductPrice = styled.p`
   font-weight: bold;
 `;
 
-const ProductStatus = styled.p`
+const ProductStatus = styled.div`
   font-size: 14px;
   color: #666;
   margin: 10px 20px 8px 20px;
   width: calc(100% - 40px);
-  word-break: break-all; // 글자 단위로 줄바꿈
-  img {
-    width: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다.
-    height: 50%; //100%는 너무 큰 것 같아서 사이즈를 줄여보긴 했는데, 조절 가능합니다.
+  word-break: break-all;
+
+  .detail-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
   }
 `;
 
@@ -162,8 +170,6 @@ const ProductDetail = () => {
       setIsAlertModalOpen(true);
       console.log(error.message);
     }
-    
-    
   };
 
   return (
@@ -178,8 +184,15 @@ const ProductDetail = () => {
       <ProductName>{product.productName}</ProductName>
       <ProductPrice>{product.price}</ProductPrice>
       <ProductStatus>
+        {product.productName.includes("M") ? "상세 사이즈 : 가슴단면 50.5 총길이 64" : ""}
+        {product.productName.includes("반다나") ? "상세 사이즈 : 60 x 60" : ""}
+        {product.productName.includes("XL") ? "상세 사이즈 : 가슴단면 55.5 총길이 70" : ""}
         {product.detailImage ? (
-          <img src={product.detailImage} alt={product.productName} />
+          <img
+            src={product.detailImage}
+            alt={product.productName}
+            className="detail-img"
+          />
         ) : (
           <p>이미지를 불러올 수 없습니다.</p>
         )}
@@ -190,7 +203,25 @@ const ProductDetail = () => {
       >
         {" "}
       </ProductDetailModal>
-
+      {product.stock === 0 ? (
+        <ButtonContainer>
+          <p style={{ color: "red", fontWeight: "bold", margin: "auto" }}>
+            품절되었습니다
+          </p>
+        </ButtonContainer>
+      ) : (
+        <ButtonContainer>
+          <Button onClick={handleDirectBuy} className="compare">
+            바로 구매하기
+          </Button>
+          <Button
+            onClick={handleAddToCart}
+            className="purchase"
+          >
+            장바구니에 담기
+          </Button>
+        </ButtonContainer>
+      )}
       <Modal
         isOpen={isAlertModalOpen}
         onClose={() => {
