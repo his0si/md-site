@@ -29,6 +29,13 @@ const Table = styled.table`
   border-collapse: collapse;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: block;
+  overflow-x: auto;
+
+  @media (min-width: 768px) {
+    display: table;
+    overflow-x: visible;
+  }
 `;
 
 const Th = styled.th`
@@ -37,12 +44,30 @@ const Th = styled.th`
   padding: 15px;
   text-align: left;
   font-weight: 500;
+
+  @media (max-width: 767px) {
+    padding: 10px;
+    font-size: 12px; /* Smaller font size for smaller screens */
+
+    &:nth-child(5) { /* Target the 5th header cell (주문 날짜) */
+      font-size: 12px; 
+    }
+  }
 `;
 
 const Td = styled.td`
   padding: 15px;
   border-bottom: 1px solid #eee;
   color: #333;
+
+  @media (max-width: 767px) {
+    padding: 10px;
+    font-size: 12px; /* Smaller font size for smaller screens */
+
+    &:nth-child(5) { /* Target the 5th data cell (date) */
+      font-size: 10px; 
+    }
+  }
 `;
 
 const StatusBadge = styled.span`
@@ -51,6 +76,7 @@ const StatusBadge = styled.span`
   font-size: 12px;
   background-color: ${props => props.primary ? '#e6f4ea' : '#fce8e6'};
   color: ${props => props.primary ? '#167D4E' : '#c5221f'};
+  white-space: nowrap;
 `;
 
 const ActionButton = styled.button`
@@ -61,6 +87,15 @@ const ActionButton = styled.button`
   border-radius: 4px;
   cursor: pointer;
   margin-right: 5px;
+  margin-bottom: 5px;
+  display: block;
+  width: fit-content;
+
+  @media (min-width: 480px) {
+    display: inline-block;
+    margin-bottom: 0;
+  }
+  white-space: nowrap;
   
   &:hover {
     background-color: #0d5a3a;
