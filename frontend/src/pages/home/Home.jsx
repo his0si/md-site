@@ -34,24 +34,34 @@ const ScrollableContent = styled.div`
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-
+  const [thumbnails, setThumbnails] = useState([]); // 썸네일 배열 상태 추가
   useEffect( () => {
     const fetchProducts = async () =>{
       try {
         const res = await axiosInstance.get("/products");
         setProducts(res.data);
+
       } catch (error) {
         console.log("상품 조회 오류" + error.message);
       }
     };
+    const fetchThumbnails = async () => {
+      try {
+        const res = await axiosInstance.get("/product-image");
+        setThumbnails(res.data.productImage); 
+      } catch (error) {
+        console.log("썸네일 조회 오류: " + error.message);
+      }
+    };
 
     fetchProducts();
+    fetchThumbnails();
   }, []);
 
   return (
     <Container>
       <ScrollableContent>
-        <ProductList products={products} />
+        <ProductList products={products} thumbnails={thumbnails}/>
       </ScrollableContent>
     </Container>
   );
