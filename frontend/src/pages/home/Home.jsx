@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import styled from "styled-components";
-import { axiosInstance } from './../../lib/axios';
+import { axiosInstance } from "./../../lib/axios";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -45,6 +45,7 @@ const Home = () => {
         console.log("상품 조회 오류" + error.message);
       }
     };
+    
     const fetchThumbnails = async () => {
       try {
         const res = await axiosInstance.get("/product-image");
