@@ -270,6 +270,7 @@ const OrderPage = () => {
   const formattedProducts = isSingle
     ? [
         {
+          id: singleItem.productId || singleItem.id,
           productName: singleItem.productName,
           price: Number(String(singleItem.price).replaceAll(",", "")),
           quantity: quantity,
@@ -277,6 +278,7 @@ const OrderPage = () => {
         },
       ]
     : items.map((item) => ({
+        id: item.productId || item.id,
         productName: item.productName,
         price: item.price,
         quantity: item.quantity ?? 1,
@@ -385,7 +387,9 @@ const OrderPage = () => {
         </AccountCard>
 
         <Footer>
-          <OrderBtn onClick={handleOrder}>주문하기 (입금 후 클릭해주세요!)</OrderBtn>
+          <OrderBtn onClick={handleOrder}>
+            주문하기 (입금 후 클릭해주세요!)
+          </OrderBtn>
         </Footer>
       </Wrapper>
     </Container>

@@ -28,8 +28,10 @@ const CartList = ({ onSelectionChange }) => {
     try {
       setLoading(true);
       const response = await getCart();
+
       const cartItems = response.data.map((item) => ({
         id: item.productID,
+        productId: item.productID,
         productName: item.productName,
         price: Number(String(item.price).replaceAll(",", "")),
         quantity: item.quantity,
