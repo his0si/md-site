@@ -61,15 +61,16 @@ const ProductStatus = styled.div`
   color: #ff0000;
 `;
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, thumbnail }) => {
   const navigate = useNavigate();
   const handleProductDetail = () => {
     navigate(`/product-detail/${product._id}`);
   };
+
   return (
     <Card onClick={handleProductDetail}>
       <ProductImage>
-        <img src={product.thumbnailImage} />
+        <img src={thumbnail}  alt={product.productName} />
       </ProductImage>
       <ProductInfo>
         <ProductName>{product.productName}</ProductName>
