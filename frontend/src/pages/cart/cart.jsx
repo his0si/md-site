@@ -166,12 +166,16 @@ const Cart = () => {
     }
 
     const formattedItems = selectedItems.map((item) => ({
+      id: item.productId,
       productId: item.productId,
       productName: item.productName,
       price: Number(String(item.price).replaceAll(",", "")),
       quantity: item.quantity ?? 1,
       thumbnailImage: item.thumbnailImage || "",
     }));
+
+    //console.log("** 선택 상품 formattedItems 확인용:", formattedItems);
+    console.log("*** 선택된 selectedItems 원본:", selectedItems);
 
     navigate("/order-page", {
       state: {
@@ -194,7 +198,8 @@ const Cart = () => {
       }
 
       const formattedItems = cartItems.map((item) => ({
-        productId: item.productId,
+        id: item.productID,
+        productId: item.productID,
         productName: item.productName,
         price: Number(String(item.price).replaceAll(",", "")),
         quantity: item.quantity ?? 1,

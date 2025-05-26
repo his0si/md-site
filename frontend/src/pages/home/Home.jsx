@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import ProductList from "./ProductList";
 import styled from "styled-components";
-import { axiosInstance } from './../../lib/axios';
+import { axiosInstance } from "./../../lib/axios";
 
 const Container = styled.div`
   min-height: 100vh;
@@ -35,8 +35,8 @@ const ScrollableContent = styled.div`
 const Home = () => {
   const [products, setProducts] = useState([]);
 
-  useEffect( () => {
-    const fetchProducts = async () =>{
+  useEffect(() => {
+    const fetchProducts = async () => {
       try {
         const res = await axiosInstance.get("/products");
         setProducts(res.data);
